@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link rel="stylesheet" type="text/css" href="Jeopardy.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script> 
+    var vid = null;
+    $(document).ready(function () {
+       vid = document.getElementById("bkg-video");
+    });
+        function playVid() {
+            console.log("Hello");
+            if (vid.paused) {
+                vid.play();
+                console.log("Play");
+            } else {
+                vid.pause();
+                console.log("Pause");
+            }
+        }
+
+    </script>
+    <title>Jeopardy!</title>    
+</head>
+<body id="interactiveBKG">
+    <div class="video-container">
+        <video id="bkg-video" onclick="playVid();" autoplay="on">
+            <source type="video/mp4" src="">
+        </video>
+    <div class="catClue interactive" onclick="playVid();">
+        <div id="interactiveClueArea">
+            <p id="interactiveClueString"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+﻿body {
+    overflow: hidden;
+    background-color: #03128A;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#interactiveBKG{
+    /* background-image: url('https://pmctvline2.files.wordpress.com/2017/09/the-greatest-american-hero.jpg'); */
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+.video-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+  } 
+  video{
+      width:100%;
+      height:100%
+  }
+div.catTitle {
+    width:90% !important;
+    text-shadow: 0px 3px 3px #000;
+    color: white;
+    font-family: "Swiss911W01-Compressed";    
+    font-size:15vw;
+    /* font-size:100px; */
+    /* font-size: calc(16vw + 2vh + 2vmin); */
+    /* font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300))); */
+    /*font-size: 4vw;*/
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 70px 0;
+    /* max-width:800px; */
+    line-height:0.85;
+    /*max-height: 800px;*/
+    /*max-width: 900px;*/
+    /*vertical-align: middle;*/
+    /*position: relative;*/
+    /*top: 50%;*/
+    /*left: 27%;*/
+    /*transform: translateY(-50%);*/
+    /*transform: translateX(100%);*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+}
+div.catTitleSmall {
+    width:90% !important;
+    text-shadow: 0px 2px 2px #000;
+    color: white;
+    font-family: "Swiss911W01-Compressed";
+    font-size: 10vw;
+    /*font-size: 4vw;*/
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 70px 0;
+    /* max-width:800px; */
+    line-height:0.85;
+    /*max-height: 800px;*/
+    /*max-width: 900px;*/
+    /*vertical-align: middle;*/
+    /*position: relative;*/
+    /*top: 50%;*/
+    /*left: 27%;*/
+    /*transform: translateY(-50%);*/
+    /*transform: translateX(100%);*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+}
+
+div.catClue {
+    width:60% !important;
+    text-shadow: 0px 3px 3px #000;
+    color: white;
+    font-family: "Korinna Regular BT";
+    /* font-size: 60px; */
+    font-size: 4vw;
+    line-height:1.1;
+    text-align: center;
+    padding: 70px 0;    
+    height:90%;
+    /*vertical-align: middle;*/
+    /*position: relative;*/
+    /*top: 50%;*/
+    /*left: 27%;*/
+    /*transform: translateY(-50%);*/
+    /*transform: translateX(100%);*/
+    position: absolute;
+    /* max-height:100%; */
+    margin-bottom:0;
+    /* height:50%; */
+    margin:auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+}
+div.interactive{
+    font-size: 2vw !important;
+}
+#clue{
+    /* height:50%; */
+    /* margin-top:10px !important; */
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    /* padding: 70px 0; */
+    /* position: absolute; */
+    text-align:center;
+    margin-top:auto;
+    margin-bottom:auto;
+    /* margin-bottom:10px; */
+}
+#clueArea{
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* margin-top:auto;
+    margin-bottom:auto; */
+    /* padding: 70px 0; */
+    /* margin:auto; */
+    width:100%;
+}
+#interactiveClueArea{
+    background-image:url('PictureVideoClueStripTrans.png');
+    background-size:cover;
+    position: relative;
+    float: left;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:100%;
+}
+#interactiveClueString{
+    text-align:center;
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-left:auto;
+    margin-right:auto;
+    width:90%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+img {
+    position: relative;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    /* padding: 0; */
+    display: block;
+    /* margin: auto; */
+    max-width:30vw;
+    max-height:30vw;    
+}
+#interactiveClue{
+    /* padding: 70px 0;     */
+    height: 100%;
+    /* width: 50%; */
+    max-width:30vw;
+    max-height:30vw;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:0;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+}
+/*div {
+    align-content: center;
+}*/
+
+@font-face {
+    font-family: "Swiss911W01-Compressed";
+    src: url("Swiss911W01-Compressed.ttf");
+}
+
+@font-face {
+    font-family: "Swiss911 XCm BT";
+    src: url("Swiss911 XCm BT.woff");
+}
+
+@font-face {
+    font-family: "Korinna Regular_0";
+    src: url("Korinna Regular_0.woff");
+}
+/* @font-face {
+    font-family: "Korinna Regular BT";
+    src: url("Korinna Regular BT.ttf");
+} */
+@font-face {
+    font-family: "Korinna Regular BT";
+    src: url("Korinna Regular BT.woff");
+}

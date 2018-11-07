@@ -65,7 +65,28 @@
   <PropertyGroup>
     <ApplicationIcon>JeopardyQuiz.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\WheelOfFortune\WheelOfFortune\bin\Debug\Interop.SpeechLib.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ShadowLabel">
@@ -133,7 +154,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ClueVoice.vb" />
-    <Compile Include="Clue.vb" />
+    <Compile Include="clsClue.vb" />
     <Compile Include="ClueDisplay.Designer.vb">
       <DependentUpon>ClueDisplay.vb</DependentUpon>
     </Compile>
@@ -151,6 +172,18 @@
     </Compile>
     <Compile Include="ClueWindow.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContestantControl.Designer.vb">
+      <DependentUpon>ContestantControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ContestantControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContestantDisplay.Designer.vb">
+      <DependentUpon>ContestantDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ContestantDisplay.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomizeCloseDialog.Designer.vb">
       <DependentUpon>CustomizeCloseDialog.vb</DependentUpon>
@@ -186,10 +219,22 @@
     <Compile Include="FormatLabel.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="frmContestantManager.Designer.vb">
+      <DependentUpon>frmContestantManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmContestantManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmHelp.Designer.vb">
       <DependentUpon>frmHelp.vb</DependentUpon>
     </Compile>
     <Compile Include="frmHelp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoadGame.Designer.vb">
+      <DependentUpon>frmLoadGame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoadGame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmScore.Designer.vb">
@@ -212,6 +257,12 @@
     </Compile>
     <Compile Include="JeopardyController.vb" />
     <Compile Include="JeopardySpeechRecognizer.vb" />
+    <Compile Include="MiniClue.Designer.vb">
+      <DependentUpon>MiniClue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MiniClue.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -227,6 +278,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="NameTag.Designer.vb">
+      <DependentUpon>NameTag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NameTag.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Player.vb" />
     <Compile Include="PodiumScreen.Designer.vb">
       <DependentUpon>PodiumScreen.vb</DependentUpon>
     </Compile>
@@ -257,11 +315,23 @@
     <Compile Include="ScreenBypass.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsScreen.Designer.vb">
-      <DependentUpon>SettingsScreen.vb</DependentUpon>
+    <Compile Include="frmNewGame.Designer.vb">
+      <DependentUpon>frmNewGame.vb</DependentUpon>
     </Compile>
-    <Compile Include="SettingsScreen.vb">
+    <Compile Include="frmNewGame.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsControl.Designer.vb">
+      <DependentUpon>StatsControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StatsControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TeamDisplay.Designer.vb">
+      <DependentUpon>TeamDisplay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TeamDisplay.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="testFormatting.Designer.vb">
       <DependentUpon>testFormatting.vb</DependentUpon>
@@ -313,6 +383,12 @@
     <EmbeddedResource Include="ClueWindow.resx">
       <DependentUpon>ClueWindow.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContestantControl.resx">
+      <DependentUpon>ContestantControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContestantDisplay.resx">
+      <DependentUpon>ContestantDisplay.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomizeCloseDialog.resx">
       <DependentUpon>CustomizeCloseDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -328,8 +404,14 @@
     <EmbeddedResource Include="dlgSelectPack.resx">
       <DependentUpon>dlgSelectPack.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmContestantManager.resx">
+      <DependentUpon>frmContestantManager.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHelp.resx">
       <DependentUpon>frmHelp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoadGame.resx">
+      <DependentUpon>frmLoadGame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScore.resx">
       <DependentUpon>frmScore.vb</DependentUpon>
@@ -340,11 +422,17 @@
     <EmbeddedResource Include="IntroScreen.resx">
       <DependentUpon>IntroScreen.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MiniClue.resx">
+      <DependentUpon>MiniClue.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NameTag.resx">
+      <DependentUpon>NameTag.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PodiumScreen.resx">
       <DependentUpon>PodiumScreen.vb</DependentUpon>
@@ -361,8 +449,14 @@
     <EmbeddedResource Include="ScreenBypass.resx">
       <DependentUpon>ScreenBypass.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsScreen.resx">
-      <DependentUpon>SettingsScreen.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewGame.resx">
+      <DependentUpon>frmNewGame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatsControl.resx">
+      <DependentUpon>StatsControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeamDisplay.resx">
+      <DependentUpon>TeamDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="testFormatting.resx">
       <DependentUpon>testFormatting.vb</DependentUpon>
@@ -390,6 +484,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Interop.SpeechLib.dll" />
     <Content Include="JeopardyClues.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -398,6 +493,29 @@
       <DependentUpon>JeopardyClues.mdf</DependentUpon>
     </Content>
     <Content Include="JeopardyQuiz.ico" />
+    <None Include="Resources\JeopardyNewGameTeams.png" />
+    <None Include="Resources\JeopardyContestantManager.png" />
+    <None Include="Resources\PodiumNameBKG.png" />
+    <None Include="Resources\JEOPARDYLogo.png" />
+    <None Include="Resources\DOUBLEJeopardy.png" />
+    <None Include="Resources\jeopardy_ubicom-screen-03-final_jeopardy-full_size-1280x720_304779.jpg" />
+    <None Include="Resources\Screen2000.PNG" />
+    <None Include="Resources\Screen1600.PNG" />
+    <None Include="Resources\Screen1200.PNG" />
+    <None Include="Resources\Screen1000.PNG" />
+    <None Include="Resources\Screen800.PNG" />
+    <None Include="Resources\Screen600.PNG" />
+    <None Include="Resources\Screen400.PNG" />
+    <None Include="Resources\Screen200.PNG" />
+    <None Include="Resources\JeopardyNewGame.png" />
+    <None Include="Resources\JeopardySeason35MenuNew.png" />
+    <None Include="Resources\JeopardySeason35.jpg" />
+    <None Include="Resources\JeopardySeason35Menu.png" />
+    <None Include="Resources\YellowCharacterCircle.png" />
+    <None Include="Resources\PictureVideoClueStripTrans.png" />
+    <None Include="Resources\PictureVideoClueStrip.png" />
+    <None Include="Resources\JeopardyTitlesGIF1.gif" />
+    <None Include="Resources\JeopardyTitlesGIF.gif" />
     <None Include="Resources\JeopardyPlayerNameChangeSample.png" />
     <None Include="Resources\FinalJeopardyCheckAnswerSample2.png" />
     <None Include="Resources\FinalJeopardyCheckAnswerSample.png" />
@@ -452,15 +570,6 @@
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="SpeechLib">
-      <Guid>{C866CA3A-32F7-11D2-9602-00C04F8EE628}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>4</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="TTSEngineLib">
       <Guid>{5F7209DB-16C5-45AE-A67D-60B8585100CA}</Guid>

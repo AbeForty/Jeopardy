@@ -29,6 +29,11 @@
     End Sub
 
     Private Sub DailyDouble_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+            lblWagerRules.Text = "You can bet up to $1000 if you have $0 in your bank"
+        ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+            lblWagerRules.Text = "You can bet up to $2000 if you have $0 in your bank"
+        End If
         'CategoryScreen.jSpeechRecog..RecognizeAsyncCancel()
         Timer1.Start()
         Timer2.Start()
@@ -37,33 +42,45 @@
             frmScore.Player2RungIn = True
             frmScore.Player3RungIn = True
             frmScore.IsDailyDouble = True
-            frmScore.txtCurrentPlayer.Text = "Player 1"
-            If Integer.Parse(frmScore.lblPlayer1Score.Text) > 1000 Then
-                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer1Score.Text)
+            frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer1.Text
+            If Integer.Parse(frmScore.lblPlayer1Score.Text.Replace("$", "").Replace(",", "")) > 1000 Then
+                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer1Score.Text.Replace("$", "").Replace(",", ""))
             Else
-                wagerBox.Maximum = 1000
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    wagerBox.Maximum = 1000
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    wagerBox.Maximum = 2000
+                End If
             End If
         ElseIf JeopardyController.currentPlayer = 2 Then
             frmScore.Player1RungIn = True
             frmScore.Player2RungIn = True
             frmScore.Player3RungIn = True
             frmScore.IsDailyDouble = True
-            frmScore.txtCurrentPlayer.Text = "Player 2"
-            If Integer.Parse(frmScore.lblPlayer2Score.Text) > 1000 Then
-                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer1Score.Text)
+            frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text
+            If Integer.Parse(frmScore.lblPlayer2Score.Text.Replace("$", "").Replace(",", "")) > 1000 Then
+                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer1Score.Text.Replace("$", "").Replace(",", ""))
             Else
-                wagerBox.Maximum = 1000
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    wagerBox.Maximum = 1000
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    wagerBox.Maximum = 2000
+                End If
             End If
         ElseIf JeopardyController.currentPlayer = 3 Then
             frmScore.Player1RungIn = True
             frmScore.Player2RungIn = True
             frmScore.Player3RungIn = True
             frmScore.IsDailyDouble = True
-            frmScore.txtCurrentPlayer.Text = "Player 3"
-            If Integer.Parse(frmScore.lblPlayer3Score.Text) > 1000 Then
-                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer3Score.Text)
+            frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text
+            If Integer.Parse(frmScore.lblPlayer3Score.Text.Replace("$", "").Replace(",", "")) > 1000 Then
+                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer3Score.Text.Replace("$", "").Replace(",", ""))
             Else
-                wagerBox.Maximum = 1000
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    wagerBox.Maximum = 1000
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    wagerBox.Maximum = 2000
+                End If
             End If
         End If
     End Sub

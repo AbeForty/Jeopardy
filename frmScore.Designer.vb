@@ -26,6 +26,7 @@ Partial Class frmScore
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmScore))
         Me.tmrCurrentValue = New System.Windows.Forms.Timer(Me.components)
         Me.pnlScore = New System.Windows.Forms.Panel()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnDoubleJeopardy = New System.Windows.Forms.Button()
         Me.btnGo = New System.Windows.Forms.Button()
@@ -36,9 +37,7 @@ Partial Class frmScore
         Me.numPlayer1 = New System.Windows.Forms.NumericUpDown()
         Me.numPlayer2 = New System.Windows.Forms.NumericUpDown()
         Me.notifyBar = New System.Windows.Forms.Label()
-        Me.lblPlayer2 = New System.Windows.Forms.Label()
         Me.btnFinalJeopardy = New System.Windows.Forms.Button()
-        Me.lblPlayer1 = New System.Windows.Forms.Label()
         Me.quitBTN = New System.Windows.Forms.Button()
         Me.txtCurrentPlayer = New System.Windows.Forms.TextBox()
         Me.lblPlayer1Score = New System.Windows.Forms.Label()
@@ -46,11 +45,13 @@ Partial Class frmScore
         Me.numPlayer3 = New System.Windows.Forms.NumericUpDown()
         Me.lblPlayer3Score = New System.Windows.Forms.Label()
         Me.lblPlayer2Score = New System.Windows.Forms.Label()
-        Me.lblPlayer3 = New System.Windows.Forms.Label()
         Me.txtWager3 = New System.Windows.Forms.TextBox()
         Me.txtWager2 = New System.Windows.Forms.TextBox()
         Me.txtWager1 = New System.Windows.Forms.TextBox()
         Me.lblPlayerWagerMessage = New System.Windows.Forms.Label()
+        Me.lblPlayer3 = New Jeopardy.NameTag()
+        Me.lblPlayer2 = New Jeopardy.NameTag()
+        Me.lblPlayer1 = New Jeopardy.NameTag()
         Me.pnlScore.SuspendLayout()
         CType(Me.numPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numPlayer2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,6 +65,10 @@ Partial Class frmScore
         '
         Me.pnlScore.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
         Me.pnlScore.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlScore.Controls.Add(Me.lblPlayer3)
+        Me.pnlScore.Controls.Add(Me.lblPlayer2)
+        Me.pnlScore.Controls.Add(Me.lblPlayer1)
+        Me.pnlScore.Controls.Add(Me.btnClear)
         Me.pnlScore.Controls.Add(Me.btnHelp)
         Me.pnlScore.Controls.Add(Me.btnDoubleJeopardy)
         Me.pnlScore.Controls.Add(Me.btnGo)
@@ -74,9 +79,7 @@ Partial Class frmScore
         Me.pnlScore.Controls.Add(Me.numPlayer1)
         Me.pnlScore.Controls.Add(Me.numPlayer2)
         Me.pnlScore.Controls.Add(Me.notifyBar)
-        Me.pnlScore.Controls.Add(Me.lblPlayer2)
         Me.pnlScore.Controls.Add(Me.btnFinalJeopardy)
-        Me.pnlScore.Controls.Add(Me.lblPlayer1)
         Me.pnlScore.Controls.Add(Me.quitBTN)
         Me.pnlScore.Controls.Add(Me.txtCurrentPlayer)
         Me.pnlScore.Controls.Add(Me.lblPlayer1Score)
@@ -84,12 +87,23 @@ Partial Class frmScore
         Me.pnlScore.Controls.Add(Me.numPlayer3)
         Me.pnlScore.Controls.Add(Me.lblPlayer3Score)
         Me.pnlScore.Controls.Add(Me.lblPlayer2Score)
-        Me.pnlScore.Controls.Add(Me.lblPlayer3)
         Me.pnlScore.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlScore.Location = New System.Drawing.Point(0, 0)
         Me.pnlScore.Name = "pnlScore"
         Me.pnlScore.Size = New System.Drawing.Size(1932, 125)
         Me.pnlScore.TabIndex = 29
+        '
+        'btnClear
+        '
+        Me.btnClear.BackgroundImage = Global.Jeopardy.My.Resources.Resources.YellowCharacterCircle
+        Me.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnClear.Location = New System.Drawing.Point(236, 43)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(41, 42)
+        Me.btnClear.TabIndex = 34
+        Me.btnClear.Text = "C"
+        Me.btnClear.UseVisualStyleBackColor = True
+        Me.btnClear.Visible = False
         '
         'btnHelp
         '
@@ -103,7 +117,7 @@ Partial Class frmScore
         '
         'btnDoubleJeopardy
         '
-        Me.btnDoubleJeopardy.BackgroundImage = Global.Jeopardy.My.Resources.Resources.DoubleJeopardyCard
+        Me.btnDoubleJeopardy.BackgroundImage = Global.Jeopardy.My.Resources.Resources.DOUBLEJeopardy
         Me.btnDoubleJeopardy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnDoubleJeopardy.Location = New System.Drawing.Point(1720, 41)
         Me.btnDoubleJeopardy.Name = "btnDoubleJeopardy"
@@ -116,7 +130,7 @@ Partial Class frmScore
         '
         Me.btnGo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnGo.Font = New System.Drawing.Font("Wingdings", 7.8!)
-        Me.btnGo.Location = New System.Drawing.Point(196, 43)
+        Me.btnGo.Location = New System.Drawing.Point(200, 43)
         Me.btnGo.Name = "btnGo"
         Me.btnGo.Size = New System.Drawing.Size(32, 42)
         Me.btnGo.TabIndex = 30
@@ -174,13 +188,13 @@ Partial Class frmScore
         'numPlayer1
         '
         Me.numPlayer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.numPlayer1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numPlayer1.Font = New System.Drawing.Font("Univers LT Std 55", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numPlayer1.ForeColor = System.Drawing.Color.Transparent
         Me.numPlayer1.Location = New System.Drawing.Point(519, 5)
         Me.numPlayer1.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.numPlayer1.Minimum = New Decimal(New Integer() {50000, 0, 0, -2147483648})
         Me.numPlayer1.Name = "numPlayer1"
-        Me.numPlayer1.Size = New System.Drawing.Size(299, 41)
+        Me.numPlayer1.Size = New System.Drawing.Size(299, 45)
         Me.numPlayer1.TabIndex = 15
         Me.numPlayer1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.numPlayer1.ThousandsSeparator = True
@@ -189,13 +203,13 @@ Partial Class frmScore
         'numPlayer2
         '
         Me.numPlayer2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.numPlayer2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numPlayer2.Font = New System.Drawing.Font("Univers LT Std 55", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numPlayer2.ForeColor = System.Drawing.Color.Transparent
         Me.numPlayer2.Location = New System.Drawing.Point(826, 5)
         Me.numPlayer2.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.numPlayer2.Minimum = New Decimal(New Integer() {50000, 0, 0, -2147483648})
         Me.numPlayer2.Name = "numPlayer2"
-        Me.numPlayer2.Size = New System.Drawing.Size(299, 41)
+        Me.numPlayer2.Size = New System.Drawing.Size(299, 45)
         Me.numPlayer2.TabIndex = 19
         Me.numPlayer2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.numPlayer2.ThousandsSeparator = True
@@ -212,42 +226,18 @@ Partial Class frmScore
         Me.notifyBar.TabIndex = 28
         Me.notifyBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.notifyBar.UseMnemonic = False
-        '
-        'lblPlayer2
-        '
-        Me.lblPlayer2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblPlayer2.Font = New System.Drawing.Font("Segoe UI Light", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPlayer2.ForeColor = System.Drawing.Color.White
-        Me.lblPlayer2.Location = New System.Drawing.Point(826, 52)
-        Me.lblPlayer2.Name = "lblPlayer2"
-        Me.lblPlayer2.Size = New System.Drawing.Size(278, 68)
-        Me.lblPlayer2.TabIndex = 17
-        Me.lblPlayer2.Text = "Player 2"
-        Me.lblPlayer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblPlayer2.UseMnemonic = False
+        Me.notifyBar.Visible = False
         '
         'btnFinalJeopardy
         '
-        Me.btnFinalJeopardy.BackgroundImage = Global.Jeopardy.My.Resources.Resources.finalj_570x317
+        Me.btnFinalJeopardy.BackgroundImage = Global.Jeopardy.My.Resources.Resources.jeopardy_ubicom_screen_03_final_jeopardy_full_size_1280x720_304779
         Me.btnFinalJeopardy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnFinalJeopardy.Location = New System.Drawing.Point(1801, 42)
+        Me.btnFinalJeopardy.Location = New System.Drawing.Point(1801, 41)
         Me.btnFinalJeopardy.Name = "btnFinalJeopardy"
         Me.btnFinalJeopardy.Size = New System.Drawing.Size(75, 46)
         Me.btnFinalJeopardy.TabIndex = 26
         Me.btnFinalJeopardy.UseVisualStyleBackColor = True
-        '
-        'lblPlayer1
-        '
-        Me.lblPlayer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblPlayer1.Font = New System.Drawing.Font("Segoe UI Light", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPlayer1.ForeColor = System.Drawing.Color.White
-        Me.lblPlayer1.Location = New System.Drawing.Point(524, 52)
-        Me.lblPlayer1.Name = "lblPlayer1"
-        Me.lblPlayer1.Size = New System.Drawing.Size(278, 68)
-        Me.lblPlayer1.TabIndex = 10
-        Me.lblPlayer1.Text = "Player 1"
-        Me.lblPlayer1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblPlayer1.UseMnemonic = False
+        Me.btnFinalJeopardy.Visible = False
         '
         'quitBTN
         '
@@ -271,36 +261,36 @@ Partial Class frmScore
         'lblPlayer1Score
         '
         Me.lblPlayer1Score.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.lblPlayer1Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPlayer1Score.Font = New System.Drawing.Font("Univers LT Std 55", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPlayer1Score.ForeColor = System.Drawing.Color.White
         Me.lblPlayer1Score.Location = New System.Drawing.Point(522, 2)
         Me.lblPlayer1Score.Name = "lblPlayer1Score"
         Me.lblPlayer1Score.Size = New System.Drawing.Size(280, 47)
         Me.lblPlayer1Score.TabIndex = 11
-        Me.lblPlayer1Score.Text = "0"
+        Me.lblPlayer1Score.Text = "$0"
         Me.lblPlayer1Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblCurrentValue
         '
         Me.lblCurrentValue.AutoSize = True
-        Me.lblCurrentValue.Font = New System.Drawing.Font("Segoe UI Light", 10.0!)
+        Me.lblCurrentValue.Font = New System.Drawing.Font("Korinna BT", 10.0!)
         Me.lblCurrentValue.ForeColor = System.Drawing.Color.White
         Me.lblCurrentValue.Location = New System.Drawing.Point(20, 52)
         Me.lblCurrentValue.Name = "lblCurrentValue"
-        Me.lblCurrentValue.Size = New System.Drawing.Size(82, 23)
+        Me.lblCurrentValue.Size = New System.Drawing.Size(85, 20)
         Me.lblCurrentValue.TabIndex = 25
         Me.lblCurrentValue.Text = "PointValue"
         '
         'numPlayer3
         '
         Me.numPlayer3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.numPlayer3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numPlayer3.Font = New System.Drawing.Font("Univers LT Std 55", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numPlayer3.ForeColor = System.Drawing.Color.Transparent
         Me.numPlayer3.Location = New System.Drawing.Point(1131, 5)
         Me.numPlayer3.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.numPlayer3.Minimum = New Decimal(New Integer() {50000, 0, 0, -2147483648})
         Me.numPlayer3.Name = "numPlayer3"
-        Me.numPlayer3.Size = New System.Drawing.Size(299, 41)
+        Me.numPlayer3.Size = New System.Drawing.Size(299, 45)
         Me.numPlayer3.TabIndex = 23
         Me.numPlayer3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.numPlayer3.ThousandsSeparator = True
@@ -309,39 +299,26 @@ Partial Class frmScore
         'lblPlayer3Score
         '
         Me.lblPlayer3Score.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.lblPlayer3Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPlayer3Score.Font = New System.Drawing.Font("Univers LT Std 55", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPlayer3Score.ForeColor = System.Drawing.Color.White
         Me.lblPlayer3Score.Location = New System.Drawing.Point(1129, 2)
         Me.lblPlayer3Score.Name = "lblPlayer3Score"
         Me.lblPlayer3Score.Size = New System.Drawing.Size(280, 47)
         Me.lblPlayer3Score.TabIndex = 22
-        Me.lblPlayer3Score.Text = "0"
+        Me.lblPlayer3Score.Text = "$0"
         Me.lblPlayer3Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblPlayer2Score
         '
         Me.lblPlayer2Score.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.lblPlayer2Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPlayer2Score.Font = New System.Drawing.Font("Univers LT Std 55", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPlayer2Score.ForeColor = System.Drawing.Color.White
         Me.lblPlayer2Score.Location = New System.Drawing.Point(824, 2)
         Me.lblPlayer2Score.Name = "lblPlayer2Score"
         Me.lblPlayer2Score.Size = New System.Drawing.Size(280, 47)
         Me.lblPlayer2Score.TabIndex = 18
-        Me.lblPlayer2Score.Text = "0"
+        Me.lblPlayer2Score.Text = "$0"
         Me.lblPlayer2Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblPlayer3
-        '
-        Me.lblPlayer3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblPlayer3.Font = New System.Drawing.Font("Segoe UI Light", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPlayer3.ForeColor = System.Drawing.Color.White
-        Me.lblPlayer3.Location = New System.Drawing.Point(1131, 52)
-        Me.lblPlayer3.Name = "lblPlayer3"
-        Me.lblPlayer3.Size = New System.Drawing.Size(278, 68)
-        Me.lblPlayer3.TabIndex = 21
-        Me.lblPlayer3.Text = "Player 3"
-        Me.lblPlayer3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblPlayer3.UseMnemonic = False
         '
         'txtWager3
         '
@@ -394,6 +371,39 @@ Partial Class frmScore
         Me.lblPlayerWagerMessage.UseMnemonic = False
         Me.lblPlayerWagerMessage.Visible = False
         '
+        'lblPlayer3
+        '
+        Me.lblPlayer3.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lblPlayer3.BackgroundImage = CType(resources.GetObject("lblPlayer3.BackgroundImage"), System.Drawing.Image)
+        Me.lblPlayer3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblPlayer3.contestantID = 0
+        Me.lblPlayer3.Location = New System.Drawing.Point(1130, 51)
+        Me.lblPlayer3.Name = "lblPlayer3"
+        Me.lblPlayer3.Size = New System.Drawing.Size(299, 71)
+        Me.lblPlayer3.TabIndex = 37
+        '
+        'lblPlayer2
+        '
+        Me.lblPlayer2.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lblPlayer2.BackgroundImage = CType(resources.GetObject("lblPlayer2.BackgroundImage"), System.Drawing.Image)
+        Me.lblPlayer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblPlayer2.contestantID = 0
+        Me.lblPlayer2.Location = New System.Drawing.Point(825, 51)
+        Me.lblPlayer2.Name = "lblPlayer2"
+        Me.lblPlayer2.Size = New System.Drawing.Size(299, 71)
+        Me.lblPlayer2.TabIndex = 36
+        '
+        'lblPlayer1
+        '
+        Me.lblPlayer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lblPlayer1.BackgroundImage = CType(resources.GetObject("lblPlayer1.BackgroundImage"), System.Drawing.Image)
+        Me.lblPlayer1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblPlayer1.contestantID = 0
+        Me.lblPlayer1.Location = New System.Drawing.Point(519, 51)
+        Me.lblPlayer1.Name = "lblPlayer1"
+        Me.lblPlayer1.Size = New System.Drawing.Size(299, 71)
+        Me.lblPlayer1.TabIndex = 35
+        '
         'frmScore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -422,15 +432,12 @@ Partial Class frmScore
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblPlayer1 As Label
     Friend WithEvents lblPlayer1Score As Label
     Friend WithEvents numPlayer1 As NumericUpDown
     Friend WithEvents numPlayer2 As NumericUpDown
     Friend WithEvents lblPlayer2Score As Label
-    Friend WithEvents lblPlayer2 As Label
     Friend WithEvents numPlayer3 As NumericUpDown
     Friend WithEvents lblPlayer3Score As Label
-    Friend WithEvents lblPlayer3 As Label
     Friend WithEvents txtCurrentPlayer As TextBox
     Friend WithEvents lblCurrentValue As Label
     Friend WithEvents tmrCurrentValue As Timer
@@ -449,4 +456,8 @@ Partial Class frmScore
     Friend WithEvents txtWager1 As TextBox
     Friend WithEvents btnHelp As Button
     Friend WithEvents lblPlayerWagerMessage As Label
+    Friend WithEvents btnClear As Button
+    Friend WithEvents lblPlayer3 As NameTag
+    Friend WithEvents lblPlayer2 As NameTag
+    Friend WithEvents lblPlayer1 As NameTag
 End Class

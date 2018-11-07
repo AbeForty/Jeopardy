@@ -24,35 +24,32 @@ Partial Class CategoryDisplay
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.pboxJeopardyCard = New System.Windows.Forms.PictureBox()
-        Me.lblCategory = New System.Windows.Forms.Label()
         Me.tmrRevealCategory = New System.Windows.Forms.Timer(Me.components)
+        Me.catBrowser = New System.Windows.Forms.WebBrowser()
         CType(Me.pboxJeopardyCard, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pboxJeopardyCard
         '
-        Me.pboxJeopardyCard.Image = Global.Jeopardy.My.Resources.Resources.JeopardyTitle1
-        Me.pboxJeopardyCard.Location = New System.Drawing.Point(159, 99)
+        Me.pboxJeopardyCard.Image = Global.Jeopardy.My.Resources.Resources.JEOPARDYLogo
+        Me.pboxJeopardyCard.Location = New System.Drawing.Point(151, 99)
         Me.pboxJeopardyCard.Name = "pboxJeopardyCard"
-        Me.pboxJeopardyCard.Size = New System.Drawing.Size(1737, 887)
+        Me.pboxJeopardyCard.Size = New System.Drawing.Size(1745, 892)
         Me.pboxJeopardyCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pboxJeopardyCard.TabIndex = 0
         Me.pboxJeopardyCard.TabStop = False
         '
-        'lblCategory
-        '
-        Me.lblCategory.AutoEllipsis = True
-        Me.lblCategory.Font = New System.Drawing.Font("Swiss911W01-Compressed", 124.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCategory.ForeColor = System.Drawing.Color.Transparent
-        Me.lblCategory.Location = New System.Drawing.Point(159, 99)
-        Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(1737, 887)
-        Me.lblCategory.TabIndex = 21
-        Me.lblCategory.Text = "CLUE"
-        Me.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'tmrRevealCategory
         '
+        '
+        'catBrowser
+        '
+        Me.catBrowser.Location = New System.Drawing.Point(151, 99)
+        Me.catBrowser.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.catBrowser.Name = "catBrowser"
+        Me.catBrowser.ScrollBarsEnabled = False
+        Me.catBrowser.Size = New System.Drawing.Size(1745, 892)
+        Me.catBrowser.TabIndex = 22
         '
         'CategoryDisplay
         '
@@ -62,7 +59,7 @@ Partial Class CategoryDisplay
         Me.BackgroundImage = Global.Jeopardy.My.Resources.Resources.CategoryScreenBKG
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Controls.Add(Me.pboxJeopardyCard)
-        Me.Controls.Add(Me.lblCategory)
+        Me.Controls.Add(Me.catBrowser)
         Me.DoubleBuffered = True
         Me.Name = "CategoryDisplay"
         Me.Size = New System.Drawing.Size(1932, 1092)
@@ -72,6 +69,6 @@ Partial Class CategoryDisplay
     End Sub
 
     Friend WithEvents pboxJeopardyCard As PictureBox
-    Friend WithEvents lblCategory As Label
     Friend WithEvents tmrRevealCategory As Timer
+    Friend WithEvents catBrowser As WebBrowser
 End Class

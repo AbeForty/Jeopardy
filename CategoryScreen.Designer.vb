@@ -25,6 +25,12 @@ Partial Class categoryScreen
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(categoryScreen))
         Me.catPanel = New System.Windows.Forms.FlowLayoutPanel()
+        Me.cat1Title = New Jeopardy.CategoryTitle()
+        Me.cat2Title = New Jeopardy.CategoryTitle()
+        Me.cat3Title = New Jeopardy.CategoryTitle()
+        Me.cat4Title = New Jeopardy.CategoryTitle()
+        Me.cat5Title = New Jeopardy.CategoryTitle()
+        Me.cat6Title = New Jeopardy.CategoryTitle()
         Me.Cat1200 = New System.Windows.Forms.PictureBox()
         Me.Cat2200 = New System.Windows.Forms.PictureBox()
         Me.Cat3200 = New System.Windows.Forms.PictureBox()
@@ -55,24 +61,17 @@ Partial Class categoryScreen
         Me.Cat41000 = New System.Windows.Forms.PictureBox()
         Me.Cat51000 = New System.Windows.Forms.PictureBox()
         Me.Cat61000 = New System.Windows.Forms.PictureBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
-        Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
-        Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
-        Me.ProgressBar3 = New System.Windows.Forms.ProgressBar()
-        Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer7 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer8 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer9 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer10 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer11 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer12 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer13 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer14 = New System.Windows.Forms.Timer(Me.components)
+        Me.pbarCatReveal = New System.Windows.Forms.ProgressBar()
+        Me.tmrCatReveal = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCheckReveal = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrPointValueBox = New System.Windows.Forms.Timer(Me.components)
+        Me.pbarPVB = New System.Windows.Forms.ProgressBar()
+        Me.tmrCheckCatCleared = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrRingIn = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCheckIfRungIn = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCheckCurrentRound = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCheckRecogStopped = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCheckIfSelectCategory = New System.Windows.Forms.Timer(Me.components)
         Me.rtbSeenClues = New System.Windows.Forms.RichTextBox()
         Me.rtbPointValues = New System.Windows.Forms.RichTextBox()
         Me.categoryPanel = New System.Windows.Forms.TableLayoutPanel()
@@ -93,12 +92,7 @@ Partial Class categoryScreen
         Me.playerTimeOutTimer = New System.Windows.Forms.Timer(Me.components)
         Me.clue = New Jeopardy.ClueDisplayScreen()
         Me.CategoryDisplay1 = New Jeopardy.CategoryDisplay()
-        Me.cat1Title = New Jeopardy.CategoryTitle()
-        Me.cat2Title = New Jeopardy.CategoryTitle()
-        Me.cat3Title = New Jeopardy.CategoryTitle()
-        Me.cat4Title = New Jeopardy.CategoryTitle()
-        Me.cat5Title = New Jeopardy.CategoryTitle()
-        Me.cat6Title = New Jeopardy.CategoryTitle()
+        Me.PointValueBox = New System.Windows.Forms.PictureBox()
         Me.catPanel.SuspendLayout()
         CType(Me.Cat1200, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Cat2200, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,6 +135,7 @@ Partial Class categoryScreen
         CType(Me.TrackBar8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrackBar9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrackBar10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PointValueBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'catPanel
@@ -158,9 +153,75 @@ Partial Class categoryScreen
         Me.catPanel.Size = New System.Drawing.Size(1349, 128)
         Me.catPanel.TabIndex = 0
         '
+        'cat1Title
+        '
+        Me.cat1Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.cat1Title.BackgroundImage = CType(resources.GetObject("cat1Title.BackgroundImage"), System.Drawing.Image)
+        Me.cat1Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cat1Title.display = True
+        Me.cat1Title.Location = New System.Drawing.Point(3, 3)
+        Me.cat1Title.Name = "cat1Title"
+        Me.cat1Title.Size = New System.Drawing.Size(218, 125)
+        Me.cat1Title.TabIndex = 6
+        '
+        'cat2Title
+        '
+        Me.cat2Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.cat2Title.BackgroundImage = CType(resources.GetObject("cat2Title.BackgroundImage"), System.Drawing.Image)
+        Me.cat2Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cat2Title.display = True
+        Me.cat2Title.Location = New System.Drawing.Point(227, 3)
+        Me.cat2Title.Name = "cat2Title"
+        Me.cat2Title.Size = New System.Drawing.Size(218, 125)
+        Me.cat2Title.TabIndex = 7
+        '
+        'cat3Title
+        '
+        Me.cat3Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.cat3Title.BackgroundImage = CType(resources.GetObject("cat3Title.BackgroundImage"), System.Drawing.Image)
+        Me.cat3Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cat3Title.display = True
+        Me.cat3Title.Location = New System.Drawing.Point(451, 3)
+        Me.cat3Title.Name = "cat3Title"
+        Me.cat3Title.Size = New System.Drawing.Size(218, 125)
+        Me.cat3Title.TabIndex = 8
+        '
+        'cat4Title
+        '
+        Me.cat4Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.cat4Title.BackgroundImage = CType(resources.GetObject("cat4Title.BackgroundImage"), System.Drawing.Image)
+        Me.cat4Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cat4Title.display = True
+        Me.cat4Title.Location = New System.Drawing.Point(675, 3)
+        Me.cat4Title.Name = "cat4Title"
+        Me.cat4Title.Size = New System.Drawing.Size(218, 125)
+        Me.cat4Title.TabIndex = 9
+        '
+        'cat5Title
+        '
+        Me.cat5Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.cat5Title.BackgroundImage = CType(resources.GetObject("cat5Title.BackgroundImage"), System.Drawing.Image)
+        Me.cat5Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cat5Title.display = True
+        Me.cat5Title.Location = New System.Drawing.Point(899, 3)
+        Me.cat5Title.Name = "cat5Title"
+        Me.cat5Title.Size = New System.Drawing.Size(218, 125)
+        Me.cat5Title.TabIndex = 10
+        '
+        'cat6Title
+        '
+        Me.cat6Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.cat6Title.BackgroundImage = CType(resources.GetObject("cat6Title.BackgroundImage"), System.Drawing.Image)
+        Me.cat6Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cat6Title.display = True
+        Me.cat6Title.Location = New System.Drawing.Point(1123, 3)
+        Me.cat6Title.Name = "cat6Title"
+        Me.cat6Title.Size = New System.Drawing.Size(218, 125)
+        Me.cat6Title.TabIndex = 11
+        '
         'Cat1200
         '
-        Me.Cat1200.Image = Global.Jeopardy.My.Resources.Resources.Screen200
+        Me.Cat1200.Image = CType(resources.GetObject("Cat1200.Image"), System.Drawing.Image)
         Me.Cat1200.Location = New System.Drawing.Point(3, 3)
         Me.Cat1200.Name = "Cat1200"
         Me.Cat1200.Size = New System.Drawing.Size(218, 110)
@@ -226,7 +287,7 @@ Partial Class categoryScreen
         '
         'Cat1400
         '
-        Me.Cat1400.Image = Global.Jeopardy.My.Resources.Resources.Screen400
+        Me.Cat1400.Image = CType(resources.GetObject("Cat1400.Image"), System.Drawing.Image)
         Me.Cat1400.Location = New System.Drawing.Point(3, 119)
         Me.Cat1400.Name = "Cat1400"
         Me.Cat1400.Size = New System.Drawing.Size(218, 110)
@@ -488,68 +549,50 @@ Partial Class categoryScreen
         Me.Cat61000.TabStop = False
         Me.Cat61000.Visible = False
         '
-        'Panel1
+        'pbarCatReveal
         '
-        Me.Panel1.BackColor = System.Drawing.Color.Black
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(25, 14)
-        Me.Panel1.TabIndex = 2
+        Me.pbarCatReveal.Location = New System.Drawing.Point(824, 165)
+        Me.pbarCatReveal.Maximum = 60
+        Me.pbarCatReveal.Name = "pbarCatReveal"
+        Me.pbarCatReveal.Size = New System.Drawing.Size(100, 23)
+        Me.pbarCatReveal.TabIndex = 3
+        Me.pbarCatReveal.Visible = False
         '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(824, 165)
-        Me.ProgressBar1.Maximum = 60
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(100, 23)
-        Me.ProgressBar1.TabIndex = 3
-        Me.ProgressBar1.Visible = False
-        '
-        'Timer1
+        'tmrCatReveal
         '
         '
-        'Timer2
+        'tmrCheckReveal
         '
         '
-        'Timer3
-        '
-        Me.Timer3.Interval = 1000
-        '
-        'ProgressBar2
-        '
-        Me.ProgressBar2.Location = New System.Drawing.Point(705, 96)
-        Me.ProgressBar2.Maximum = 10
-        Me.ProgressBar2.Name = "ProgressBar2"
-        Me.ProgressBar2.Size = New System.Drawing.Size(100, 23)
-        Me.ProgressBar2.TabIndex = 7
-        Me.ProgressBar2.Visible = False
-        '
-        'ProgressBar3
-        '
-        Me.ProgressBar3.Location = New System.Drawing.Point(768, 230)
-        Me.ProgressBar3.Maximum = 5
-        Me.ProgressBar3.Name = "ProgressBar3"
-        Me.ProgressBar3.Size = New System.Drawing.Size(100, 23)
-        Me.ProgressBar3.TabIndex = 9
-        Me.ProgressBar3.Visible = False
-        '
-        'Timer6
+        'tmrPointValueBox
         '
         '
-        'Timer7
+        'pbarPVB
         '
-        Me.Timer7.Interval = 1
+        Me.pbarPVB.Location = New System.Drawing.Point(705, 96)
+        Me.pbarPVB.Maximum = 10
+        Me.pbarPVB.Name = "pbarPVB"
+        Me.pbarPVB.Size = New System.Drawing.Size(100, 23)
+        Me.pbarPVB.TabIndex = 7
+        Me.pbarPVB.Visible = False
         '
-        'Timer8
+        'tmrCheckCatCleared
         '
         '
-        'Timer9
+        'tmrRingIn
+        '
+        Me.tmrRingIn.Interval = 1
+        '
+        'tmrCheckIfRungIn
         '
         '
-        'Timer12
+        'tmrCheckCurrentRound
         '
         '
-        'Timer13
+        'tmrCheckRecogStopped
+        '
+        '
+        'tmrCheckIfSelectCategory
         '
         '
         'rtbSeenClues
@@ -573,7 +616,7 @@ Partial Class categoryScreen
         'categoryPanel
         '
         Me.categoryPanel.BackColor = System.Drawing.Color.Black
-        Me.categoryPanel.BackgroundImage = Global.Jeopardy.My.Resources.Resources.Jeopardy
+        Me.categoryPanel.BackgroundImage = Global.Jeopardy.My.Resources.Resources.JeopardySeason35
         Me.categoryPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.categoryPanel.ColumnCount = 6
         Me.categoryPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667!))
@@ -745,72 +788,39 @@ Partial Class categoryScreen
         'clue
         '
         Me.clue.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.clue.clue = Nothing
         Me.clue.clueDisplay = "CLUE"
+        Me.clue.clueType = Jeopardy.JeopardyController.clueType.Regular
         Me.clue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.clue.imgClueLocation = Nothing
         Me.clue.Location = New System.Drawing.Point(0, 0)
         Me.clue.Name = "clue"
         Me.clue.Size = New System.Drawing.Size(1932, 1092)
         Me.clue.TabIndex = 39
+        Me.clue.videoClueLocation = Nothing
         '
         'CategoryDisplay1
         '
         Me.CategoryDisplay1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.CategoryDisplay1.BackgroundImage = CType(resources.GetObject("CategoryDisplay1.BackgroundImage"), System.Drawing.Image)
         Me.CategoryDisplay1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.CategoryDisplay1.Category = "CLUE"
         Me.CategoryDisplay1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CategoryDisplay1.Location = New System.Drawing.Point(0, 0)
         Me.CategoryDisplay1.Name = "CategoryDisplay1"
         Me.CategoryDisplay1.Size = New System.Drawing.Size(1932, 1092)
         Me.CategoryDisplay1.TabIndex = 40
         '
-        'cat1Title
+        'PointValueBox
         '
-        Me.cat1Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.cat1Title.Location = New System.Drawing.Point(3, 3)
-        Me.cat1Title.Name = "cat1Title"
-        Me.cat1Title.Size = New System.Drawing.Size(218, 125)
-        Me.cat1Title.TabIndex = 6
-        '
-        'cat2Title
-        '
-        Me.cat2Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.cat2Title.Location = New System.Drawing.Point(227, 3)
-        Me.cat2Title.Name = "cat2Title"
-        Me.cat2Title.Size = New System.Drawing.Size(218, 125)
-        Me.cat2Title.TabIndex = 7
-        '
-        'cat3Title
-        '
-        Me.cat3Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.cat3Title.Location = New System.Drawing.Point(451, 3)
-        Me.cat3Title.Name = "cat3Title"
-        Me.cat3Title.Size = New System.Drawing.Size(218, 125)
-        Me.cat3Title.TabIndex = 8
-        '
-        'cat4Title
-        '
-        Me.cat4Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.cat4Title.Location = New System.Drawing.Point(675, 3)
-        Me.cat4Title.Name = "cat4Title"
-        Me.cat4Title.Size = New System.Drawing.Size(218, 125)
-        Me.cat4Title.TabIndex = 9
-        '
-        'cat5Title
-        '
-        Me.cat5Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.cat5Title.Location = New System.Drawing.Point(899, 3)
-        Me.cat5Title.Name = "cat5Title"
-        Me.cat5Title.Size = New System.Drawing.Size(218, 125)
-        Me.cat5Title.TabIndex = 10
-        '
-        'cat6Title
-        '
-        Me.cat6Title.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.cat6Title.Location = New System.Drawing.Point(1123, 3)
-        Me.cat6Title.Name = "cat6Title"
-        Me.cat6Title.Size = New System.Drawing.Size(218, 125)
-        Me.cat6Title.TabIndex = 11
+        Me.PointValueBox.BackColor = System.Drawing.Color.Transparent
+        Me.PointValueBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PointValueBox.Location = New System.Drawing.Point(0, 0)
+        Me.PointValueBox.Name = "PointValueBox"
+        Me.PointValueBox.Size = New System.Drawing.Size(1932, 1092)
+        Me.PointValueBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PointValueBox.TabIndex = 42
+        Me.PointValueBox.TabStop = False
+        Me.PointValueBox.Visible = False
         '
         'categoryScreen
         '
@@ -819,9 +829,10 @@ Partial Class categoryScreen
         Me.BackgroundImage = Global.Jeopardy.My.Resources.Resources.JeopardyBoardBlank
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1932, 1092)
+        Me.Controls.Add(Me.PointValueBox)
         Me.Controls.Add(Me.CategoryDisplay1)
         Me.Controls.Add(Me.clue)
-        Me.Controls.Add(Me.ProgressBar1)
+        Me.Controls.Add(Me.pbarCatReveal)
         Me.Controls.Add(Me.TrackBar10)
         Me.Controls.Add(Me.TrackBar9)
         Me.Controls.Add(Me.TrackBar8)
@@ -835,11 +846,9 @@ Partial Class categoryScreen
         Me.Controls.Add(Me.pbarLoadCat)
         Me.Controls.Add(Me.loadCatProgressBar)
         Me.Controls.Add(Me.catListBox)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.rtbPointValues)
         Me.Controls.Add(Me.rtbSeenClues)
-        Me.Controls.Add(Me.ProgressBar3)
-        Me.Controls.Add(Me.ProgressBar2)
+        Me.Controls.Add(Me.pbarPVB)
         Me.Controls.Add(Me.categoryPanel)
         Me.Controls.Add(Me.catPanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -891,6 +900,7 @@ Partial Class categoryScreen
         CType(Me.TrackBar8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TrackBar9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TrackBar10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PointValueBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -927,24 +937,17 @@ Partial Class categoryScreen
     Friend WithEvents Cat41000 As PictureBox
     Friend WithEvents Cat51000 As PictureBox
     Friend WithEvents Cat61000 As PictureBox
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents ProgressBar1 As ProgressBar
-    Friend WithEvents Timer1 As Timer
-    Friend WithEvents Timer2 As Timer
-    Friend WithEvents Timer3 As Timer
-    Friend WithEvents Timer4 As Timer
-    Friend WithEvents ProgressBar2 As ProgressBar
-    Friend WithEvents Timer5 As Timer
-    Friend WithEvents ProgressBar3 As ProgressBar
-    Friend WithEvents Timer6 As Timer
-    Friend WithEvents Timer7 As Timer
-    Friend WithEvents Timer8 As Timer
-    Friend WithEvents Timer9 As Timer
-    Friend WithEvents Timer10 As Timer
-    Friend WithEvents Timer11 As Timer
-    Friend WithEvents Timer12 As Timer
-    Friend WithEvents Timer13 As Timer
-    Friend WithEvents Timer14 As Timer
+    Friend WithEvents pbarCatReveal As ProgressBar
+    Friend WithEvents tmrCatReveal As Timer
+    Friend WithEvents tmrCheckReveal As Timer
+    Friend WithEvents tmrPointValueBox As Timer
+    Friend WithEvents pbarPVB As ProgressBar
+    Friend WithEvents tmrCheckCatCleared As Timer
+    Friend WithEvents tmrRingIn As Timer
+    Friend WithEvents tmrCheckIfRungIn As Timer
+    Friend WithEvents tmrCheckCurrentRound As Timer
+    Friend WithEvents tmrCheckRecogStopped As Timer
+    Friend WithEvents tmrCheckIfSelectCategory As Timer
     Friend WithEvents rtbSeenClues As RichTextBox
     Friend WithEvents rtbPointValues As RichTextBox
     Friend WithEvents categoryPanel As TableLayoutPanel
@@ -971,4 +974,5 @@ Partial Class categoryScreen
     Friend WithEvents cat4Title As CategoryTitle
     Friend WithEvents cat5Title As CategoryTitle
     Friend WithEvents cat6Title As CategoryTitle
+    Friend WithEvents PointValueBox As PictureBox
 End Class

@@ -24,33 +24,29 @@ Partial Class FinalJeopardy
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FinalJeopardy))
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrThink = New System.Windows.Forms.Timer(Me.components)
         Me.finalJeopardyPic = New System.Windows.Forms.PictureBox()
-        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrRevealCategory = New System.Windows.Forms.Timer(Me.components)
         Me.CategoryTitle1 = New Jeopardy.CategoryTitleLarge()
         Me.ClueDisplayScreen1 = New Jeopardy.ClueDisplayScreen()
         CType(Me.finalJeopardyPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Timer1
+        'tmrThink
         '
         '
         'finalJeopardyPic
         '
         Me.finalJeopardyPic.BackColor = System.Drawing.Color.Transparent
         Me.finalJeopardyPic.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.finalJeopardyPic.Image = CType(resources.GetObject("finalJeopardyPic.Image"), System.Drawing.Image)
+        Me.finalJeopardyPic.Image = Global.Jeopardy.My.Resources.Resources.jeopardy_ubicom_screen_03_final_jeopardy_full_size_1280x720_304779
         Me.finalJeopardyPic.Location = New System.Drawing.Point(0, 0)
         Me.finalJeopardyPic.Name = "finalJeopardyPic"
         Me.finalJeopardyPic.Size = New System.Drawing.Size(1932, 1092)
         Me.finalJeopardyPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.finalJeopardyPic.TabIndex = 1
         Me.finalJeopardyPic.TabStop = False
-        '
-        'Timer2
-        '
         '
         'ProgressBar1
         '
@@ -61,13 +57,15 @@ Partial Class FinalJeopardy
         Me.ProgressBar1.TabIndex = 2
         Me.ProgressBar1.Visible = False
         '
-        'Timer3
+        'tmrRevealCategory
         '
         '
         'CategoryTitle1
         '
         Me.CategoryTitle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.CategoryTitle1.category = "CATEGORY"
+        Me.CategoryTitle1.BackgroundImage = CType(resources.GetObject("CategoryTitle1.BackgroundImage"), System.Drawing.Image)
+        Me.CategoryTitle1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.CategoryTitle1.category = Nothing
         Me.CategoryTitle1.display = True
         Me.CategoryTitle1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CategoryTitle1.Location = New System.Drawing.Point(0, 0)
@@ -78,7 +76,9 @@ Partial Class FinalJeopardy
         'ClueDisplayScreen1
         '
         Me.ClueDisplayScreen1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.ClueDisplayScreen1.clue = Nothing
         Me.ClueDisplayScreen1.clueDisplay = "CLUE"
+        Me.ClueDisplayScreen1.clueType = Jeopardy.JeopardyController.clueType.Regular
         Me.ClueDisplayScreen1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ClueDisplayScreen1.Location = New System.Drawing.Point(0, 0)
         Me.ClueDisplayScreen1.Name = "ClueDisplayScreen1"
@@ -108,11 +108,10 @@ Partial Class FinalJeopardy
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Timer1 As Timer
+    Friend WithEvents tmrThink As Timer
     Friend WithEvents finalJeopardyPic As PictureBox
-    Friend WithEvents Timer2 As Timer
     Friend WithEvents ProgressBar1 As ProgressBar
-    Friend WithEvents Timer3 As Timer
+    Friend WithEvents tmrRevealCategory As Timer
     Friend WithEvents CategoryTitle1 As CategoryTitleLarge
     Friend WithEvents ClueDisplayScreen1 As ClueDisplayScreen
 End Class

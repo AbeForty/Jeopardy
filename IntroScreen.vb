@@ -1,6 +1,6 @@
 ﻿Public Class IntroScreen
     Private Sub IntroScreen_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        AxWindowsMediaPlayer1.URL = "C:\Users\ac765\Documents\Visual Studio 2015\Projects\Jeopardy\Jeopardy\bin\Debug" & "\JeoS33IntroPre.mp4"
+        AxWindowsMediaPlayer1.URL = JeopardyController.finalURL & "\Resources\JeopardySeason35Intro.mp4"
         AxWindowsMediaPlayer1.uiMode = "none"
         Timer1.Start()
         AxWindowsMediaPlayer1.settings.volume = 100

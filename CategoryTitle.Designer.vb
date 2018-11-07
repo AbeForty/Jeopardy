@@ -24,19 +24,21 @@ Partial Class CategoryTitle
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.tmrCheckSize = New System.Windows.Forms.Timer(Me.components)
-        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.catBrowserSmall = New System.Windows.Forms.WebBrowser()
         Me.SuspendLayout()
         '
-        'lblCategory
+        'catBrowserSmall
         '
-        Me.lblCategory.Font = New System.Drawing.Font("Open Sans", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.lblCategory.ForeColor = System.Drawing.Color.White
-        Me.lblCategory.Location = New System.Drawing.Point(18, 12)
-        Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(189, 100)
-        Me.lblCategory.TabIndex = 0
-        Me.lblCategory.Text = "CATEGORY"
-        Me.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.catBrowserSmall.IsWebBrowserContextMenuEnabled = False
+        Me.catBrowserSmall.Location = New System.Drawing.Point(15, 12)
+        Me.catBrowserSmall.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.catBrowserSmall.Name = "catBrowserSmall"
+        Me.catBrowserSmall.ScrollBarsEnabled = False
+        Me.catBrowserSmall.Size = New System.Drawing.Size(190, 101)
+        Me.catBrowserSmall.TabIndex = 0
+        Me.catBrowserSmall.Url = New System.Uri("C:\Users\ac765\Documents\Visual Studio 2015\Projects\Jeopardy\Jeopardy\bin\Debug\" &
+        "Resources\category.html", System.UriKind.Absolute)
+        Me.catBrowserSmall.WebBrowserShortcutsEnabled = False
         '
         'CategoryTitle
         '
@@ -45,7 +47,7 @@ Partial Class CategoryTitle
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.BackgroundImage = Global.Jeopardy.My.Resources.Resources.CategoryTVFrame
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Controls.Add(Me.lblCategory)
+        Me.Controls.Add(Me.catBrowserSmall)
         Me.DoubleBuffered = True
         Me.Name = "CategoryTitle"
         Me.Size = New System.Drawing.Size(218, 125)
@@ -53,6 +55,6 @@ Partial Class CategoryTitle
 
     End Sub
     Friend WithEvents tmrCheckSize As Timer
-    Friend WithEvents lblCategory As Label
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents catBrowserSmall As WebBrowser
 End Class

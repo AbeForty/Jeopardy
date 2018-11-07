@@ -9,16 +9,14 @@ Public Class CategoryTitleLarge
         Set(value As Boolean)
             displayBoolean = value
             If value = False Then
-                lblCategory.Text = ""
+                catBrowser.Navigate(JeopardyController.finalURL & "\Resources\category.html")
             End If
         End Set
     End Property
     Public Property category As String
-        Get
-            Return lblCategory.Text
-        End Get
-        Set(value As String)
-            lblCategory.Text = value
-        End Set
-    End Property
+    Private Sub catBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles catBrowser.DocumentCompleted
+        If JeopardyController.roundEnum = JeopardyController.roundType.FinalJeopardy Then
+            CType(sender, WebBrowser).Document.GetElementById("category").InnerHtml = category
+        End If
+    End Sub
 End Class

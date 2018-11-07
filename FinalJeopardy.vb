@@ -4,7 +4,7 @@
         'CategoryTitle1.category
         'AxWindowsMediaPlayer1.Ctlcontrols.stop()
         JeopardyController.loadFinalJeopardy()
-        finalJeopardyPic.Image = My.Resources.finalj_570x317
+        finalJeopardyPic.Image = My.Resources.jeopardy_ubicom_screen_03_final_jeopardy_full_size_1280x720_304779
         frmScore.Show()
         frmScore.txtWager1.Show()
         frmScore.txtWager2.Show()
@@ -13,11 +13,7 @@
         frmScore.btnGo.Show()
     End Sub
 
-    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-
-    End Sub
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Private Sub tmrThink_Tick(sender As Object, e As EventArgs) Handles tmrThink.Tick
         'If AxWindowsMediaPlayer1.playState = WMPLib.WMPPlayState.wmppsStopped Then
         '    finalJeopardyPic.Hide()
         '    frmScore.Show()
@@ -29,19 +25,20 @@
             'CategoryTitle1.Hide()
             'Timer1.Start()
             'frmScore.Hide()
-            Timer1.Stop()
+            tmrThink.Stop()
             'startTheme()
         End If
     End Sub
 
-    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+    Private Sub tmrRevealCategory_Tick(sender As Object, e As EventArgs) Handles tmrRevealCategory.Tick
         If frmScore.txtWager1.Visible = False And frmScore.txtWager2.Visible = False And frmScore.txtWager3.Visible = False Then
+            frmScore.lblPlayerWagerMessage.Hide()
             ProgressBar1.Increment(1)
             If ProgressBar1.Value = ProgressBar1.Maximum Then
                 CategoryTitle1.Hide()
                 'Timer1.Start()
                 'frmScore.Hide()
-                Timer3.Stop()
+                tmrRevealCategory.Stop()
                 'startTheme()
             End If
         Else
@@ -51,15 +48,15 @@
     Private Sub finalJeopardyPic_Click(sender As Object, e As EventArgs) Handles finalJeopardyPic.Click
         finalJeopardyPic.Hide()
         My.Computer.Audio.Play(My.Resources.rightanswer, AudioPlayMode.Background)
-        Timer3.Start()
+        tmrRevealCategory.Start()
     End Sub
 
     Private Sub CategoryTitle1_Click(sender As Object, e As EventArgs) Handles CategoryTitle1.Click
         'If frmScore.Visible = True Then
-        My.Computer.Audio.Play(My.Resources.thinkmusic, AudioPlayMode.Background)
-        'Timer1.Start()
-        CategoryTitle1.Hide()
-        frmScore.Hide()
+        'My.Computer.Audio.Play(My.Resources.thinkmusic, AudioPlayMode.Background)
+        ''Timer1.Start()
+        'CategoryTitle1.Hide()
+        'frmScore.Hide()
         'ElseIf frmScore.Visible = False Then
         '    frmScore.Show()
         'End If

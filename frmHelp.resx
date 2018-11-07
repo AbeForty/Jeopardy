@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>If you want to create saved game contestant profiles, click on contestants button. The contestant manager will appear. In this window, click on New Contestant to create a new profile. After playing a saved game, player statistics can viewed in this window by clicking on the contestant name.</value>
+  </data>
   <data name="lblInstruction1.Text" xml:space="preserve">
     <value>Click the customize button to start creating your own clue packs. Click the drop down and select "Create New Pack."  Then continue by entering pack and category names and selecting the category number, round, and point value for the clue. Finally, enter the clue into the box and then click submit. Continue until you fill out all of the clues. You may come back and edit your clues anytime.  Just click on Customize again, and then select your pack from the drop down to start editing.
  
@@ -125,6 +128,9 @@
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>When the Jeopardy! round is complete click the Double Jeopardy! button (if configured) to proceed to the next round. If Double Jeopardy! clues were not created, click the Final Jeopardy! button instead.</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>To play a pack, head to the welcome screen and click the play button to launch the Pack Select dialog box. Select a pack from the drop down. You can create teams with previously saved profiles or play quickly by entering player names in the boxes. To create a team Click Add to Team to select a player profile to a team. To have the game save your game progress for recording and easy resuming, click the Start Saved Game button (only for games using saved profiles). Click the Quick Start button to start playing without saving your game.</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>In the Final Jeopardy! round, click the graphic once to reveal the category. After revealing the category, let the players enter their wager into the box below their player name. Click the arrow to start Final Jeopardy! and the iconic "Think!" music.</value>

@@ -24,20 +24,18 @@ Partial Class CategoryTitleLarge
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.tmrCheckSize = New System.Windows.Forms.Timer(Me.components)
-        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.catBrowser = New System.Windows.Forms.WebBrowser()
         Me.SuspendLayout()
         '
-        'lblCategory
+        'catBrowser
         '
-        Me.lblCategory.BackColor = System.Drawing.Color.Transparent
-        Me.lblCategory.Font = New System.Drawing.Font("Swiss911W01-Compressed", 138.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCategory.ForeColor = System.Drawing.Color.White
-        Me.lblCategory.Location = New System.Drawing.Point(151, 100)
-        Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(1639, 891)
-        Me.lblCategory.TabIndex = 0
-        Me.lblCategory.Text = "CATEGORY"
-        Me.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.catBrowser.IsWebBrowserContextMenuEnabled = False
+        Me.catBrowser.Location = New System.Drawing.Point(153, 100)
+        Me.catBrowser.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.catBrowser.Name = "catBrowser"
+        Me.catBrowser.Size = New System.Drawing.Size(1722, 911)
+        Me.catBrowser.TabIndex = 1
+        Me.catBrowser.WebBrowserShortcutsEnabled = False
         '
         'CategoryTitleLarge
         '
@@ -46,7 +44,7 @@ Partial Class CategoryTitleLarge
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.BackgroundImage = Global.Jeopardy.My.Resources.Resources.CategoryTVFrame
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Controls.Add(Me.lblCategory)
+        Me.Controls.Add(Me.catBrowser)
         Me.DoubleBuffered = True
         Me.Name = "CategoryTitleLarge"
         Me.Size = New System.Drawing.Size(1932, 1092)
@@ -54,6 +52,6 @@ Partial Class CategoryTitleLarge
 
     End Sub
     Friend WithEvents tmrCheckSize As Timer
-    Friend WithEvents lblCategory As Label
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents catBrowser As WebBrowser
 End Class

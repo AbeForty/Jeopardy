@@ -29,6 +29,8 @@ Partial Class ClueDisplay
         Me.clueIDlbl = New System.Windows.Forms.Label()
         Me.formatLabel2 = New System.Windows.Forms.Label()
         Me.editBTN = New System.Windows.Forms.PictureBox()
+        Me.cboQuestion = New System.Windows.Forms.ComboBox()
+        Me.lblCBID = New System.Windows.Forms.Label()
         CType(Me.editBTN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -112,11 +114,34 @@ Partial Class ClueDisplay
         Me.editBTN.TabIndex = 16
         Me.editBTN.TabStop = False
         '
+        'cboQuestion
+        '
+        Me.cboQuestion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboQuestion.Font = New System.Drawing.Font("Korinna BT", 7.8!)
+        Me.cboQuestion.FormattingEnabled = True
+        Me.cboQuestion.Location = New System.Drawing.Point(220, 97)
+        Me.cboQuestion.Name = "cboQuestion"
+        Me.cboQuestion.Size = New System.Drawing.Size(406, 24)
+        Me.cboQuestion.TabIndex = 20
+        '
+        'lblCBID
+        '
+        Me.lblCBID.AutoSize = True
+        Me.lblCBID.ForeColor = System.Drawing.Color.White
+        Me.lblCBID.Location = New System.Drawing.Point(322, 128)
+        Me.lblCBID.Name = "lblCBID"
+        Me.lblCBID.Size = New System.Drawing.Size(36, 17)
+        Me.lblCBID.TabIndex = 21
+        Me.lblCBID.Text = "cbID"
+        Me.lblCBID.Visible = False
+        '
         'ClueDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.Controls.Add(Me.lblCBID)
+        Me.Controls.Add(Me.cboQuestion)
         Me.Controls.Add(Me.formatLabel2)
         Me.Controls.Add(Me.clueIDlbl)
         Me.Controls.Add(Me.imgLabel)
@@ -138,4 +163,6 @@ Partial Class ClueDisplay
     Friend WithEvents imgLabel As Label
     Friend WithEvents clueIDlbl As Label
     Friend WithEvents formatLabel2 As Label
+    Friend WithEvents cboQuestion As ComboBox
+    Friend WithEvents lblCBID As Label
 End Class

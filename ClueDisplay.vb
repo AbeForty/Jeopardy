@@ -9,11 +9,14 @@
         'RichTextBox1.SelectAll()
         'RichTextBox1.SelectionAlignment = HorizontalAlignment.Center
         'myClue = clue
-        categorylbl.Text = clue.getCategory()
-        valuelbl.Text = clue.getValue()
-        'answerlbl.Text = clue.getAnswer()
-        formatLabel2.Text = clue.getClue()
-        clueIDlbl.Text = clue.getclueID()
+        categorylbl.Text = clue.category
+        valuelbl.Text = clue.value
+        'answerlbl.Text = clue.answer
+        lblCBID.Text = clue.cbID
+        imgLabel.Text = clue.interactiveClueLocation
+        cboQuestion.DataSource = clue.answer
+        formatLabel2.Text = clue.clue
+        clueIDlbl.Text = clue.clueID
     End Sub
 
     'Private Sub clueBox_Click(sender As Object, e As EventArgs)
@@ -29,8 +32,8 @@
     Private Sub editBTN_Click(sender As Object, e As EventArgs) Handles editBTN.Click
         Customizer.cboCategory.SelectedItem = categorylbl.Text
         Customizer.numValue.Value = valuelbl.Text
-        'Customizer.answerTextBox.Text = answerlbl.Text
-        'Customizer.clueLocationTextBox.Text = clueBox.ImageLocation
+        Customizer.cboQuestion.DataSource = cboQuestion.Items
+        Customizer.txtInteractiveClue.Text = imgLabel.Text
         Customizer.txtClue.Text = formatLabel2.Text
         Customizer.clueIDTextBox.Text = clueIDlbl.Text
     End Sub

@@ -27,6 +27,7 @@ Partial Class frmHelp
         Me.btnClose = New System.Windows.Forms.Button()
         Me.pnlSetup = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.pnlAddedSpace = New System.Windows.Forms.Panel()
@@ -38,7 +39,6 @@ Partial Class frmHelp
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.PictureBox7 = New System.Windows.Forms.PictureBox()
@@ -53,12 +53,12 @@ Partial Class frmHelp
         Me.lblInstructions = New System.Windows.Forms.Label()
         Me.pnlInstructions.SuspendLayout()
         Me.pnlSetup.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,7 +80,9 @@ Partial Class frmHelp
         '
         'btnClose
         '
-        Me.btnClose.Font = New System.Drawing.Font("Open Sans", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClose.Font = New System.Drawing.Font("Korinna BT", 16.2!)
+        Me.btnClose.ForeColor = System.Drawing.Color.White
         Me.btnClose.Location = New System.Drawing.Point(482, 630)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(155, 49)
@@ -93,6 +95,7 @@ Partial Class frmHelp
         '
         Me.pnlSetup.AutoScroll = True
         Me.pnlSetup.Controls.Add(Me.Label12)
+        Me.pnlSetup.Controls.Add(Me.PictureBox3)
         Me.pnlSetup.Controls.Add(Me.Label1)
         Me.pnlSetup.Controls.Add(Me.PictureBox10)
         Me.pnlSetup.Controls.Add(Me.pnlAddedSpace)
@@ -104,7 +107,6 @@ Partial Class frmHelp
         Me.pnlSetup.Controls.Add(Me.Label10)
         Me.pnlSetup.Controls.Add(Me.Label2)
         Me.pnlSetup.Controls.Add(Me.PictureBox8)
-        Me.pnlSetup.Controls.Add(Me.PictureBox3)
         Me.pnlSetup.Controls.Add(Me.Label9)
         Me.pnlSetup.Controls.Add(Me.PictureBox4)
         Me.pnlSetup.Controls.Add(Me.PictureBox7)
@@ -123,30 +125,39 @@ Partial Class frmHelp
         '
         'Label12
         '
-        Me.Label12.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Font = New System.Drawing.Font("Korinna BT", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(284, 614)
+        Me.Label12.Location = New System.Drawing.Point(293, 390)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(745, 59)
-        Me.Label12.TabIndex = 23
-        Me.Label12.Text = "If you want to change the names of the players, click Settings to input desired n" &
-    "ames."
+        Me.Label12.Size = New System.Drawing.Size(745, 99)
+        Me.Label12.TabIndex = 26
+        Me.Label12.Text = resources.GetString("Label12.Text")
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.Jeopardy.My.Resources.Resources.JeopardyContestantManager
+        Me.PictureBox3.Location = New System.Drawing.Point(13, 376)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(263, 146)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 25
+        Me.PictureBox3.TabStop = False
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Open Sans", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Korinna BT", 12.0!)
         Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(172, 27)
+        Me.Label1.Size = New System.Drawing.Size(172, 24)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Setup the Game"
+        Me.Label1.Text = "SETUP THE GAME"
         '
         'PictureBox10
         '
-        Me.PictureBox10.Image = Global.Jeopardy.My.Resources.Resources.JeopardyPlayerNameChangeSample
-        Me.PictureBox10.Location = New System.Drawing.Point(4, 571)
+        Me.PictureBox10.Image = Global.Jeopardy.My.Resources.Resources.JeopardyNewGameTeams
+        Me.PictureBox10.Location = New System.Drawing.Point(17, 708)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -155,7 +166,7 @@ Partial Class frmHelp
         '
         'pnlAddedSpace
         '
-        Me.pnlAddedSpace.Location = New System.Drawing.Point(340, 1979)
+        Me.pnlAddedSpace.Location = New System.Drawing.Point(353, 1920)
         Me.pnlAddedSpace.Name = "pnlAddedSpace"
         Me.pnlAddedSpace.Size = New System.Drawing.Size(427, 23)
         Me.pnlAddedSpace.TabIndex = 24
@@ -172,29 +183,29 @@ Partial Class frmHelp
         '
         'Label11
         '
-        Me.Label11.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(284, 1866)
+        Me.Label11.Location = New System.Drawing.Point(297, 1809)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(744, 59)
+        Me.Label11.Size = New System.Drawing.Size(744, 49)
         Me.Label11.TabIndex = 20
         Me.Label11.Text = "When time is up, the score board will appear again allowing you to mark players a" &
     "nswers and wrong or correct."
         '
         'lblInstruction1
         '
-        Me.lblInstruction1.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstruction1.Font = New System.Drawing.Font("Korinna BT", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInstruction1.ForeColor = System.Drawing.Color.White
         Me.lblInstruction1.Location = New System.Drawing.Point(293, 119)
         Me.lblInstruction1.Name = "lblInstruction1"
-        Me.lblInstruction1.Size = New System.Drawing.Size(745, 183)
+        Me.lblInstruction1.Size = New System.Drawing.Size(745, 137)
         Me.lblInstruction1.TabIndex = 2
         Me.lblInstruction1.Text = resources.GetString("lblInstruction1.Text")
         '
         'PictureBox9
         '
         Me.PictureBox9.Image = Global.Jeopardy.My.Resources.Resources.FinalJeopardyCheckAnswerSample2
-        Me.PictureBox9.Location = New System.Drawing.Point(4, 1820)
+        Me.PictureBox9.Location = New System.Drawing.Point(17, 1761)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -203,7 +214,7 @@ Partial Class frmHelp
         '
         'PictureBox2
         '
-        Me.PictureBox2.Image = Global.Jeopardy.My.Resources.Resources.JeopardyTitle33HD
+        Me.PictureBox2.Image = Global.Jeopardy.My.Resources.Resources.JeopardySeason35MenuNew
         Me.PictureBox2.Location = New System.Drawing.Point(13, 51)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(263, 149)
@@ -213,59 +224,48 @@ Partial Class frmHelp
         '
         'Label10
         '
-        Me.Label10.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label10.ForeColor = System.Drawing.Color.White
-        Me.Label10.Location = New System.Drawing.Point(284, 1515)
+        Me.Label10.Location = New System.Drawing.Point(297, 1456)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(744, 79)
+        Me.Label10.Size = New System.Drawing.Size(744, 75)
         Me.Label10.TabIndex = 18
         Me.Label10.Text = resources.GetString("Label10.Text")
         '
         'Label2
         '
-        Me.Label2.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(284, 821)
+        Me.Label2.Location = New System.Drawing.Point(296, 700)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(745, 60)
+        Me.Label2.Size = New System.Drawing.Size(745, 159)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "To play a pack, head to the welcome screen and click the play button to launch th" &
-    "e Pack Select dialog box. Select a pack from the drop down and click OK."
+        Me.Label2.Text = resources.GetString("Label2.Text")
         '
         'PictureBox8
         '
         Me.PictureBox8.Image = Global.Jeopardy.My.Resources.Resources.JeopardyBoardBlank
-        Me.PictureBox8.Location = New System.Drawing.Point(4, 1479)
+        Me.PictureBox8.Location = New System.Drawing.Point(17, 1420)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox8.TabIndex = 17
         Me.PictureBox8.TabStop = False
         '
-        'PictureBox3
-        '
-        Me.PictureBox3.Image = Global.Jeopardy.My.Resources.Resources.JeopardySelectPack
-        Me.PictureBox3.Location = New System.Drawing.Point(10, 761)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(248, 150)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox3.TabIndex = 5
-        Me.PictureBox3.TabStop = False
-        '
         'Label9
         '
-        Me.Label9.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(284, 1680)
+        Me.Label9.Location = New System.Drawing.Point(297, 1640)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(744, 112)
+        Me.Label9.Size = New System.Drawing.Size(744, 76)
         Me.Label9.TabIndex = 16
         Me.Label9.Text = resources.GetString("Label9.Text")
         '
         'PictureBox4
         '
         Me.PictureBox4.Image = Global.Jeopardy.My.Resources.Resources.CategoryRevealSample
-        Me.PictureBox4.Location = New System.Drawing.Point(4, 936)
+        Me.PictureBox4.Location = New System.Drawing.Point(17, 877)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -275,7 +275,7 @@ Partial Class frmHelp
         'PictureBox7
         '
         Me.PictureBox7.Image = Global.Jeopardy.My.Resources.Resources.FinalJeopardyWagerSample
-        Me.PictureBox7.Location = New System.Drawing.Point(4, 1658)
+        Me.PictureBox7.Location = New System.Drawing.Point(17, 1599)
         Me.PictureBox7.Name = "PictureBox7"
         Me.PictureBox7.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -284,31 +284,31 @@ Partial Class frmHelp
         '
         'Label3
         '
-        Me.Label3.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Korinna BT", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(293, 379)
+        Me.Label3.Location = New System.Drawing.Point(293, 549)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(745, 110)
+        Me.Label3.Size = New System.Drawing.Size(745, 92)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = resources.GetString("Label3.Text")
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Open Sans", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Font = New System.Drawing.Font("Korinna BT", 12.0!)
         Me.Label8.ForeColor = System.Drawing.Color.White
-        Me.Label8.Location = New System.Drawing.Point(12, 527)
+        Me.Label8.Location = New System.Drawing.Point(12, 665)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(186, 27)
+        Me.Label8.Size = New System.Drawing.Size(190, 24)
         Me.Label8.TabIndex = 14
-        Me.Label8.Text = "Playing the Game"
+        Me.Label8.Text = "PLAYING THE GAME"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Open Sans", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(21, 400)
+        Me.Label4.Location = New System.Drawing.Point(21, 567)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(246, 52)
         Me.Label4.TabIndex = 9
@@ -316,9 +316,9 @@ Partial Class frmHelp
         '
         'Label7
         '
-        Me.Label7.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(284, 1339)
+        Me.Label7.Location = New System.Drawing.Point(297, 1280)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(744, 60)
         Me.Label7.TabIndex = 13
@@ -327,9 +327,9 @@ Partial Class frmHelp
         '
         'Label5
         '
-        Me.Label5.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(284, 967)
+        Me.Label5.Location = New System.Drawing.Point(297, 908)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(744, 79)
         Me.Label5.TabIndex = 9
@@ -340,7 +340,7 @@ Partial Class frmHelp
         'PictureBox6
         '
         Me.PictureBox6.Image = Global.Jeopardy.My.Resources.Resources.JeopardyRingInSample
-        Me.PictureBox6.Location = New System.Drawing.Point(4, 1299)
+        Me.PictureBox6.Location = New System.Drawing.Point(17, 1240)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -350,7 +350,7 @@ Partial Class frmHelp
         'PictureBox5
         '
         Me.PictureBox5.Image = Global.Jeopardy.My.Resources.Resources.JeopardyBoardSample
-        Me.PictureBox5.Location = New System.Drawing.Point(4, 1109)
+        Me.PictureBox5.Location = New System.Drawing.Point(17, 1050)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(263, 146)
         Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -359,9 +359,9 @@ Partial Class frmHelp
         '
         'Label6
         '
-        Me.Label6.Font = New System.Drawing.Font("Open Sans", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Korinna BT", 10.8!)
         Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(284, 1162)
+        Me.Label6.Location = New System.Drawing.Point(297, 1103)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(744, 60)
         Me.Label6.TabIndex = 11
@@ -371,13 +371,13 @@ Partial Class frmHelp
         'lblInstructions
         '
         Me.lblInstructions.AutoSize = True
-        Me.lblInstructions.Font = New System.Drawing.Font("Open Sans", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstructions.Font = New System.Drawing.Font("Korinna BT", 19.8!)
         Me.lblInstructions.ForeColor = System.Drawing.Color.White
         Me.lblInstructions.Location = New System.Drawing.Point(30, 36)
         Me.lblInstructions.Name = "lblInstructions"
-        Me.lblInstructions.Size = New System.Drawing.Size(143, 45)
+        Me.lblInstructions.Size = New System.Drawing.Size(153, 40)
         Me.lblInstructions.TabIndex = 1
-        Me.lblInstructions.Text = "How-To"
+        Me.lblInstructions.Text = "HOW-TO"
         '
         'frmHelp
         '
@@ -400,12 +400,12 @@ Partial Class frmHelp
         Me.pnlInstructions.PerformLayout()
         Me.pnlSetup.ResumeLayout(False)
         Me.pnlSetup.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
@@ -415,7 +415,6 @@ Partial Class frmHelp
     End Sub
 
     Friend WithEvents pnlInstructions As Panel
-    Friend WithEvents Label12 As Label
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents Label11 As Label
     Friend WithEvents PictureBox9 As PictureBox
@@ -433,7 +432,6 @@ Partial Class frmHelp
     Friend WithEvents Label3 As Label
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents lblInstruction1 As Label
@@ -442,4 +440,6 @@ Partial Class frmHelp
     Friend WithEvents pnlAddedSpace As Panel
     Friend WithEvents pnlSetup As Panel
     Friend WithEvents btnClose As Button
+    Friend WithEvents Label12 As Label
+    Friend WithEvents PictureBox3 As PictureBox
 End Class

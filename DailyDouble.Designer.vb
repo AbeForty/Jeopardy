@@ -25,11 +25,11 @@ Partial Class DailyDouble
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DailyDouble))
         Me.wagerBox = New System.Windows.Forms.NumericUpDown()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblWagerTitle = New System.Windows.Forms.Label()
         Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
         Me.btnGo = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblWagerRules = New System.Windows.Forms.Label()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.btnTrueDailyDouble = New System.Windows.Forms.Button()
         CType(Me.wagerBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -39,25 +39,25 @@ Partial Class DailyDouble
         'wagerBox
         '
         Me.wagerBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(147, Byte), Integer))
-        Me.wagerBox.Font = New System.Drawing.Font("Segoe UI Light", 72.0!)
+        Me.wagerBox.Font = New System.Drawing.Font("Univers LT Std 55", 72.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.wagerBox.ForeColor = System.Drawing.Color.Transparent
         Me.wagerBox.Location = New System.Drawing.Point(786, 484)
         Me.wagerBox.Name = "wagerBox"
-        Me.wagerBox.Size = New System.Drawing.Size(451, 167)
+        Me.wagerBox.Size = New System.Drawing.Size(451, 156)
         Me.wagerBox.TabIndex = 0
         '
-        'Label1
+        'lblWagerTitle
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Enchanted", 36.0!)
-        Me.Label1.ForeColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(775, 357)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(465, 71)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Enter your wager"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblWagerTitle.AutoSize = True
+        Me.lblWagerTitle.BackColor = System.Drawing.Color.Transparent
+        Me.lblWagerTitle.Font = New System.Drawing.Font("Korinna", 36.0!)
+        Me.lblWagerTitle.ForeColor = System.Drawing.Color.Transparent
+        Me.lblWagerTitle.Location = New System.Drawing.Point(753, 345)
+        Me.lblWagerTitle.Name = "lblWagerTitle"
+        Me.lblWagerTitle.Size = New System.Drawing.Size(523, 76)
+        Me.lblWagerTitle.TabIndex = 4
+        Me.lblWagerTitle.Text = "Enter your wager"
+        Me.lblWagerTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'AxWindowsMediaPlayer1
         '
@@ -72,7 +72,7 @@ Partial Class DailyDouble
         'btnGo
         '
         Me.btnGo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnGo.Font = New System.Drawing.Font("Enchanted", 36.0!)
+        Me.btnGo.Font = New System.Drawing.Font("Korinna", 36.0!)
         Me.btnGo.ForeColor = System.Drawing.Color.Transparent
         Me.btnGo.Location = New System.Drawing.Point(1068, 666)
         Me.btnGo.Name = "btnGo"
@@ -84,16 +84,16 @@ Partial Class DailyDouble
         'Timer1
         '
         '
-        'Label2
+        'lblWagerRules
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Enchanted", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Transparent
-        Me.Label2.Location = New System.Drawing.Point(739, 440)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(551, 29)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "You can bet up to $1000 if you have $0 in your bank"
+        Me.lblWagerRules.AutoSize = True
+        Me.lblWagerRules.Font = New System.Drawing.Font("Korinna", 13.8!)
+        Me.lblWagerRules.ForeColor = System.Drawing.Color.Transparent
+        Me.lblWagerRules.Location = New System.Drawing.Point(718, 437)
+        Me.lblWagerRules.Name = "lblWagerRules"
+        Me.lblWagerRules.Size = New System.Drawing.Size(606, 30)
+        Me.lblWagerRules.TabIndex = 7
+        Me.lblWagerRules.Text = "You can bet up to $1000 if you have $0 in your bank"
         '
         'Timer2
         '
@@ -101,7 +101,7 @@ Partial Class DailyDouble
         'btnTrueDailyDouble
         '
         Me.btnTrueDailyDouble.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnTrueDailyDouble.Font = New System.Drawing.Font("Enchanted", 20.0!)
+        Me.btnTrueDailyDouble.Font = New System.Drawing.Font("Korinna", 19.8!)
         Me.btnTrueDailyDouble.ForeColor = System.Drawing.Color.Transparent
         Me.btnTrueDailyDouble.Location = New System.Drawing.Point(786, 666)
         Me.btnTrueDailyDouble.Name = "btnTrueDailyDouble"
@@ -117,9 +117,9 @@ Partial Class DailyDouble
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(147, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1932, 1092)
         Me.Controls.Add(Me.btnTrueDailyDouble)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblWagerRules)
         Me.Controls.Add(Me.btnGo)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblWagerTitle)
         Me.Controls.Add(Me.wagerBox)
         Me.Controls.Add(Me.AxWindowsMediaPlayer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -138,11 +138,11 @@ Partial Class DailyDouble
     End Sub
 
     Friend WithEvents wagerBox As NumericUpDown
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblWagerTitle As Label
     Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents btnGo As Button
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblWagerRules As Label
     Friend WithEvents Timer2 As Timer
     Friend WithEvents btnTrueDailyDouble As Button
 End Class

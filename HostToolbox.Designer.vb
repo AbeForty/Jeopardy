@@ -53,7 +53,7 @@ Partial Class HostToolbox
         '
         'finalJeopardyBTN
         '
-        Me.finalJeopardyBTN.BackgroundImage = Global.Jeopardy.My.Resources.Resources.finalj_570x317
+        Me.finalJeopardyBTN.BackgroundImage = Global.Jeopardy.My.Resources.Resources.jeopardy_ubicom_screen_03_final_jeopardy_full_size_1280x720_304779
         Me.finalJeopardyBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.finalJeopardyBTN.Location = New System.Drawing.Point(55, 3)
         Me.finalJeopardyBTN.Name = "finalJeopardyBTN"

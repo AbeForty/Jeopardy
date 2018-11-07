@@ -18,23 +18,28 @@ Public Class dlgSelectPack
         Me.Close()
     End Sub
     Private Sub getPackNames()
-        Dim connPuzzle As SqlConnection
-        connPuzzle = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & "C:\Users\ac765\Documents\Visual Studio 2015\Projects\Jeopardy\Jeopardy\bin\Debug" & "\JeopardyClues.mdf;Integrated Security=True")
-        Dim strSQL As String
-        strSQL = "SELECT * FROM Clueboard"
-        Dim cmd As SqlCommand
-        Dim rdr As SqlDataReader
-        connPuzzle.Open()
-        cmd = New SqlCommand(strSQL, connPuzzle)
-        cmd.CommandType = CommandType.Text
-        rdr = cmd.ExecuteReader()
-        Do While rdr.Read()
-            If Not cboPack.Items.Contains(Trim(rdr("PackName").ToString)) Then
-                cboPack.Items.Add(Trim(rdr("PackName")).ToString)
-            Else
-            End If
-        Loop
-        connPuzzle.Close()
+        Try
+            Dim connPuzzle As SqlConnection
+            'connPuzzle = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & "http://localhost/Jeopardy/App_Data/" & "JeopardyClues.mdf;Integrated Security=True")
+            connPuzzle = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
+            Dim strSQL As String
+            strSQL = "SELECT * FROM Clueboard"
+            Dim cmd As SqlCommand
+            Dim rdr As SqlDataReader
+            connPuzzle.Open()
+            cmd = New SqlCommand(strSQL, connPuzzle)
+            cmd.CommandType = CommandType.Text
+            rdr = cmd.ExecuteReader()
+            Do While rdr.Read()
+                If Not cboPack.Items.Contains(Trim(rdr("PackName").ToString)) Then
+                    cboPack.Items.Add(Trim(rdr("PackName")).ToString)
+                Else
+                End If
+            Loop
+            connPuzzle.Close()
+        Catch ex As Exception
+            MsgBox("Pack names failed to load.", vbCritical, "JEOPARDY!")
+        End Try
     End Sub
     Private Sub dlgSelectPack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         getPackNames()

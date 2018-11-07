@@ -10,12 +10,15 @@
         Application.Exit()
     End Sub
     Private Sub frmScore_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        numPlayer1.Font = New Font("Open Sans", 24, FontStyle.Bold)
-        numPlayer2.Font = New Font("Open Sans", 24, FontStyle.Bold)
-        numPlayer3.Font = New Font("Open Sans", 24, FontStyle.Bold)
-        lblPlayer1Score.Font = New Font("Open Sans", 24, FontStyle.Bold)
-        lblPlayer2Score.Font = New Font("Open Sans", 24, FontStyle.Bold)
-        lblPlayer3Score.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        'numPlayer1.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        'numPlayer2.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        'numPlayer3.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        'lblPlayer1Score.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        'lblPlayer2Score.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        'lblPlayer3Score.Font = New Font("Open Sans", 24, FontStyle.Bold)
+        lblPlayer1.Text = JeopardyController.Player1List(0).PlayerName
+        lblPlayer2.Text = JeopardyController.Player2List(0).PlayerName
+        lblPlayer3.Text = JeopardyController.Player3List(0).PlayerName
         tmrCurrentValue.Start()
         Me.Dock = DockStyle.Top
         txtCurrentPlayer.Focus()
@@ -30,7 +33,7 @@
             numPlayer1.Show()
             IsPlayer1Override = True
         ElseIf IsPlayer1Override = True Then
-            lblPlayer1Score.Text = Integer.Parse(lblPlayer1Score.Text) + numPlayer1.Value
+            lblPlayer1Score.Text = FormatCurrency(Integer.Parse(lblPlayer1Score.Text.Replace("$", "").Replace(",", "")) + numPlayer1.Value, 0, , TriState.False)
             numPlayer1.Hide()
             IsPlayer1Override = False
         End If
@@ -41,7 +44,7 @@
             numPlayer2.Show()
             IsPlayer2Override = True
         ElseIf IsPlayer2Override = True Then
-            lblPlayer2Score.Text = Integer.Parse(lblPlayer2Score.Text) + numPlayer2.Value
+            lblPlayer2Score.Text = FormatCurrency(Integer.Parse(lblPlayer2Score.Text.Replace("$", "").Replace(",", "")) + numPlayer2.Value, 0, , TriState.False)
             numPlayer2.Hide()
             IsPlayer2Override = False
         End If
@@ -52,29 +55,41 @@
             numPlayer3.Show()
             IsPlayer3Override = True
         ElseIf IsPlayer3Override = True Then
-            lblPlayer3Score.Text = Integer.Parse(lblPlayer3Score.Text) + numPlayer3.Value
+            lblPlayer3Score.Text = FormatCurrency(Integer.Parse(lblPlayer3Score.Text.Replace("$", "").Replace(",", "")) + numPlayer3.Value, 0, , TriState.False)
             numPlayer3.Hide()
             IsPlayer3Override = False
         End If
     End Sub
     Private Sub finalJeopardyBTN_Click(sender As Object, e As EventArgs) Handles btnFinalJeopardy.Click
+        JeopardyController.roundNumber = 3
+        JeopardyController.saveGame(True)
         FinalJeopardy.Show()
         categoryScreen.Close()
     End Sub
     Private Sub quitBTN_Click(sender As Object, e As EventArgs) Handles quitBTN.Click
-        Dim result As Integer = MessageBox.Show("Do you want to keep your current game save progress?", "Jeopardy!", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If result = DialogResult.No Then
-            categoryScreen.rtbSeenClues.Clear()
-            categoryScreen.rtbPointValues.Clear()
-            categoryScreen.rtbSeenClues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
-            categoryScreen.rtbPointValues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
+        'Dim result As Integer = MessageBox.Show("Do you want to keep your current game save progress?", "Jeopardy!", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        'If result = DialogResult.No Then
+        '    Application.Exit()
+        'ElseIf result = DialogResult.Yes Then
+        '    categoryScreen.rtbSeenClues.Clear()
+        '    categoryScreen.rtbPointValues.Clear()
+        '    categoryScreen.rtbSeenClues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
+        '    categoryScreen.rtbPointValues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
+        '    Application.Exit()
+        'End If
+        Try
             Application.Exit()
-        ElseIf result = DialogResult.Yes Then
-            Application.Exit()
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
     Private Sub btnYes_Click(sender As Object, e As EventArgs) Handles btnYes.Click
         JeopardyController.setAnswerValue(True)
+        btnClear.Hide()
+        If JeopardyController.quickGame = False Then
+            JeopardyController.saveGame(True)
+        End If
+        JeopardyController.cbID = Nothing
     End Sub
     Private Sub btnNo_Click(sender As Object, e As EventArgs) Handles btnNo.Click
         JeopardyController.setAnswerValue(False)
@@ -87,27 +102,41 @@
     Private Sub btnGo_Click(sender As Object, e As EventArgs) Handles btnGo.Click
         If FinalJeopardy.Visible = False Then
             lblPlayerWagerMessage.Hide()
-            categoryScreen.Timer7.Start()
+            categoryScreen.tmrRingIn.Start()
             categoryScreen.timeOutTimer.Start()
             My.Computer.Audio.Play(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\OneDrive\Jeopardy\rightanswer.wav")
+            btnClear.Show()
             btnGo.Hide()
+            Dim clueType = JeopardyController.roundForm.clue.clueType
+            If clueType = JeopardyController.clueType.Audio Then
+                'JeopardyController.roundForm.clue.wmpClue.Show()
+                JeopardyController.roundForm.clue.wmpClue.Ctlcontrols.play()
+            End If
         Else
             If FinalJeopardy.revealed = False Then
                 FinalJeopardy.startTheme()
-                FinalJeopardy.Timer1.Start()
+                FinalJeopardy.tmrThink.Start()
+                lblPlayerWagerMessage.Hide()
+                FinalJeopardy.CategoryTitle1.Hide()
                 Me.Hide()
             Else
-                txtCurrentPlayer.Text = "Player 1"
-                btnYes.Show()
-                btnNo.Show()
-                JeopardyController.currentPointValue = CInt(txtWager1.Text)
+                If JeopardyController.finalCheckStarted = False Then
+                    txtCurrentPlayer.Text = lblPlayer1.Text
+                    btnYes.Show()
+                    btnNo.Show()
+                    JeopardyController.currentPointValue = CInt(txtWager1.Text)
+                    JeopardyController.finalCheckStarted = True
+                End If
             End If
         End If
     End Sub
 
     Private Sub btnDoubleJeopardy_Click(sender As Object, e As EventArgs) Handles btnDoubleJeopardy.Click
         categoryScreen.Close()
+        JeopardyController.roundNumber = 2
+        JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy
         btnDoubleJeopardy.Hide()
+        JeopardyController.initializeGameManual(JeopardyController.roundType.DoubleJeopardy)
         Me.Hide()
     End Sub
 
@@ -119,7 +148,7 @@
                 MsgBox("Please enter only digits.", vbExclamation, "Jeopardy!")
                 Exit Sub
             End Try
-            If Integer.Parse(txtWager1.Text) < CInt(lblPlayer1Score.Text) Then
+            If Integer.Parse(txtWager1.Text) <= CInt(lblPlayer1Score.Text) Then
                 txtWager1.Hide()
             Else
                 MsgBox("Please enter a wager less than or equal to your total.", vbExclamation, "Jeopardy!")
@@ -135,7 +164,7 @@
                 MsgBox("Please enter only digits.", vbExclamation, "Jeopardy!")
                 Exit Sub
             End Try
-            If Integer.Parse(txtWager2.Text) < CInt(lblPlayer2Score.Text) Then
+            If Integer.Parse(txtWager2.Text) <= CInt(lblPlayer2Score.Text) Then
                 txtWager2.Hide()
             Else
                 MsgBox("Please enter a wager less than or equal to your total.", vbExclamation, "Jeopardy!")
@@ -151,7 +180,7 @@
                 MsgBox("Please enter only digits.", vbExclamation, "Jeopardy!")
                 Exit Sub
             End Try
-            If Integer.Parse(txtWager3.Text) < CInt(lblPlayer3Score.Text) Then
+            If Integer.Parse(txtWager3.Text) <= CInt(lblPlayer3Score.Text) Then
                 txtWager3.Hide()
             Else
                 MsgBox("Please enter a wager less than or equal to your total.", vbExclamation, "Jeopardy!")
@@ -161,5 +190,23 @@
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         frmHelp.ShowDialog()
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        JeopardyController.roundForm.clue.Hide()
+        My.Computer.Audio.Play(My.Resources.timesup, AudioPlayMode.Background)
+        CType(sender, Button).Hide()
+        If JeopardyController.quickGame = False Then
+            JeopardyController.saveGame(False)
+        End If
+        JeopardyController.cbID = Nothing
+    End Sub
+
+    Private Sub lblPlayerScore_TextChanged(sender As Object, e As EventArgs) Handles lblPlayer1Score.TextChanged, lblPlayer2Score.TextChanged, lblPlayer3Score.TextChanged
+        If CType(sender, Label).Text.Contains("-") Then
+            CType(sender, Label).ForeColor = Color.Red
+        Else
+            CType(sender, Label).ForeColor = Color.White
+        End If
     End Sub
 End Class

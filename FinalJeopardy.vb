@@ -1,4 +1,4 @@
-﻿Public Class FinalJeopardy
+Public Class FinalJeopardy
     Public revealed = False
     Private Sub FinalJeopardy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'CategoryTitle1.category
@@ -10,7 +10,7 @@
         frmScore.txtWager2.Show()
         frmScore.txtWager3.Show()
         frmScore.lblPlayerWagerMessage.Show()
-        frmScore.btnGo.Show()
+        frmScore.btnGo.Hide()
     End Sub
 
     Private Sub tmrThink_Tick(sender As Object, e As EventArgs) Handles tmrThink.Tick
@@ -48,6 +48,7 @@
     Private Sub finalJeopardyPic_Click(sender As Object, e As EventArgs) Handles finalJeopardyPic.Click
         finalJeopardyPic.Hide()
         My.Computer.Audio.Play(My.Resources.rightanswer, AudioPlayMode.Background)
+        frmScore.btnGo.Show()
         tmrRevealCategory.Start()
     End Sub
 

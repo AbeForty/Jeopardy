@@ -1,6 +1,5 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 Imports System.Data.SqlClient
-
 Public Class frmNewGame
     Dim numOfPlayers As Integer
     Dim player1 As Boolean = False
@@ -29,25 +28,15 @@ Public Class frmNewGame
                 For Each player In TeamDisplay1.flpContestants.Controls
                     Dim newPlayer As New Player((CType(player, ContestantDisplay).ContestantID), 1, (CType(player, ContestantDisplay).ContestantName))
                     JeopardyController.Player1List.Add(newPlayer)
-                    createGamePlayers(newPlayer.ID, newPlayer.PlayerNumber)
                 Next
                 For Each player In TeamDisplay2.flpContestants.Controls
                     Dim newPlayer As New Player((CType(player, ContestantDisplay).ContestantID), 2, (CType(player, ContestantDisplay).ContestantName))
                     JeopardyController.Player2List.Add(newPlayer)
-                    createGamePlayers(newPlayer.ID, newPlayer.PlayerNumber)
                 Next
                 For Each player In TeamDisplay3.flpContestants.Controls
                     Dim newPlayer As New Player((CType(player, ContestantDisplay).ContestantID), 3, (CType(player, ContestantDisplay).ContestantName))
                     JeopardyController.Player3List.Add(newPlayer)
-                    createGamePlayers(newPlayer.ID, newPlayer.PlayerNumber)
                 Next
-                'Next
-                'JeopardyController.player1Name = CType(pnlNewGame.Controls("lblPlayer1"), NameTag).Text
-                'JeopardyController.player2Name = CType(pnlNewGame.Controls("lblPlayer2"), NameTag).Text
-                'JeopardyController.player3Name = CType(pnlNewGame.Controls("lblPlayer3"), NameTag).Text
-                'JeopardyController.player1Id = CType(pnlNewGame.Controls("lblPlayer1"), NameTag).contestantID
-                'JeopardyController.player2Id = CType(pnlNewGame.Controls("lblPlayer2"), NameTag).contestantID
-                'JeopardyController.player3Id = CType(pnlNewGame.Controls("lblPlayer3"), NameTag).contestantID
             Else
                 If player1 = False OrElse player2 = False OrElse player3 = False Then
                     MsgBox("You need 3 players or teams to play JEOPARDY! Please enter or select three contestants to continue.", vbExclamation, "JEOPARDY!")
@@ -72,7 +61,6 @@ Public Class frmNewGame
     Private Sub getPackNames()
         Try
             Dim connPuzzle As SqlConnection
-            'connPuzzle = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & "http://localhost/Jeopardy/App_Data/" & "JeopardyClues.mdf;Integrated Security=True")
             connPuzzle = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
             Dim strSQL As String
             strSQL = "SELECT * FROM Clueboard"
@@ -98,7 +86,6 @@ Public Class frmNewGame
     Private Sub dlgSelectPack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         getPackNames()
     End Sub
-
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         JeopardyController.clearTeams()
         WelcomeScreen.Show()
@@ -112,7 +99,6 @@ Public Class frmNewGame
             JeopardyController.virtualHost = False
         End If
     End Sub
-
     Private Sub btnSaveGame_Click(sender As Object, e As EventArgs) Handles btnSaveGame.Click
         If cboPack.SelectedItem <> Nothing Then
             If TeamDisplay1.flpContestants.Controls.Count = 0 And TeamDisplay2.flpContestants.Controls.Count = 0 And TeamDisplay3.flpContestants.Controls.Count = 0 Then
@@ -163,7 +149,6 @@ Public Class frmNewGame
             MsgBox("No pack selected. Please select a pack.", vbExclamation, "JEOPARDY!")
         End If
     End Sub
-
     Private Sub createGamePlayers(contestantID As Integer, playerNumber As Integer)
         Dim connClues As SqlConnection
         connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
@@ -180,12 +165,10 @@ Public Class frmNewGame
         cmdNewGame.ExecuteNonQuery()
         connClues.Close()
     End Sub
-
     Private Sub lblLoadGame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblLoadGame.LinkClicked
         Me.Hide()
         frmLoadGame.Show()
     End Sub
-
     Private Sub txtPlayer1_Click(sender As Object, e As EventArgs) Handles txtPlayer1.Click
         TeamDisplay1.enableClick = False
         TeamDisplay2.enableClick = False
@@ -218,7 +201,6 @@ Public Class frmNewGame
             CType(sender, TextBox).Text = "PLAYER 1"
         End If
     End Sub
-
     Private Sub txtPlayer2_LostFocus(sender As Object, e As EventArgs) Handles txtPlayer2.LostFocus
         If (CType(sender, TextBox).Text.Length <> 0 And Not CType(sender, TextBox).Text = "PLAYER 2") Then
             player2 = True
@@ -227,7 +209,6 @@ Public Class frmNewGame
             CType(sender, TextBox).Text = "PLAYER 2"
         End If
     End Sub
-
     Private Sub txtPlayer3_LostFocus(sender As Object, e As EventArgs) Handles txtPlayer3.LostFocus
         If (CType(sender, TextBox).Text.Length <> 0 And Not CType(sender, TextBox).Text = "PLAYER 3") Then
             player3 = True
@@ -238,7 +219,6 @@ Public Class frmNewGame
             CType(sender, TextBox).Text = "PLAYER 3"
         End If
     End Sub
-
     Private Sub txtPlayer1_TextChanged(sender As Object, e As EventArgs) Handles txtPlayer1.TextChanged
         If CType(sender, TextBox).Text = "PLAYER 1" Then
             player1 = False
@@ -278,12 +258,15 @@ Public Class frmNewGame
             checkNumPlayers()
         End If
     End Sub
-    Private Sub checkNumPlayers()
+    Public Sub checkNumPlayers()
         If player1 = True And player2 = True And player3 = True And cboPack.SelectedItem <> Nothing Then
             btnQuickStart.Enabled = True
         End If
+        If TeamDisplay1.flpContestants.Controls.Count > 0 And TeamDisplay2.flpContestants.Controls.Count > 0 And TeamDisplay3.flpContestants.Controls.Count > 0 Then
+            btnQuickStart.Enabled = True
+            btnSaveGame.Enabled = True
+        End If
     End Sub
-
     Private Sub cboPack_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPack.SelectedValueChanged
         checkNumPlayers()
     End Sub

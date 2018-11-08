@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 <DefaultEvent("Click")>
 Public Class CategoryTitle
     Dim displayBoolean As Boolean = True
@@ -9,7 +9,7 @@ Public Class CategoryTitle
         Set(value As Boolean)
             displayBoolean = value
             If value = False Then
-                catBrowserSmall.Navigate(Application.StartupPath & "/Resources/category.html")
+                'catBrowserSmall.Navigate(Application.StartupPath & "/Resources/category.html")
                 catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
             End If
         End Set

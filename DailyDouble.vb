@@ -1,4 +1,4 @@
-﻿Public Class DailyDouble
+Public Class DailyDouble
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If AxWindowsMediaPlayer1.playState = WMPLib.WMPPlayState.wmppsStopped Then
             AxWindowsMediaPlayer1.Hide()
@@ -59,7 +59,7 @@
             frmScore.IsDailyDouble = True
             frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text
             If Integer.Parse(frmScore.lblPlayer2Score.Text.Replace("$", "").Replace(",", "")) > 1000 Then
-                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer1Score.Text.Replace("$", "").Replace(",", ""))
+                wagerBox.Maximum = Integer.Parse(frmScore.lblPlayer2Score.Text.Replace("$", "").Replace(",", ""))
             Else
                 If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
                     wagerBox.Maximum = 1000

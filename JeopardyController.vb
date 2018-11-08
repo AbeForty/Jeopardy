@@ -72,7 +72,7 @@ Public MustInherit Class JeopardyController
     Public Shared roundForm As categoryScreen
     Public Shared packName As String
     Public Shared roundNumber As Integer = 1
-    Public Shared finalURL As String = "C:\Users\ac765\Documents\Visual Studio 2015\Projects\Jeopardy\Jeopardy\bin\Debug"
+    Public Shared finalURL As String = Application.StartupPath
     Public Shared virtualHost As Boolean = False
     Public Shared SAPI As New SpeechLib.SpVoice
     'Public Shared player1Name As String = "PLAYER 1"
@@ -679,6 +679,7 @@ Public MustInherit Class JeopardyController
                 frmScore.btnYes.Hide()
                 frmScore.btnNo.Hide()
                 If My.Computer.Keyboard.CtrlKeyDown = True And frmScore.Player1RungIn = False Then
+                    currentPlayer = 1
                     roundForm.clue.wmpClue.Ctlcontrols.stop()
                     frmScore.btnYes.Show()
                     frmScore.btnNo.Show()
@@ -709,6 +710,7 @@ Public MustInherit Class JeopardyController
                         End Try
                     End If
                 ElseIf My.Computer.Keyboard.AltKeyDown = True And frmScore.Player2RungIn = False Then
+                    currentPlayer = 2
                     roundForm.clue.wmpClue.Ctlcontrols.stop()
                     frmScore.btnYes.Show()
                     frmScore.btnNo.Show()
@@ -733,6 +735,7 @@ Public MustInherit Class JeopardyController
                         End Try
                     End If
                 ElseIf My.Computer.Keyboard.ShiftKeyDown = True And frmScore.Player3RungIn = False Then
+                    currentPlayer = 3
                     roundForm.clue.wmpClue.Ctlcontrols.stop()
                     frmScore.btnYes.Show()
                     frmScore.btnNo.Show()
@@ -1269,7 +1272,7 @@ Public MustInherit Class JeopardyController
         Dim str7Replaced As String
         Dim str8Replaced As String
         Dim str9Replaced As String
-        Dim fs As New FileStream("C:\Users\ac765\Documents\Visual Studio 2015\Projects\Jeopardy\Jeopardy\bin\Debug" + "\JeopardyMain.xml", FileMode.Open, FileAccess.Read)
+        Dim fs As New FileStream(Application.StartupPath + "\JeopardyMain.xml", FileMode.Open, FileAccess.Read)
         Dim XMLStringList As New List(Of String)
         xmldoc.Load(fs)
         xmlnode = xmldoc.GetElementsByTagName("clue")
@@ -1386,7 +1389,7 @@ Public MustInherit Class JeopardyController
         Dim str7Replaced As String
         Dim str8Replaced As String
         Dim str9Replaced As String
-        Dim fs As New FileStream("C:\Users\ac765\Documents\Visual Studio 2015\Projects\Jeopardy\Jeopardy\bin\Debug" + "\JeopardyMain.xml", FileMode.Open, FileAccess.Read)
+        Dim fs As New FileStream(Application.StartupPath + "\JeopardyMain.xml", FileMode.Open, FileAccess.Read)
         Dim XMLStringList As New List(Of String)
         xmldoc.Load(fs)
         xmlnode = xmldoc.GetElementsByTagName("clue")
@@ -2487,4 +2490,3 @@ Public MustInherit Class JeopardyController
     End Function
 #End Region
 End Class
-

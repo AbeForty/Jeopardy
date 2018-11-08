@@ -1,5 +1,4 @@
-﻿Public Class categoryScreen
-
+Public Class categoryScreen
     Private Sub tmrRingIn_Tick(sender As Object, e As EventArgs) Handles tmrRingIn.Tick
         'JeopardyController.ringIn()
         JeopardyController.ringInManual()
@@ -81,7 +80,12 @@
     Private Sub aClue_Click(sender As Object, e As EventArgs) Handles Cat1200.Click, Cat1400.Click, Cat1600.Click, Cat1800.Click, Cat11000.Click, Cat2200.Click, Cat2400.Click, Cat2600.Click, Cat2800.Click, Cat21000.Click, Cat3200.Click, Cat3400.Click, Cat3600.Click, Cat3800.Click, Cat31000.Click, Cat4200.Click, Cat4400.Click, Cat4600.Click, Cat4800.Click, Cat41000.Click, Cat5200.Click, Cat5400.Click, Cat5600.Click, Cat5800.Click, Cat51000.Click, Cat6200.Click, Cat6400.Click, Cat6600.Click, Cat6800.Click, Cat61000.Click
         CType(sender, PictureBox).Image = My.Resources.BlankTile
         If CType(sender, PictureBox).Name.Length = 8 Then
-            Dim strCatNumberPreformatted As String = CType(sender, PictureBox).Name.Remove(0, 3)
+            Dim strCatNumberPreformatted As String
+            If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                strCatNumberPreformatted = CType(sender, PictureBox).Name.Remove(0, 3)
+            ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                strCatNumberPreformatted = JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name.Remove(0, 3))
+            End If
             Dim strCatNumber As String = strCatNumberPreformatted.Remove(1, 4)
             'MsgBox(CType(sender, PictureBox).Name)
             Dim catNumber As Integer = Integer.Parse(strCatNumber)
@@ -102,9 +106,18 @@
                 Next
             Else
             End If
-            JeopardyController.loadClue(CType(sender, PictureBox).Name)
+            If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                JeopardyController.loadClue(CType(sender, PictureBox).Name)
+            ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                JeopardyController.loadClue(JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name))
+            End If
         ElseIf CType(sender, PictureBox).Name.Length = 7 Then
             Dim strCatNumberPreformatted As String = CType(sender, PictureBox).Name.Remove(0, 3)
+            If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                strCatNumberPreformatted = CType(sender, PictureBox).Name.Remove(0, 3)
+            ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                strCatNumberPreformatted = JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name.Remove(0, 3))
+            End If
             'MsgBox(CType(sender, PictureBox).Name)
             Dim strCatNumber As String = strCatNumberPreformatted.Remove(1, 3)
             Dim catNumber As Integer = Integer.Parse(strCatNumber)
@@ -123,10 +136,14 @@
                 'Next
             Else
             End If
-            JeopardyController.loadClue(CType(sender, PictureBox).Name)
+            If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                JeopardyController.loadClue(CType(sender, PictureBox).Name)
+            ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                JeopardyController.loadClue(JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name))
+            End If
         End If
-        'JeopardyController.loadClue(CType(sender, PictureBox).Name)
-        JeopardyController.questionMode = True
+            'JeopardyController.loadClue(CType(sender, PictureBox).Name)
+            JeopardyController.questionMode = True
         JeopardyController.categoryMode = False
         tmrPointValueBox.Start()
     End Sub
@@ -223,11 +240,9 @@
         '    pbarLoadCat.Value += 1
         'Next
     End Sub
-
     Private Sub TrackBar1_ValueChanged(sender As Object, e As EventArgs) Handles TrackBar1.ValueChanged
         JeopardyController._fadeOpacity = CSng(TrackBar1.Value / TrackBar1.Maximum)
     End Sub
-
     Private Sub TrackBar2_ValueChanged(sender As Object, e As EventArgs) Handles TrackBar2.ValueChanged
         JeopardyController._fadeOpacity2 = CSng(TrackBar2.Value / TrackBar2.Maximum)
     End Sub
@@ -359,11 +374,9 @@
         JeopardyController.setAnswerValue(False)
         JeopardyController.ifNoRingIn()
     End Sub
-
     Private Sub Cat_EnabledChanged(sender As Object, e As EventArgs) Handles Cat1200.EnabledChanged, Cat1400.EnabledChanged, Cat1600.EnabledChanged, Cat1800.EnabledChanged, Cat11000.EnabledChanged, Cat2200.EnabledChanged, Cat2400.EnabledChanged, Cat2600.EnabledChanged, Cat2800.EnabledChanged, Cat21000.EnabledChanged, Cat3200.EnabledChanged, Cat3400.EnabledChanged, Cat3600.EnabledChanged, Cat3800.EnabledChanged, Cat31000.EnabledChanged, Cat4200.EnabledChanged, Cat4400.EnabledChanged, Cat4600.EnabledChanged, Cat4800.EnabledChanged, Cat41000.EnabledChanged, Cat5200.EnabledChanged, Cat5400.EnabledChanged, Cat5600.EnabledChanged, Cat5800.EnabledChanged, Cat51000.EnabledChanged, Cat6200.EnabledChanged, Cat6400.EnabledChanged, Cat6600.EnabledChanged, Cat6800.EnabledChanged, Cat61000.EnabledChanged
         CType(sender, PictureBox).Image = My.Resources.BlankTile
     End Sub
-
     '    Private Sub timeOutTimer_Tick(sender As Object, e As EventArgs) Handles timeOutTimer.Tick
     '        'checkIfTimedOut(JeopardyController.TimeOutCommand.Inactivity)
     '        Dim mySecond
@@ -375,7 +388,6 @@
     '            MsgBox("Times Up")
     '        End If
     '    End Sub
-
     '    Private Sub playerTimeOutTimer_Tick(sender As Object, e As EventArgs) Handles playerTimeOutTimer.Tick
     '        'checkIfTimedOut(JeopardyController.TimeOutCommand.Player)
     '        Dim mySecond
@@ -388,14 +400,10 @@
     '    End Sub
     '#Region "Time Out Code"
     '    'Public Shared Sub checkIfTimedOut(tmOutCmd As TimeOutCommand)
-
     '    '    mySecond += 1
     '    '    If tmOutCmd = TimeOutCommand.Inactivity Then
-
     '    '    ElseIf tmOutCmd = TimeOutCommand.Player Then
-
     '    '    End If
     '    'End Sub
     '#End Region
 End Class
-

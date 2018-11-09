@@ -66,10 +66,7 @@ Public Class categoryScreen
     '    Me.Close()
     'End Sub
     Private Sub tmrCheckCurrentRound_Tick(sender As Object, e As EventArgs) Handles tmrCheckCurrentRound.Tick
-        If JeopardyController.doubleJeopardyExists = True Then
-            JeopardyController.checkDoubleJeopardy()
-        End If
-        JeopardyController.checkFinalJeopardy()
+        JeopardyController.checkRound()
     End Sub
     Private Sub tmrCheckRecogStopped_Tick(sender As Object, e As EventArgs) Handles tmrCheckRecogStopped.Tick
         JeopardyController.ifRecogStopped()

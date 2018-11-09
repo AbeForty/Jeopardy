@@ -62,7 +62,9 @@
     End Sub
     Private Sub finalJeopardyBTN_Click(sender As Object, e As EventArgs) Handles btnFinalJeopardy.Click
         JeopardyController.roundNumber = 3
-        JeopardyController.saveGame(True)
+        If JeopardyController.quickGame = False Then
+            JeopardyController.saveGame(True)
+        End If
         FinalJeopardy.Show()
         categoryScreen.Close()
     End Sub

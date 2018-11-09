@@ -36,6 +36,7 @@ Public MustInherit Class JeopardyController
     Public Shared categoryMode As Boolean = False
     Public Shared bypassCategoryReveal As Boolean = False
     Public Shared doubleJeopardyExists As Boolean = False
+    Public Shared finalJeopardyExists As Boolean = False
     Public Shared WithEvents jSpeechRecog As New JeopardySpeechRecognizer
     Private Shared clueID As String
     Dim xmlstr3 As String
@@ -1189,14 +1190,19 @@ Public MustInherit Class JeopardyController
         connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
         Dim strSQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = @RoundNumber"
         Dim strDoubleJeopardySQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = @RoundNumber"
+        Dim strFinalJeopardySQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = @RoundNumber"
         Dim cmd As SqlCommand
         Dim djcmd As SqlCommand
+        Dim fjcmd As SqlCommand
         Dim rdr As SqlDataReader
         Dim djrdr As SqlDataReader
+        Dim fjrdr As SqlDataReader
         Dim packNameParam As SqlParameter = New SqlParameter("@PackName", packName)
         Dim roundParam As SqlParameter = New SqlParameter("@RoundNumber", roundNumber)
         Dim djpackNameParam As SqlParameter = New SqlParameter("@PackName", packName)
         Dim djroundParam As SqlParameter = New SqlParameter("@RoundNumber", 2)
+        Dim fjpackNameParam As SqlParameter = New SqlParameter("@PackName", packName)
+        Dim fjroundParam As SqlParameter = New SqlParameter("@RoundNumber", 3)
         connClues.Open()
         cmd = New SqlCommand(strSQL, connClues)
         cmd.Parameters.Add(packNameParam)
@@ -1245,6 +1251,16 @@ Public MustInherit Class JeopardyController
             djrdr = djcmd.ExecuteReader()
             If djrdr.HasRows = True Then
                 doubleJeopardyExists = True
+            End If
+            connClues.Close()
+            connClues.Open()
+            fjcmd = New SqlCommand(strFinalJeopardySQL, connClues)
+            fjcmd.Parameters.Add(fjpackNameParam)
+            fjcmd.Parameters.Add(fjroundParam)
+            fjcmd.CommandType = CommandType.Text
+            fjrdr = fjcmd.ExecuteReader()
+            If fjrdr.HasRows = True Then
+                finalJeopardyExists = True
             End If
         End If
     End Sub
@@ -1690,25 +1706,21 @@ Public MustInherit Class JeopardyController
         End If
     End Sub
 #End Region
-#Region "Check if Double Jeopardy"
-    Public Shared Sub checkDoubleJeopardy()
+#Region "Check Round"
+    Public Shared Sub checkRound()
         If (roundForm.cat1Title.display = False And roundForm.cat2Title.display = False And roundForm.cat3Title.display = False And roundForm.cat4Title.display = False And roundForm.cat5Title.display = False And roundForm.cat6Title.display = False) And roundEnum = roundType.Jeopardy Then
             'jSpeechRecog.categoryMode = False
             'jSpeechRecog.allowCatMode = False
             'jSpeechRecog.QuestionMode = False
             'jSpeechRecog.RecognizeAsyncCancel()
-            frmScore.btnDoubleJeopardy.Show()
-        End If
-    End Sub
-#End Region
-#Region "Check if Final Jeopardy"
-    Public Shared Sub checkFinalJeopardy()
-        If roundForm.cat1Title.display = False And roundForm.cat2Title.display = False And roundForm.cat3Title.display = False And roundForm.cat4Title.display = False And roundForm.cat5Title.display = False And roundForm.cat6Title.display = False Then
-            'jSpeechRecog.categoryMode = False
-            'jSpeechRecog.allowCatMode = False
-            'jSpeechRecog.QuestionMode = False
-            'jSpeechRecog.RecognizeAsyncCancel()
-            frmScore.btnFinalJeopardy.Show()
+            If roundEnum = roundType.Jeopardy And doubleJeopardyExists = True Then
+                frmScore.btnDoubleJeopardy.Show()
+            ElseIf (roundEnum = roundType.Jeopardy And finalJeopardyExists = True) Or (roundEnum = roundType.DoubleJeopardy And finalJeopardyExists = True) Then
+                frmScore.btnFinalJeopardy.Show()
+            End If
+            If quickGame = False Then
+                saveGame(True)
+            End If
         End If
     End Sub
 #End Region

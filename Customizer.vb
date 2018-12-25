@@ -1,12 +1,14 @@
-﻿Imports System.Data.SqlClient
-Imports System.IO
+
+Imports System.Data.SqlClient
 Imports System.Xml
+Imports System.IO
+
 Public Class Customizer
     Public cluefs
     Public writer
     Public clueExists As Boolean = False
     Dim dailyDouble As Integer = 0
-    Dim cbID As Integer
+    Public cbID As Integer
     Dim lastValue = 200
     Private Sub Customizer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pnlSelectPack.Top = (Me.ClientSize.Height / 2) - (pnlSelectPack.Height / 2)
@@ -79,6 +81,7 @@ Public Class Customizer
             Dim clueID As String = "Cat" & Trim(rdr("categoryNumber").ToString()) & Trim(rdr("pointValue")).ToString()
             Dim clueboardID As Integer = rdr("Id")
             Dim clueLocation As String = Trim(rdr("interactiveClueLocation").ToString())
+            Dim round As Integer = rdr("round")
             Dim dailyDoubleValue As Integer = rdr("dailyDouble")
             Dim dailyDoubleBoolean As Boolean
             If dailyDoubleValue = 0 Then
@@ -102,45 +105,18 @@ Public Class Customizer
             Do While rdrQuestion.Read()
                 answers.Add(Trim(rdrQuestion("Answer").ToString()))
             Loop
-            Dim retrievedClue As New Clue(clueboardID, category, value, clue, clueID, dailyDoubleBoolean, clueLocation, answers)
+            Dim retrievedClue As New Clue(clueboardID, round, category, value, clue, clueID, dailyDoubleBoolean, clueLocation, answers)
             Dim clueDisplay1 As New ClueDisplay(retrievedClue)
             clueDisplay1.Parent = cluePanel
             cluePanel.Controls.Add(clueDisplay1)
         Loop
-            connClues.Close()
+        connClues.Close()
     End Sub
     Private Sub updateClue(packName As String, categoryName As String, categoryNumber As Integer, pointValue As Integer, clue As String, round As Integer, interactiveClueLocation As String)
         Dim connClues As SqlConnection
         connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
         Dim strSQL As String
         strSQL = "Update Clueboard Set categoryName = @CategoryName, clue = @Clue WHERE packName = @PackName and categoryNumber = @CategoryNumber and pointValue = @PointValue and round = @Round and interactiveClueLocation = @InteractiveClueLocation and dailyDouble = @DailyDouble"
-        Dim cmd As SqlCommand
-        Dim packNameParam As SqlParameter = New SqlParameter("@PackName", packName)
-        Dim categoryNumberParam As SqlParameter = New SqlParameter("@CategoryNumber", categoryNumber)
-        Dim pointValueParam As SqlParameter = New SqlParameter("@PointValue", pointValue)
-        Dim categoryNameParam As SqlParameter = New SqlParameter("@CategoryName", categoryName)
-        Dim clueParam As SqlParameter = New SqlParameter("@Clue", clue)
-        Dim roundParam As SqlParameter = New SqlParameter("@Round", round)
-        Dim dailyDoubleParam As SqlParameter = New SqlParameter("@DailyDouble", dailyDouble)
-        Dim clueLocationParam As SqlParameter = New SqlParameter("@InteractiveClueLocation", interactiveClueLocation)
-        connClues.Open()
-        cmd = New SqlCommand(strSQL, connClues)
-        cmd.Parameters.Add(packNameParam)
-        cmd.Parameters.Add(categoryNumberParam)
-        cmd.Parameters.Add(pointValueParam)
-        cmd.Parameters.Add(categoryNameParam)
-        cmd.Parameters.Add(clueParam)
-        cmd.Parameters.Add(roundParam)
-        cmd.Parameters.Add(dailyDoubleParam)
-        cmd.Parameters.Add(clueLocationParam)
-        cmd.CommandType = CommandType.Text
-        cmd.ExecuteNonQuery()
-        connClues.Close()
-    End Sub
-    Private Sub insertClue(packName As String, categoryName As String, categoryNumber As Integer, pointValue As Integer, clue As String, round As Integer, interactiveClueLocation As String)
-        Dim connClues As SqlConnection
-        connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
-        Dim strSQL As String = "Insert Into Clueboard output INSERTED.ID Values (@CategoryNumber ,@CategoryName, @PointValue, @Clue, @PackName, @Round, @InteractiveClueLocation, @DailyDouble)"
         Dim cmd As SqlCommand
         Dim cmdQuestion As SqlCommand
         Dim packNameParam As SqlParameter = New SqlParameter("@PackName", packName)
@@ -162,10 +138,74 @@ Public Class Customizer
         cmd.Parameters.Add(dailyDoubleParam)
         cmd.Parameters.Add(clueLocationParam)
         cmd.CommandType = CommandType.Text
+        cmd.ExecuteNonQuery()
+        connClues.Close()
+        If Not String.IsNullOrEmpty(cboQuestion.Text) Then
+            cboQuestion.Items.Add(cboQuestion.Text)
+            cboNewAnswers.Items.Add(cboQuestion.Text)
+        End If
+        For Each item In cboNewAnswers.Items
+            Try
+                connClues.Open()
+                Dim strQuestionSQL As String = "Insert Into Answers Values (@clueboardID, @answer)"
+                cmdQuestion = New SqlCommand(strQuestionSQL, connClues)
+                Dim clueboardIDParam As SqlParameter = New SqlParameter("@clueboardID", cbID)
+                Dim answerParam As SqlParameter = New SqlParameter("@answer", item)
+                cmdQuestion.Parameters.Add(clueboardIDParam)
+                cmdQuestion.Parameters.Add(answerParam)
+                cmdQuestion.CommandType = CommandType.Text
+                cmdQuestion.ExecuteNonQuery()
+                connClues.Close()
+            Catch ex As Exception
+                MsgBox("Answer failed to add to the database.", vbCritical, "JEOPARDY!")
+            End Try
+        Next
+        chkDailyDouble.Checked = False
+        txtClue.Clear()
+        cboQuestion.Text = ""
+        cboNewAnswers.Items.Clear()
+        cboQuestion.Items.Clear()
+        cbID = Nothing
+    End Sub
+    Private Sub insertClue(packName As String, categoryName As String, categoryNumber As Integer, pointValue As Integer, clue As String, round As Integer, interactiveClueLocation As String)
+        Dim connClues As SqlConnection
+        connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
+        Dim strSQL As String = "Insert Into Clueboard output INSERTED.ID Values (@CategoryNumber ,@CategoryName, @PointValue, @Clue, @PackName, @Round, @InteractiveClueLocation, @DailyDouble)"
+        Dim cmd As SqlCommand
+        Dim cmdQuestion As SqlCommand
+        Dim packNameParam As SqlParameter = New SqlParameter("@PackName", packName)
+        Dim categoryNumberParam As SqlParameter = New SqlParameter("@CategoryNumber", categoryNumber)
+        Dim pointValueParam As SqlParameter
+        If cboRound.SelectedItem <> "FINAL JEOPARDY!" Then
+            pointValueParam = New SqlParameter("@PointValue", pointValue)
+        Else
+            pointValueParam = New SqlParameter("@PointValue", 0)
+        End If
+        Dim categoryNameParam As SqlParameter = New SqlParameter("@CategoryName", categoryName)
+        Dim clueParam As SqlParameter = New SqlParameter("@Clue", clue)
+        Dim roundParam As SqlParameter = New SqlParameter("@Round", round)
+        Dim dailyDoubleParam As SqlParameter = New SqlParameter("@DailyDouble", dailyDouble)
+        Dim clueLocationParam As SqlParameter = New SqlParameter("@InteractiveClueLocation", interactiveClueLocation)
+        connClues.Open()
+        cmd = New SqlCommand(strSQL, connClues)
+        cmd.Parameters.Add(packNameParam)
+        cmd.Parameters.Add(categoryNumberParam)
+        cmd.Parameters.Add(pointValueParam)
+        cmd.Parameters.Add(categoryNameParam)
+        cmd.Parameters.Add(clueParam)
+        cmd.Parameters.Add(roundParam)
+        cmd.Parameters.Add(dailyDoubleParam)
+        cmd.Parameters.Add(clueLocationParam)
+        cmd.CommandType = CommandType.Text
         Dim clueboardID = Integer.Parse(cmd.ExecuteScalar())
         connClues.Close()
+        If Not String.IsNullOrEmpty(cboQuestion.Text) Then
+            cboQuestion.Items.Add(cboQuestion.Text)
+            cboNewAnswers.Items.Add(cboQuestion.Text)
+        End If
         For Each item In cboNewAnswers.Items
-            Dim strQuestionSQL As String = "Insert Into Answer Values (@clueboardID, @answer)"
+            connClues.Open()
+            Dim strQuestionSQL As String = "Insert Into Answers Values (@clueboardID, @answer)"
             cmdQuestion = New SqlCommand(strQuestionSQL, connClues)
             Dim clueboardIDParam As SqlParameter = New SqlParameter("@clueboardID", clueboardID)
             Dim answerParam As SqlParameter = New SqlParameter("@answer", item)
@@ -173,7 +213,34 @@ Public Class Customizer
             cmdQuestion.Parameters.Add(answerParam)
             cmdQuestion.CommandType = CommandType.Text
             cmdQuestion.ExecuteNonQuery()
+            connClues.Close()
         Next
+        chkDailyDouble.Checked = False
+        txtClue.Clear()
+        cboQuestion.Text = ""
+        cboNewAnswers.Items.Clear()
+        cboQuestion.Items.Clear()
+        cbID = Nothing
+        Select Case cboRound.SelectedItem
+            Case "JEOPARDY!"
+                If numValue.Value < 1000 Then
+                    numValue.Value += 200
+                Else
+                    If numCategory.Value < 6 Then
+                        numCategory.Value += 1
+                        numValue.Value = 200
+                    End If
+                End If
+                    Case "DOUBLE JEOPARDY!"
+                If numValue.Value < 2000 Then
+                    numValue.Value += 400
+                Else
+                    If numCategory.Value < 6 Then
+                        numCategory.Value += 1
+                        numValue.Value = 400
+                    End If
+                End If
+        End Select
     End Sub
 #End Region
 #Region "Load Packs from Database"
@@ -533,5 +600,11 @@ Public Class Customizer
             CType(sender, NumericUpDown).Increment = 200
         End If
         lastValue = CType(sender, NumericUpDown).Value
+    End Sub
+
+    Private Sub lblQuestion_DoubleClick(sender As Object, e As EventArgs) Handles lblQuestion.DoubleClick
+        cboQuestion.Text = ""
+        cboNewAnswers.Items.Clear()
+        cboQuestion.Items.Clear()
     End Sub
 End Class

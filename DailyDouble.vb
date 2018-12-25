@@ -1,7 +1,7 @@
 Public Class DailyDouble
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        If AxWindowsMediaPlayer1.playState = WMPLib.WMPPlayState.wmppsStopped Then
-            AxWindowsMediaPlayer1.Hide()
+        If wmpDailyDouble.playState = WMPLib.WMPPlayState.wmppsStopped Then
+            wmpDailyDouble.Hide()
         End If
     End Sub
 
@@ -29,6 +29,7 @@ Public Class DailyDouble
     End Sub
 
     Private Sub DailyDouble_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        wmpDailyDouble.URL = Application.StartupPath & "\Resources\DailyDoubleSeason35Final.mp4"
         If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
             lblWagerRules.Text = "You can bet up to $1000 if you have $0 in your bank"
         ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then

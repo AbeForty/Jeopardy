@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 <DefaultEvent("Click")>
 Public Class CategoryTitleLarge
     Dim displayBoolean As Boolean = True
@@ -9,7 +9,7 @@ Public Class CategoryTitleLarge
         Set(value As Boolean)
             displayBoolean = value
             If value = False Then
-                catBrowser.Navigate(JeopardyController.finalURL & "\Resources\category.html")
+                catBrowser.Navigate(Application.StartupPath & "\Resources\category.html")
             End If
         End Set
     End Property

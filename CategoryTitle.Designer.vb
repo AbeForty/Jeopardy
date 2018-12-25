@@ -36,7 +36,7 @@ Partial Class CategoryTitle
         Me.catBrowserSmall.ScrollBarsEnabled = False
         Me.catBrowserSmall.Size = New System.Drawing.Size(190, 101)
         Me.catBrowserSmall.TabIndex = 0
-        Me.catBrowserSmall.Url = New System.Uri(JeopardyController.finalURL &
+        Me.catBrowserSmall.Url = New System.Uri(Application.StartupPath &
         "Resources\category.html", System.UriKind.Absolute)
         Me.catBrowserSmall.WebBrowserShortcutsEnabled = False
         '

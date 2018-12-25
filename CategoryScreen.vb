@@ -12,15 +12,14 @@ Public Class categoryScreen
         'My.Computer.Audio.Play(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\OneDrive\Jeopardy\categorychooser.wav")
         'catChooserPlayer.URL = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\OneDrive\Jeopardy\categorychooser.wav"
         'catChooserPlayer.Ctlcontrols.play()
-        JeopardyController.roundForm = Me
         clue.Hide()
         JeopardyController.loadClues(JeopardyController.packName, JeopardyController.roundEnum)
-        cat1Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        cat2Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        cat3Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        cat4Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        cat5Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        cat6Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
+        cat1Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        cat2Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        cat3Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        cat4Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        cat5Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        cat6Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
     End Sub
     Private Sub categoryScreen_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         'JeopardyController.initializeGame()
@@ -88,32 +87,39 @@ Public Class categoryScreen
             Dim catNumber As Integer = Integer.Parse(strCatNumber)
             'MsgBox(strCatNumber)
             '21000
-            Dim strclueValue As String = CType(sender, PictureBox).Name.Remove(0, 4)
-            JeopardyController.currentPointValue = Integer.Parse(strclueValue)
-            If JeopardyController.lstClues.ContainsKey(strCatNumberPreformatted) Then
-                For Each clueEntry As KeyValuePair(Of Integer, Clue) In JeopardyController.lstClues
-                    Dim categoryNumber As Integer = strCatNumber
-                    Dim categoryName As String = JeopardyController.lstClues(strCatNumberPreformatted).category
-                    'Dim categoryNumber As Integer = clueEntry.Key
-                    'Dim categoryName As String = clueEntry.Value.category
-                    ''MsgBox(categoryName & vbCrLf & categoryNumber)
-                    'If (catNumber = categoryNumber) Then
-                    ''JeopardyController.loadClue(CType(sender, PictureBox).Name)
-                    'End If
-                Next
-            Else
-            End If
+            Dim strclueValue As String
             If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
-                JeopardyController.loadClue(CType(sender, PictureBox).Name)
+                strclueValue = CType(sender, PictureBox).Name.Remove(0, 4)
+                JeopardyController.currentPointValue = Integer.Parse(strclueValue)
             ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
-                JeopardyController.loadClue(JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name))
+                strclueValue = JeopardyController.convertToR2(CType(sender, PictureBox).Name).Remove(0, 4)
+                JeopardyController.currentPointValue = Integer.Parse(strclueValue)
+
             End If
-        ElseIf CType(sender, PictureBox).Name.Length = 7 Then
-            Dim strCatNumberPreformatted As String = CType(sender, PictureBox).Name.Remove(0, 3)
+            If JeopardyController.lstClues.ContainsKey(strCatNumberPreformatted) Then
+                    For Each clueEntry As KeyValuePair(Of Integer, Clue) In JeopardyController.lstClues
+                        Dim categoryNumber As Integer = strCatNumber
+                        Dim categoryName As String = JeopardyController.lstClues(strCatNumberPreformatted).category
+                        'Dim categoryNumber As Integer = clueEntry.Key
+                        'Dim categoryName As String = clueEntry.Value.category
+                        ''MsgBox(categoryName & vbCrLf & categoryNumber)
+                        'If (catNumber = categoryNumber) Then
+                        ''JeopardyController.loadClue(CType(sender, PictureBox).Name)
+                        'End If
+                    Next
+                Else
+                End If
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    JeopardyController.loadClue(CType(sender, PictureBox).Name)
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    JeopardyController.loadClue(JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name))
+                End If
+            ElseIf CType(sender, PictureBox).Name.Length = 7 Then
+                Dim strCatNumberPreformatted As String = CType(sender, PictureBox).Name.Remove(0, 3)
             If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
                 strCatNumberPreformatted = CType(sender, PictureBox).Name.Remove(0, 3)
             ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
-                strCatNumberPreformatted = JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name.Remove(0, 3))
+                strCatNumberPreformatted = JeopardyController.convertToR2(CType(sender, PictureBox).Name.Remove(0, 3))
             End If
             'MsgBox(CType(sender, PictureBox).Name)
             Dim strCatNumber As String = strCatNumberPreformatted.Remove(1, 3)
@@ -136,7 +142,7 @@ Public Class categoryScreen
             If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
                 JeopardyController.loadClue(CType(sender, PictureBox).Name)
             ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
-                JeopardyController.loadClue(JeopardyController.convertClueIDToR2(CType(sender, PictureBox).Name))
+                JeopardyController.loadClue(JeopardyController.convertToR2(CType(sender, PictureBox).Name))
             End If
         End If
             'JeopardyController.loadClue(CType(sender, PictureBox).Name)
@@ -282,7 +288,7 @@ Public Class categoryScreen
                 End Using
             End If
         End If
-        If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(CType(sender, Control).Name)) = True Then
+        If JeopardyController.checkClueList(CType(sender, Control).Name) = True Then
             e.Graphics.DrawImageUnscaled(JeopardyController.oldImage, Point.Empty)
             CType(sender, Control).Enabled = False
         End If
@@ -302,7 +308,7 @@ Public Class categoryScreen
                 End Using
             End If
         End If
-        If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(CType(sender, Control).Name)) = True Then
+        If JeopardyController.checkClueList(CType(sender, Control).Name) = True Then
             e.Graphics.DrawImageUnscaled(JeopardyController.oldImage, Point.Empty)
             CType(sender, Control).Enabled = False
         End If
@@ -322,7 +328,7 @@ Public Class categoryScreen
                 End Using
             End If
         End If
-        If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(CType(sender, Control).Name)) = True Then
+        If JeopardyController.checkClueList(CType(sender, Control).Name) = True Then
             e.Graphics.DrawImageUnscaled(JeopardyController.oldImage, Point.Empty)
             CType(sender, Control).Enabled = False
         End If
@@ -342,7 +348,7 @@ Public Class categoryScreen
                 End Using
             End If
         End If
-        If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(CType(sender, Control).Name)) = True Then
+        If JeopardyController.checkClueList(CType(sender, Control).Name) = True Then
             e.Graphics.DrawImageUnscaled(JeopardyController.oldImage, Point.Empty)
             CType(sender, Control).Enabled = False
         End If
@@ -362,7 +368,7 @@ Public Class categoryScreen
                 End Using
             End If
         End If
-        If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(CType(sender, Control).Name)) = True Then
+        If JeopardyController.checkClueList(CType(sender, Control).Name) = True Then
             e.Graphics.DrawImageUnscaled(JeopardyController.oldImage, Point.Empty)
             CType(sender, Control).Enabled = False
         End If

@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-
+Imports System.Data.SqlClient
 Public Class ContestantDisplay
     Public Property ContestantID As Integer
     Public Property ContestantName As String
@@ -12,7 +11,7 @@ Public Class ContestantDisplay
     End Property
     Public Property Total As Integer
         Get
-            Return Integer.Parse(lblTotal.Text.Replace("$", ""))
+            Return Integer.Parse(lblTotal.Text.Replace("$", "").Replace(",", ""))
         End Get
         Set(value As Integer)
             lblTotal.Text = FormatCurrency(value, 0)

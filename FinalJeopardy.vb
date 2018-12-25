@@ -6,9 +6,6 @@ Public Class FinalJeopardy
         JeopardyController.loadFinalJeopardy()
         finalJeopardyPic.Image = My.Resources.jeopardy_ubicom_screen_03_final_jeopardy_full_size_1280x720_304779
         frmScore.Show()
-        frmScore.txtWager1.Show()
-        frmScore.txtWager2.Show()
-        frmScore.txtWager3.Show()
         frmScore.lblPlayerWagerMessage.Show()
         frmScore.btnGo.Hide()
     End Sub
@@ -47,9 +44,10 @@ Public Class FinalJeopardy
 
     Private Sub finalJeopardyPic_Click(sender As Object, e As EventArgs) Handles finalJeopardyPic.Click
         finalJeopardyPic.Hide()
+        CategoryTitle1.Show()
         My.Computer.Audio.Play(My.Resources.rightanswer, AudioPlayMode.Background)
-        frmScore.btnGo.Show()
-        tmrRevealCategory.Start()
+        JeopardyController.determineIfNegative()
+        'tmrRevealCategory.Start()
     End Sub
 
     Private Sub CategoryTitle1_Click(sender As Object, e As EventArgs) Handles CategoryTitle1.Click

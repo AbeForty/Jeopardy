@@ -31,6 +31,8 @@ Partial Class ClueDisplay
         Me.editBTN = New System.Windows.Forms.PictureBox()
         Me.cboQuestion = New System.Windows.Forms.ComboBox()
         Me.lblCBID = New System.Windows.Forms.Label()
+        Me.lblRoundNumber = New System.Windows.Forms.Label()
+        Me.lblDailyDouble = New System.Windows.Forms.Label()
         CType(Me.editBTN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -135,11 +137,35 @@ Partial Class ClueDisplay
         Me.lblCBID.Text = "cbID"
         Me.lblCBID.Visible = False
         '
+        'lblRoundNumber
+        '
+        Me.lblRoundNumber.AutoSize = True
+        Me.lblRoundNumber.ForeColor = System.Drawing.Color.White
+        Me.lblRoundNumber.Location = New System.Drawing.Point(364, 128)
+        Me.lblRoundNumber.Name = "lblRoundNumber"
+        Me.lblRoundNumber.Size = New System.Drawing.Size(45, 17)
+        Me.lblRoundNumber.TabIndex = 22
+        Me.lblRoundNumber.Text = "round"
+        Me.lblRoundNumber.Visible = False
+        '
+        'lblDailyDouble
+        '
+        Me.lblDailyDouble.AutoSize = True
+        Me.lblDailyDouble.ForeColor = System.Drawing.Color.White
+        Me.lblDailyDouble.Location = New System.Drawing.Point(415, 128)
+        Me.lblDailyDouble.Name = "lblDailyDouble"
+        Me.lblDailyDouble.Size = New System.Drawing.Size(82, 17)
+        Me.lblDailyDouble.TabIndex = 23
+        Me.lblDailyDouble.Text = "dailyDouble"
+        Me.lblDailyDouble.Visible = False
+        '
         'ClueDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.Controls.Add(Me.lblDailyDouble)
+        Me.Controls.Add(Me.lblRoundNumber)
         Me.Controls.Add(Me.lblCBID)
         Me.Controls.Add(Me.cboQuestion)
         Me.Controls.Add(Me.formatLabel2)
@@ -165,4 +191,6 @@ Partial Class ClueDisplay
     Friend WithEvents formatLabel2 As Label
     Friend WithEvents cboQuestion As ComboBox
     Friend WithEvents lblCBID As Label
+    Friend WithEvents lblRoundNumber As Label
+    Friend WithEvents lblDailyDouble As Label
 End Class

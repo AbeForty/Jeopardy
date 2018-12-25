@@ -70,7 +70,7 @@ Public MustInherit Class JeopardyController
     Public Shared set8 As New List(Of String)
     Public Shared set9 As New List(Of String)
     Public Shared set10 As New List(Of String)
-    Public Shared roundForm As categoryScreen
+    'Public Shared categoryScreen As categoryScreen
     Public Shared packName As String
     Public Shared roundNumber As Integer = 1
     Public Shared finalURL As String = Application.StartupPath
@@ -104,23 +104,29 @@ Public MustInherit Class JeopardyController
 #End Region
 #Region "Initialize Game Manual"
     Public Shared Sub initializeGameManual(round As roundType)
-        If roundForm.Visible = True Then
-            roundForm = CType(roundForm, categoryScreen)
-        End If
+        categoryScreen.cat1Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
+        categoryScreen.cat2Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
+        categoryScreen.cat3Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
+        categoryScreen.cat4Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
+        categoryScreen.cat5Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
+        categoryScreen.cat6Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
+        'If categoryScreen.Visible = True Then
+        '    categoryScreen = CType(categoryScreen, categoryScreen)
+        'End If
         If round = roundType.Jeopardy Then
             roundNumber = 1
-            roundForm.CategoryDisplay1.pboxJeopardyCard.Image = My.Resources.JEOPARDYLogo
+            categoryScreen.CategoryDisplay1.pboxJeopardyCard.Image = My.Resources.JEOPARDYLogo
             For i As Integer = 1 To 6
                 For j As Integer = 200 To 1000 Step 200
-                    roundForm.catListBox.Items.Add("Cat" & i & j)
+                    categoryScreen.catListBox.Items.Add("Cat" & i & j)
                 Next
             Next
         ElseIf round = roundType.DoubleJeopardy Then
             roundNumber = 2
-            roundForm.CategoryDisplay1.pboxJeopardyCard.Image = My.Resources.DOUBLEJeopardy
+            categoryScreen.CategoryDisplay1.pboxJeopardyCard.Image = My.Resources.DOUBLEJeopardy
             For i As Integer = 1 To 6
                 For j As Integer = 400 To 2000 Step 400
-                    roundForm.catListBox.Items.Add("Cat" & i & j)
+                    categoryScreen.catListBox.Items.Add("Cat" & i & j)
                 Next
             Next
         ElseIf round = roundType.FinalJeopardy Then
@@ -136,46 +142,54 @@ Public MustInherit Class JeopardyController
             frmScore.lblPlayer2.contestantID = Player2List(0).ID
             frmScore.lblPlayer3.contestantID = Player3List(0).ID
         End If
-        'For Each item As PictureBox In roundForm.categoryPanel.Controls
-        '    roundForm.catListBox.Items.Add(item.Name)
+        'For Each item As PictureBox In categoryScreen.categoryPanel.Controls
+        '    categoryScreen.catListBox.Items.Add(item.Name)
         'Next
-        'If roundForm.Visible = True Then
+        'If categoryScreen.Visible = True Then
         '    loadSets()
-        'ElseIf djroundForm.Visible = True Then
+        'ElseIf djcategoryScreen.Visible = True Then
         'End If
-        loadSets()
-        'roundForm.Timer3.Start()
-        'roundForm.rtbSeenClues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
-        'roundForm.rtbPointValues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
-        'loadcategoryXMLManual()
-        roundForm.tmrCheckCurrentRound.Start()
-        roundForm.tmrCheckIfRungIn.Start()
-        'roundForm.wmpCategory.Ctlcontrols.stop()
-        roundForm.cat1Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
-        roundForm.cat2Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
-        roundForm.cat3Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
-        roundForm.cat4Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
-        roundForm.cat5Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
-        roundForm.cat6Title.catBrowserSmall.Navigate(finalURL & "\Resources\category.html")
-        roundEnum = round
         If round = roundType.Jeopardy Then
-            roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(1200).category
-            roundForm.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(2200).category
-            roundForm.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(3200).category
-            roundForm.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(4200).category
-            roundForm.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(5200).category
-            roundForm.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(6200).category
+            loadSets()
         ElseIf round = roundType.DoubleJeopardy Then
-            roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(1400).category
-            roundForm.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(2400).category
-            roundForm.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(3400).category
-            roundForm.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(4400).category
-            roundForm.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(5400).category
-            roundForm.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(6400).category
+            noAnimation()
         End If
-        roundForm.tmrCatReveal.Start()
-        roundForm.tmrCheckCatCleared.Start()
-        roundForm.clue.clueBrowser.Navigate(Application.StartupPath & "/Resources/clue.html")
+        'categoryScreen.Timer3.Start()
+        'categoryScreen.rtbSeenClues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
+        'categoryScreen.rtbPointValues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
+        'loadcategoryXMLManual()
+        categoryScreen.tmrCheckCurrentRound.Start()
+        categoryScreen.tmrCheckIfRungIn.Start()
+        'categoryScreen.wmpCategory.Ctlcontrols.stop()
+        'If round = roundType.DoubleJeopardy Then
+        '    MsgBox(categoryScreen.cat1Title.catBrowserSmall.ReadyState)
+        '    MsgBox(categoryScreen.cat2Title.catBrowserSmall.ReadyState)
+        '    MsgBox(categoryScreen.cat3Title.catBrowserSmall.ReadyState)
+        '    MsgBox(categoryScreen.cat4Title.catBrowserSmall.ReadyState)
+        '    MsgBox(categoryScreen.cat5Title.catBrowserSmall.ReadyState)
+        '    MsgBox(categoryScreen.cat6Title.catBrowserSmall.ReadyState)
+        'End If
+        roundEnum = round
+        'MsgBox(categoryScreen.cat1Title.catBrowserSmall.Document.Url.ToString())
+        'MsgBox(categoryScreen.cat1Title.catBrowserSmall.DocumentText)
+        If round = roundType.Jeopardy Then
+            categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(1200).category
+            categoryScreen.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(2200).category
+            categoryScreen.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(3200).category
+            categoryScreen.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(4200).category
+            categoryScreen.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(5200).category
+            categoryScreen.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(6200).category
+        ElseIf round = roundType.DoubleJeopardy Then
+            categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(1400).category
+            categoryScreen.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(2400).category
+            categoryScreen.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(3400).category
+            categoryScreen.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(4400).category
+            categoryScreen.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(5400).category
+            categoryScreen.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = lstClues(6400).category
+        End If
+        categoryScreen.tmrCatReveal.Start()
+        categoryScreen.tmrCheckCatCleared.Start()
+        categoryScreen.clue.clueBrowser.Navigate(Application.StartupPath & "/Resources/clue.html")
     End Sub
 #Region "Clueboard Front-End"
 #Region "Fade in Code"
@@ -196,17 +210,26 @@ Public MustInherit Class JeopardyController
     End Function
 #End Region
 #Region "Clueboard Reveal Animation"
+    Private Shared Sub noAnimation()
+        For Each item As String In categoryScreen.catListBox.Items
+            CType(categoryScreen.categoryPanel.Controls(convertClueID(item)), PictureBox).Image = CType(My.Resources.ResourceManager.GetObject("Screen" & item.Remove(0, 4)), Bitmap)
+            CType(categoryScreen.categoryPanel.Controls(convertClueID(item)), PictureBox).Enabled = True
+        Next
+    End Sub
     Private Shared Sub loadSets()
-        If roundForm.Visible = True Then
+        For Each item As Control In categoryScreen.categoryPanel.Controls
+            item.Enabled = True
+        Next
+        If categoryScreen.Visible = True Then
             For i As Integer = 1 To 3
-                Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                set1.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                'roundForm.categoryPanel.Controls(roundForm.catListBox.Items.Item(RandNumber).ToString()).Show()
-                'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                roundForm.catListBox.Items.RemoveAt(RandNumber)
-                For myi = 1 To roundForm.TrackBar1.Maximum
+                Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                set1.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                'categoryScreen.categoryPanel.Controls(categoryScreen.catListBox.Items.Item(RandNumber).ToString()).Show()
+                'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                For myi = 1 To categoryScreen.TrackBar1.Maximum
                     'While i <= TrackBar1.Maximum
-                    roundForm.TrackBar1.Value = myi
+                    categoryScreen.TrackBar1.Value = myi
                     'End While
                 Next
                 Dim strClueValue As String
@@ -219,22 +242,22 @@ Public MustInherit Class JeopardyController
                 End If
                 'Dim newImage As New Bitmap(), New Size(164, 89))
                 Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                CType(roundForm.categoryPanel.Controls(roundForm.catListBox.Items.Item(RandNumber).ToString()), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                CType(categoryScreen.categoryPanel.Controls(convertClueID(categoryScreen.catListBox.Items.Item(RandNumber).ToString())), PictureBox).Image = FadeBitmap(newImage, 0.5)
             Next
             For myI = 1 To 100
-                roundForm.pbarLoadCat.Value += 1
+                categoryScreen.pbarLoadCat.Value += 1
             Next
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 100 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 100 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set2.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set2(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar2.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set2.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set2(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar2.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar2.Value = myi
+                        categoryScreen.TrackBar2.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -246,23 +269,23 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set2(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set2(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 200 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 200 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set3.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set3(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar3.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set3.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set3(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar3.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar3.Value = myi
+                        categoryScreen.TrackBar3.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -274,23 +297,23 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set3(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set3(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 300 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 300 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set4.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set4(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar4.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set4.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set4(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar4.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar4.Value = myi
+                        categoryScreen.TrackBar4.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -302,23 +325,23 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set4(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set4(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 400 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 400 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set5.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set5(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar5.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set5.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set5(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar5.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar5.Value = myi
+                        categoryScreen.TrackBar5.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -330,27 +353,27 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set5(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set5(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 500 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 500 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set6.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set6(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar6.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set6.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set6(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar6.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar6.Value = myi
+                        categoryScreen.TrackBar6.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
-                    'MsgBox(roundForm.catListBox.Items.Item(RandNumber - 1).ToString())
+                    'MsgBox(categoryScreen.catListBox.Items.Item(RandNumber - 1).ToString())
                     If set6(i - 1).Length = 8 Then
                         strClueValue = set6(i - 1).Remove(0, 4)
                     ElseIf set6(i - 1).Length = 7 Then
@@ -359,23 +382,23 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set6(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set6(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 600 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 600 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set7.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set7(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar7.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set7.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set7(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar7.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar7.Value = myi
+                        categoryScreen.TrackBar7.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -387,23 +410,23 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set7(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set7(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 700 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 700 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set8.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set8(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar8.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set8.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set8(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar8.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar8.Value = myi
+                        categoryScreen.TrackBar8.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -415,52 +438,52 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set8(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set8(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 800 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 800 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set9.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(roundForm.catListBox.Items.Item(RandNumber).ToString()).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar9.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set9.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(categoryScreen.catListBox.Items.Item(RandNumber).ToString()).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar9.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar9.Value = myi
+                        categoryScreen.TrackBar9.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
                     If set9(i - 1).Length = 8 Then
-                        strClueValue = roundForm.catListBox.Items.Item(RandNumber).ToString().Remove(0, 4)
+                        strClueValue = categoryScreen.catListBox.Items.Item(RandNumber).ToString().Remove(0, 4)
                     ElseIf set9(i - 1).Length = 7 Then
                         Dim strCatNumberPreformatted As String = set9(i - 1).Remove(0, 3)
                         strClueValue = strCatNumberPreformatted.Remove(0, 1)
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(roundForm.catListBox.Items.Item(RandNumber).ToString()), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(categoryScreen.catListBox.Items.Item(RandNumber).ToString())), PictureBox).Image = FadeBitmap(newImage, 0.5)
 
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
-            If roundForm.pbarLoadCat.Value = 900 Then
+            categoryScreen.PerformLayout()
+            If categoryScreen.pbarLoadCat.Value = 900 Then
                 For i As Integer = 1 To 3
-                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count - 1))
-                    set10.Add(roundForm.catListBox.Items.Item(RandNumber).ToString())
-                    'roundForm.categoryPanel.Controls(set10(i-1)).Show()
-                    'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-                    roundForm.catListBox.Items.RemoveAt(RandNumber)
-                    For myi = 1 To roundForm.TrackBar10.Maximum
+                    Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count - 1))
+                    set10.Add(categoryScreen.catListBox.Items.Item(RandNumber).ToString())
+                    'categoryScreen.categoryPanel.Controls(set10(i-1)).Show()
+                    'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+                    categoryScreen.catListBox.Items.RemoveAt(RandNumber)
+                    For myi = 1 To categoryScreen.TrackBar10.Maximum
                         'While i <= TrackBar1.Maximum
-                        roundForm.TrackBar10.Value = myi
+                        categoryScreen.TrackBar10.Value = myi
                         'End While
                     Next
                     Dim strClueValue As String
@@ -472,27 +495,27 @@ Public MustInherit Class JeopardyController
                     End If
                     'Dim newImage As New Bitmap(Image.FromFile("C:\Users\ac765\Desktop\JeopardyQs\Point Values\" & strClueValue & ".PNG"), New Size(164, 89))
                     Dim newImage As New Bitmap(CType(My.Resources.ResourceManager.GetObject("Screen" & strClueValue), Bitmap), New Size(164, 89))
-                    CType(roundForm.categoryPanel.Controls(set10(i - 1)), PictureBox).Image = FadeBitmap(newImage, 0.5)
+                    CType(categoryScreen.categoryPanel.Controls(convertClueID(set10(i - 1))), PictureBox).Image = FadeBitmap(newImage, 0.5)
                 Next
                 For myI = 1 To 100
-                    roundForm.pbarLoadCat.Value += 1
+                    categoryScreen.pbarLoadCat.Value += 1
                 Next
             End If
-            roundForm.PerformLayout()
+            categoryScreen.PerformLayout()
             'Else
-            '    For Each control As Control In DJroundForm.categoryPanel.Controls
+            '    For Each control As Control In DJcategoryScreen.categoryPanel.Controls
             '        control.Show()
             '    Next
             'End If
-            'If roundForm.pbarLoadCat.Value = 1000 Then
+            'If categoryScreen.pbarLoadCat.Value = 1000 Then
             '    For i As Integer = 1 To 3
-            '        Dim RandNumber = CInt(Math.Ceiling(Rnd() * roundForm.catListBox.Items.Count)) - 1
-            '        roundForm.categoryPanel.Controls(roundForm.catListBox.Items.Item(RandNumber).ToString()).Show()
-            '        'MsgBox(RandNumber & " | " & roundForm.catListBox.Items.Count)
-            '        roundForm.catListBox.Items.RemoveAt(RandNumber)
+            '        Dim RandNumber = CInt(Math.Ceiling(Rnd() * categoryScreen.catListBox.Items.Count)) - 1
+            '        categoryScreen.categoryPanel.Controls(categoryScreen.catListBox.Items.Item(RandNumber).ToString()).Show()
+            '        'MsgBox(RandNumber & " | " & categoryScreen.catListBox.Items.Count)
+            '        categoryScreen.catListBox.Items.RemoveAt(RandNumber)
             '    Next
             'End If
-            'roundForm.PerformLayout()
+            'categoryScreen.PerformLayout()
         End If
     End Sub
 #End Region
@@ -535,7 +558,7 @@ Public MustInherit Class JeopardyController
                 Exit For
             End If
         Next
-        For Each player As Player In Player1List
+        For Each player As Player In Player3List
             If player.ID = ID Then
                 Player3List.Remove(player)
                 Exit For
@@ -555,7 +578,7 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 194)
                     'Timer10.Stop()
                     'Timer11.Start()
-                    roundForm.tmrCheckRecogStopped.Start()
+                    categoryScreen.tmrCheckRecogStopped.Start()
                     frmScore.Player1RungIn = True
                     If frmScore.Player1RungIn = True Then
                         'Dim SAPI
@@ -570,7 +593,7 @@ Public MustInherit Class JeopardyController
                             MsgBox(ex)
                             jSpeechRecog.RecognizeAsyncCancel()
                             jSpeechRecog.recognizerOn = False
-                            roundForm.tmrRingIn.Stop()
+                            categoryScreen.tmrRingIn.Stop()
                         End Try
                         'frmScore.ProgressBar1.PerformStep()
                         'If frmScore.ProgressBar1.Value = frmScore.ProgressBar1.Maximum Then
@@ -578,7 +601,7 @@ Public MustInherit Class JeopardyController
                         'End If
                     End If
                 ElseIf My.Computer.Keyboard.AltKeyDown = True And frmScore.Player2RungIn = False Then
-                    roundForm.tmrCheckRecogStopped.Start()
+                    categoryScreen.tmrCheckRecogStopped.Start()
                     'frmScore.notifyBar.Text = frmScore.lblPlayer2.Text
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(175, 233, 253)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
@@ -597,7 +620,7 @@ Public MustInherit Class JeopardyController
                             MsgBox(ex.Message)
                             jSpeechRecog.RecognizeAsyncCancel()
                             jSpeechRecog.recognizerOn = False
-                            roundForm.tmrRingIn.Stop()
+                            categoryScreen.tmrRingIn.Stop()
                             'End Try
                             'frmScore.ProgressBar1.PerformStep()
                             'If frmScore.ProgressBar1.Value = frmScore.ProgressBar1.Maximum Then
@@ -606,7 +629,7 @@ Public MustInherit Class JeopardyController
                         End Try
                     End If
                 ElseIf My.Computer.Keyboard.ShiftKeyDown = True And frmScore.Player3RungIn = False Then
-                    roundForm.tmrCheckRecogStopped.Start()
+                    categoryScreen.tmrCheckRecogStopped.Start()
                     'frmScore.notifyBar.Text = frmScore.lblPlayer3.Text
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(175, 233, 253)
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
@@ -625,7 +648,7 @@ Public MustInherit Class JeopardyController
                             MsgBox(ex.Message)
                             jSpeechRecog.RecognizeAsyncCancel()
                             jSpeechRecog.recognizerOn = False
-                            roundForm.tmrRingIn.Stop()
+                            categoryScreen.tmrRingIn.Stop()
                         End Try
                         'frmScore.ProgressBar1.PerformStep()
                         'If frmScore.ProgressBar1.Value = frmScore.ProgressBar1.Maximum Then
@@ -637,7 +660,7 @@ Public MustInherit Class JeopardyController
         ElseIf jSpeechRecog.categoryMode = True Then
             jSpeechRecog.RecognizeAsyncCancel()
             'jSpeechRecog..RecognizeAsyncStop()
-            roundForm.tmrRingIn.Stop()
+            categoryScreen.tmrRingIn.Stop()
         End If
         'End If
         If frmScore.txtCurrentPlayer.Text = "" And frmScore.Player1RungIn = True And frmScore.Player2RungIn = True And frmScore.Player3RungIn = True And Not frmScore.IsDailyDouble = True Then
@@ -651,8 +674,8 @@ Public MustInherit Class JeopardyController
             jSpeechRecog.categoryMode = True
             jSpeechRecog.QuestionMode = False
             jSpeechRecog.RecognizeAsyncCancel()
-            roundForm.tmrRingIn.Stop()
-            roundForm.clue.Hide()
+            categoryScreen.tmrRingIn.Stop()
+            categoryScreen.clue.Hide()
             currentPointValue = 0
         ElseIf frmScore.IsDailyDouble = True Then
             frmScore.Player1RungIn = False
@@ -665,8 +688,8 @@ Public MustInherit Class JeopardyController
             jSpeechRecog.RecognizeAsyncCancel()
             jSpeechRecog.categoryMode = True
             jSpeechRecog.QuestionMode = False
-            roundForm.tmrRingIn.Stop()
-            roundForm.clue.Hide()
+            categoryScreen.tmrRingIn.Stop()
+            categoryScreen.clue.Hide()
             currentPointValue = 0
         End If
     End Sub
@@ -676,12 +699,12 @@ Public MustInherit Class JeopardyController
         If questionMode = True Then
             '    If RecognizerOn = True Then
             If frmScore.txtCurrentPlayer.Text = "" Then
-                roundForm.playerTimeOutTimer.Start()
+                categoryScreen.playerTimeOutTimer.Start()
                 frmScore.btnYes.Hide()
                 frmScore.btnNo.Hide()
                 If My.Computer.Keyboard.CtrlKeyDown = True And frmScore.Player1RungIn = False Then
                     currentPlayer = 1
-                    roundForm.clue.wmpClue.Ctlcontrols.stop()
+                    categoryScreen.clue.wmpClue.Ctlcontrols.stop()
                     frmScore.btnYes.Show()
                     frmScore.btnNo.Show()
                     'frmScore.notifyBar.Text = frmScore.lblPlayer1.Text
@@ -691,7 +714,7 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 194)
                     'Timer10.Stop()
                     'Timer11.Start()
-                    'roundForm.Timer12.Start()
+                    'categoryScreen.Timer12.Start()
                     frmScore.Player1RungIn = True
                     If frmScore.Player1RungIn = True Then
                         'Dim SAPI
@@ -712,10 +735,10 @@ Public MustInherit Class JeopardyController
                     End If
                 ElseIf My.Computer.Keyboard.AltKeyDown = True And frmScore.Player2RungIn = False Then
                     currentPlayer = 2
-                    roundForm.clue.wmpClue.Ctlcontrols.stop()
+                    categoryScreen.clue.wmpClue.Ctlcontrols.stop()
                     frmScore.btnYes.Show()
                     frmScore.btnNo.Show()
-                    'roundForm.Timer12.Start()
+                    'categoryScreen.Timer12.Start()
                     'frmScore.notifyBar.Text = frmScore.lblPlayer2.Text
                     frmScore.lblPlayer2.BackgroundImage = Nothing
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(175, 233, 253)
@@ -737,10 +760,10 @@ Public MustInherit Class JeopardyController
                     End If
                 ElseIf My.Computer.Keyboard.ShiftKeyDown = True And frmScore.Player3RungIn = False Then
                     currentPlayer = 3
-                    roundForm.clue.wmpClue.Ctlcontrols.stop()
+                    categoryScreen.clue.wmpClue.Ctlcontrols.stop()
                     frmScore.btnYes.Show()
                     frmScore.btnNo.Show()
-                    'roundForm.Timer12.Start()
+                    'categoryScreen.Timer12.Start()
                     'frmScore.notifyBar.Text = frmScore.lblPlayer3.Text
                     frmScore.lblPlayer3.BackgroundImage = Nothing
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(175, 233, 253)
@@ -767,7 +790,7 @@ Public MustInherit Class JeopardyController
                 End If
             End If
         ElseIf categoryMode = True Then
-            roundForm.tmrRingIn.Stop()
+            categoryScreen.tmrRingIn.Stop()
         End If
         'End If
         If frmScore.txtCurrentPlayer.Text = "" And frmScore.Player1RungIn = True And frmScore.Player2RungIn = True And frmScore.Player3RungIn = True And Not frmScore.IsDailyDouble = True Then
@@ -782,8 +805,8 @@ Public MustInherit Class JeopardyController
             'End If
             categoryMode = True
             questionMode = False
-            roundForm.tmrRingIn.Stop()
-            roundForm.clue.Hide()
+            categoryScreen.tmrRingIn.Stop()
+            categoryScreen.clue.Hide()
             currentPointValue = 0
         ElseIf frmScore.IsDailyDouble = True Then
             frmScore.Player1RungIn = False
@@ -795,8 +818,8 @@ Public MustInherit Class JeopardyController
             'SAPI.Speak("The correct answer was " + currentAnswer)
             categoryMode = True
             questionMode = False
-            roundForm.tmrRingIn.Stop()
-            roundForm.clue.Hide()
+            categoryScreen.tmrRingIn.Stop()
+            categoryScreen.clue.Hide()
             currentPointValue = 0
         End If
     End Sub
@@ -819,7 +842,7 @@ Public MustInherit Class JeopardyController
                     jSpeechRecog.QuestionMode = False
                     frmScore.lblPlayer1Score.Text = Integer.Parse(frmScore.lblPlayer1Score.Text) + currentPointValue
                     frmScore.notifyBar.Text = ""
-                    roundForm.clue.Hide()
+                    categoryScreen.clue.Hide()
                     frmScore.Player1RungIn = False
                     frmScore.Player2RungIn = False
                     frmScore.Player3RungIn = False
@@ -829,7 +852,7 @@ Public MustInherit Class JeopardyController
                     frmScore.txtCurrentPlayer.Clear()
                     currentPointValue = 0
                     currentPlayer = 1
-                    roundForm.tmrRingIn.Stop()
+                    categoryScreen.tmrRingIn.Stop()
                 ElseIf frmScore.txtCurrentPlayer.Text = "Player 2" Then
                     jSpeechRecog.RecognizeAsyncCancel()
                     jSpeechRecog.recognizerOn = False
@@ -837,7 +860,7 @@ Public MustInherit Class JeopardyController
                     jSpeechRecog.QuestionMode = False
                     frmScore.lblPlayer2Score.Text = Integer.Parse(frmScore.lblPlayer2Score.Text) + currentPointValue
                     frmScore.notifyBar.Text = ""
-                    roundForm.clue.Hide()
+                    categoryScreen.clue.Hide()
                     frmScore.Player1RungIn = False
                     frmScore.Player2RungIn = False
                     frmScore.Player3RungIn = False
@@ -847,7 +870,7 @@ Public MustInherit Class JeopardyController
                     frmScore.txtCurrentPlayer.Clear()
                     currentPointValue = 0
                     currentPlayer = 2
-                    roundForm.tmrRingIn.Stop()
+                    categoryScreen.tmrRingIn.Stop()
                 ElseIf frmScore.txtCurrentPlayer.Text = "Player 3" Then
                     jSpeechRecog.RecognizeAsyncCancel()
                     jSpeechRecog.recognizerOn = False
@@ -855,7 +878,7 @@ Public MustInherit Class JeopardyController
                     jSpeechRecog.QuestionMode = False
                     frmScore.lblPlayer3Score.Text = Integer.Parse(frmScore.lblPlayer3Score.Text) + currentPointValue
                     frmScore.notifyBar.Text = ""
-                    roundForm.clue.Hide()
+                    categoryScreen.clue.Hide()
                     frmScore.Player1RungIn = False
                     frmScore.Player2RungIn = False
                     frmScore.Player3RungIn = False
@@ -865,7 +888,7 @@ Public MustInherit Class JeopardyController
                     frmScore.txtCurrentPlayer.Clear()
                     currentPointValue = 0
                     currentPlayer = 3
-                    roundForm.tmrRingIn.Stop()
+                    categoryScreen.tmrRingIn.Stop()
                 End If
             ElseIf (jSpeechRecog.cluelist.Contains(e.Result.Text)) And e.Result.Confidence < 0.94 Then
                 frmScore.notifyBar.Text = frmScore.txtCurrentPlayer.Text + ": Speech may have been misinterpreted. Please try again."
@@ -916,7 +939,7 @@ Public MustInherit Class JeopardyController
         ElseIf jSpeechRecog.categoryMode = True Then
             jSpeechRecog.RecognizeAsyncCancel()
             frmScore.BringToFront()
-            'roundForm.Timer4.Start()
+            'categoryScreen.Timer4.Start()
             'jSpeechRecog.categoryMode = True
             jSpeechRecog.QuestionMode = False
             Dim catstring
@@ -936,71 +959,71 @@ Public MustInherit Class JeopardyController
                     currentPointValue = 200
                     loadclueBoardXML(catstring, 200)
                     jSpeechRecog.addToSeenCluesList(catstring, currentPointValue)
-                    'roundForm.PointValueBox.Show()
-                    'roundForm.PointValueBox.Image = My.Resources.Screen200
-                    roundForm.clue.Show()
-                    'roundForm.clue.BringToFront()
-                    'roundForm.clue.Load(clueLocation)
+                    'categoryScreen.PointValueBox.Show()
+                    'categoryScreen.PointValueBox.Image = My.Resources.Screen200
+                    categoryScreen.clue.Show()
+                    'categoryScreen.clue.BringToFront()
+                    'categoryScreen.clue.Load(clueLocation)
                     'cat5400.display = False
                     'cat5400.Enabled = False
                     jSpeechRecog.RecognizeAsyncCancel()
-                    roundForm.tmrRingIn.Start()
+                    categoryScreen.tmrRingIn.Start()
                 ElseIf (e.Result.Text.Contains("400")) Then
                     catstring = e.Result.Text.Replace("400", "").Replace("for", "")
                     currentPointValue = 400
                     loadclueBoardXML(catstring, 400)
                     jSpeechRecog.addToSeenCluesList(catstring, currentPointValue)
-                    'roundForm.PointValueBox.Show()
-                    'roundForm.PointValueBox.Image = My.Resources.Screen400
-                    roundForm.clue.Show()
-                    'roundForm.clue.BringToFront()
-                    'roundForm.clue.Load(clueLocation)
+                    'categoryScreen.PointValueBox.Show()
+                    'categoryScreen.PointValueBox.Image = My.Resources.Screen400
+                    categoryScreen.clue.Show()
+                    'categoryScreen.clue.BringToFront()
+                    'categoryScreen.clue.Load(clueLocation)
                     'cat5400.display = False
                     'cat5400.Enabled = False
                     jSpeechRecog.RecognizeAsyncCancel()
-                    roundForm.tmrRingIn.Start()
+                    categoryScreen.tmrRingIn.Start()
                 ElseIf (e.Result.Text.Contains("600")) Then
                     catstring = e.Result.Text.Replace("600", "").Replace("for", "")
                     currentPointValue = 600
                     loadclueBoardXML(catstring, 600)
                     jSpeechRecog.addToSeenCluesList(catstring, currentPointValue)
-                    'roundForm.PointValueBox.Show()
-                    'roundForm.PointValueBox.Image = My.Resources.Screen600
-                    roundForm.clue.Show()
-                    'roundForm.clue.BringToFront()
-                    'roundForm.clue.Load(clueLocation)
+                    'categoryScreen.PointValueBox.Show()
+                    'categoryScreen.PointValueBox.Image = My.Resources.Screen600
+                    categoryScreen.clue.Show()
+                    'categoryScreen.clue.BringToFront()
+                    'categoryScreen.clue.Load(clueLocation)
                     'cat5400.display = False
                     'cat5400.Enabled = False
                     jSpeechRecog.RecognizeAsyncCancel()
-                    roundForm.tmrRingIn.Start()
+                    categoryScreen.tmrRingIn.Start()
                 ElseIf (e.Result.Text.Contains("800")) Then
                     catstring = e.Result.Text.Replace("800", "").Replace("for", "")
                     currentPointValue = 800
                     loadclueBoardXML(catstring, 800)
                     jSpeechRecog.addToSeenCluesList(catstring, currentPointValue)
-                    'roundForm.PointValueBox.Show()
-                    'roundForm.PointValueBox.Image = My.Resources.Screen800
-                    roundForm.clue.Show()
-                    'roundForm.clue.BringToFront()
-                    'roundForm.clue.Load(clueLocation)
+                    'categoryScreen.PointValueBox.Show()
+                    'categoryScreen.PointValueBox.Image = My.Resources.Screen800
+                    categoryScreen.clue.Show()
+                    'categoryScreen.clue.BringToFront()
+                    'categoryScreen.clue.Load(clueLocation)
                     'cat5400.display = False
                     'cat5400.Enabled = False
                     jSpeechRecog.RecognizeAsyncCancel()
-                    roundForm.tmrRingIn.Start()
+                    categoryScreen.tmrRingIn.Start()
                 ElseIf (e.Result.Text.Contains("1000")) Then
                     catstring = e.Result.Text.Replace("1000", "").Replace("for", "")
                     currentPointValue = 1000
                     loadclueBoardXML(catstring, 1000)
                     jSpeechRecog.addToSeenCluesList(catstring, currentPointValue)
-                    'roundForm.PointValueBox.Show()
-                    'roundForm.PointValueBox.Image = My.Resources.Screen1000
-                    roundForm.clue.Show()
-                    'roundForm.clue.BringToFront()
-                    'roundForm.clue.Load(clueLocation)
+                    'categoryScreen.PointValueBox.Show()
+                    'categoryScreen.PointValueBox.Image = My.Resources.Screen1000
+                    categoryScreen.clue.Show()
+                    'categoryScreen.clue.BringToFront()
+                    'categoryScreen.clue.Load(clueLocation)
                     'cat5400.display = False
                     'cat5400.Enabled = False
                     jSpeechRecog.RecognizeAsyncCancel()
-                    roundForm.tmrRingIn.Start()
+                    categoryScreen.tmrRingIn.Start()
                 End If
                 'ElseIf Not (jSpeechRecog.seenclues.Contains(e.Result.Text)) And e.Result.Confidence < 0.94 Then
                 '    frmScore.notifyBar.Text = "Speech may have been misinterpreted. Please try again."
@@ -1015,98 +1038,98 @@ Public MustInherit Class JeopardyController
             End If
             Dim blankTilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\BlankTile.png"
             'MsgBox(clueID)
-            'CType(roundForm.Controls(clueID), PictureBox).Load(blankTilePath)
-            'roundForm.Controls(clueID).Enabled = False
+            'CType(categoryScreen.Controls(clueID), PictureBox).Load(blankTilePath)
+            'categoryScreen.Controls(clueID).Enabled = False
             If clueID = "Cat1200" Then
-                roundForm.Cat1200.Load(blankTilePath)
-                roundForm.Cat1200.Enabled = False
+                categoryScreen.Cat1200.Load(blankTilePath)
+                categoryScreen.Cat1200.Enabled = False
             ElseIf clueID = "Cat1400" Then
-                roundForm.Cat1400.Load(blankTilePath)
-                roundForm.Cat1400.Enabled = False
+                categoryScreen.Cat1400.Load(blankTilePath)
+                categoryScreen.Cat1400.Enabled = False
             ElseIf clueID = "Cat1600" Then
-                roundForm.Cat1600.Load(blankTilePath)
-                roundForm.Cat1600.Enabled = False
+                categoryScreen.Cat1600.Load(blankTilePath)
+                categoryScreen.Cat1600.Enabled = False
             ElseIf clueID = "Cat1800" Then
-                roundForm.Cat1800.Load(blankTilePath)
-                roundForm.Cat1800.Enabled = False
+                categoryScreen.Cat1800.Load(blankTilePath)
+                categoryScreen.Cat1800.Enabled = False
             ElseIf clueID = "Cat11000" Then
-                roundForm.Cat11000.Load(blankTilePath)
-                roundForm.Cat11000.Enabled = False
+                categoryScreen.Cat11000.Load(blankTilePath)
+                categoryScreen.Cat11000.Enabled = False
             ElseIf clueID = "Cat2200" Then
-                roundForm.Cat2200.Load(blankTilePath)
-                roundForm.Cat2200.Enabled = False
+                categoryScreen.Cat2200.Load(blankTilePath)
+                categoryScreen.Cat2200.Enabled = False
             ElseIf clueID = "Cat2400" Then
-                roundForm.Cat2400.Load(blankTilePath)
-                roundForm.Cat2400.Enabled = False
+                categoryScreen.Cat2400.Load(blankTilePath)
+                categoryScreen.Cat2400.Enabled = False
             ElseIf clueID = "Cat2600" Then
-                roundForm.Cat2600.Load(blankTilePath)
-                roundForm.Cat2600.Enabled = False
+                categoryScreen.Cat2600.Load(blankTilePath)
+                categoryScreen.Cat2600.Enabled = False
             ElseIf clueID = "Cat2800" Then
-                roundForm.Cat2800.Load(blankTilePath)
-                roundForm.Cat2800.Enabled = False
+                categoryScreen.Cat2800.Load(blankTilePath)
+                categoryScreen.Cat2800.Enabled = False
             ElseIf clueID = "Cat21000" Then
-                roundForm.Cat21000.Load(blankTilePath)
-                roundForm.Cat21000.Enabled = False
+                categoryScreen.Cat21000.Load(blankTilePath)
+                categoryScreen.Cat21000.Enabled = False
             ElseIf clueID = "Cat3200" Then
-                roundForm.Cat3200.Load(blankTilePath)
-                roundForm.Cat3200.Enabled = False
+                categoryScreen.Cat3200.Load(blankTilePath)
+                categoryScreen.Cat3200.Enabled = False
             ElseIf clueID = "Cat3400" Then
-                roundForm.Cat3400.Load(blankTilePath)
-                roundForm.Cat3400.Enabled = False
+                categoryScreen.Cat3400.Load(blankTilePath)
+                categoryScreen.Cat3400.Enabled = False
             ElseIf clueID = "Cat3600" Then
-                roundForm.Cat3600.Load(blankTilePath)
-                roundForm.Cat3600.Enabled = False
+                categoryScreen.Cat3600.Load(blankTilePath)
+                categoryScreen.Cat3600.Enabled = False
             ElseIf clueID = "Cat3800" Then
-                roundForm.Cat3800.Load(blankTilePath)
-                roundForm.Cat3800.Enabled = False
+                categoryScreen.Cat3800.Load(blankTilePath)
+                categoryScreen.Cat3800.Enabled = False
             ElseIf clueID = "Cat31000" Then
-                roundForm.Cat31000.Load(blankTilePath)
-                roundForm.Cat31000.Enabled = False
+                categoryScreen.Cat31000.Load(blankTilePath)
+                categoryScreen.Cat31000.Enabled = False
             ElseIf clueID = "Cat4200" Then
-                roundForm.Cat4200.Load(blankTilePath)
-                roundForm.Cat4200.Enabled = False
+                categoryScreen.Cat4200.Load(blankTilePath)
+                categoryScreen.Cat4200.Enabled = False
             ElseIf clueID = "Cat4400" Then
-                roundForm.Cat4400.Load(blankTilePath)
-                roundForm.Cat4400.Enabled = False
+                categoryScreen.Cat4400.Load(blankTilePath)
+                categoryScreen.Cat4400.Enabled = False
             ElseIf clueID = "Cat4600" Then
-                roundForm.Cat4600.Load(blankTilePath)
-                roundForm.Cat4600.Enabled = False
+                categoryScreen.Cat4600.Load(blankTilePath)
+                categoryScreen.Cat4600.Enabled = False
             ElseIf clueID = "Cat4800" Then
-                roundForm.Cat4800.Load(blankTilePath)
-                roundForm.Cat4800.Enabled = False
+                categoryScreen.Cat4800.Load(blankTilePath)
+                categoryScreen.Cat4800.Enabled = False
             ElseIf clueID = "Cat41000" Then
-                roundForm.Cat41000.Load(blankTilePath)
-                roundForm.Cat41000.Enabled = False
+                categoryScreen.Cat41000.Load(blankTilePath)
+                categoryScreen.Cat41000.Enabled = False
             ElseIf clueID = "Cat5200" Then
-                roundForm.Cat5200.Load(blankTilePath)
-                roundForm.Cat5200.Enabled = False
+                categoryScreen.Cat5200.Load(blankTilePath)
+                categoryScreen.Cat5200.Enabled = False
             ElseIf clueID = "Cat5400" Then
-                roundForm.Cat5400.Load(blankTilePath)
-                roundForm.Cat5400.Enabled = False
+                categoryScreen.Cat5400.Load(blankTilePath)
+                categoryScreen.Cat5400.Enabled = False
             ElseIf clueID = "Cat5600" Then
-                roundForm.Cat5600.Load(blankTilePath)
-                roundForm.Cat5600.Enabled = False
+                categoryScreen.Cat5600.Load(blankTilePath)
+                categoryScreen.Cat5600.Enabled = False
             ElseIf clueID = "Cat5800" Then
-                roundForm.Cat5800.Load(blankTilePath)
-                roundForm.Cat5800.Enabled = False
+                categoryScreen.Cat5800.Load(blankTilePath)
+                categoryScreen.Cat5800.Enabled = False
             ElseIf clueID = "Cat51000" Then
-                roundForm.Cat51000.Load(blankTilePath)
-                roundForm.Cat51000.Enabled = False
+                categoryScreen.Cat51000.Load(blankTilePath)
+                categoryScreen.Cat51000.Enabled = False
             ElseIf clueID = "Cat6200" Then
-                roundForm.Cat6200.Load(blankTilePath)
-                roundForm.Cat6200.Enabled = False
+                categoryScreen.Cat6200.Load(blankTilePath)
+                categoryScreen.Cat6200.Enabled = False
             ElseIf clueID = "Cat6400" Then
-                roundForm.Cat6400.Load(blankTilePath)
-                roundForm.Cat6400.Enabled = False
+                categoryScreen.Cat6400.Load(blankTilePath)
+                categoryScreen.Cat6400.Enabled = False
             ElseIf clueID = "Cat6600" Then
-                roundForm.Cat6600.Load(blankTilePath)
-                roundForm.Cat6600.Enabled = False
+                categoryScreen.Cat6600.Load(blankTilePath)
+                categoryScreen.Cat6600.Enabled = False
             ElseIf clueID = "Cat6800" Then
-                roundForm.Cat6800.Load(blankTilePath)
-                roundForm.Cat6800.Enabled = False
+                categoryScreen.Cat6800.Load(blankTilePath)
+                categoryScreen.Cat6800.Enabled = False
             ElseIf clueID = "Cat61000" Then
-                roundForm.Cat61000.Load(blankTilePath)
-                roundForm.Cat61000.Enabled = False
+                categoryScreen.Cat61000.Load(blankTilePath)
+                categoryScreen.Cat61000.Enabled = False
             End If
             jSpeechRecog.RecognizeAsyncCancel()
         End If
@@ -1181,16 +1204,16 @@ Public MustInherit Class JeopardyController
 #Region "Load Categories from Database"
     Public Shared Sub loadClues(packName As String, round As roundType)
         Dim roundNumber As Integer
-        If roundForm.Visible = True Then
+        If categoryScreen.Visible = True Then
             roundNumber = 1
-            'ElseIf djroundForm.Visible = True Then
+            'ElseIf djcategoryScreen.Visible = True Then
             '    roundNumber = 2
         End If
         Dim connClues As SqlConnection
         connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
         Dim strSQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = @RoundNumber"
-        Dim strDoubleJeopardySQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = @RoundNumber"
-        Dim strFinalJeopardySQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = @RoundNumber"
+        Dim strDoubleJeopardySQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = 2"
+        Dim strFinalJeopardySQL As String = "SELECT * FROM Clueboard WHERE packName = @PackName and round = 3"
         Dim cmd As SqlCommand
         Dim djcmd As SqlCommand
         Dim fjcmd As SqlCommand
@@ -1204,7 +1227,12 @@ Public MustInherit Class JeopardyController
         Dim fjpackNameParam As SqlParameter = New SqlParameter("@PackName", packName)
         Dim fjroundParam As SqlParameter = New SqlParameter("@RoundNumber", 3)
         connClues.Open()
-        cmd = New SqlCommand(strSQL, connClues)
+        If round = roundType.Jeopardy Then
+            cmd = New SqlCommand(strSQL, connClues)
+        ElseIf round = roundType.DoubleJeopardy Then
+            cmd = New SqlCommand(strDoubleJeopardySQL, connClues)
+        Else
+        End If
         cmd.Parameters.Add(packNameParam)
         cmd.Parameters.Add(roundParam)
         cmd.CommandType = CommandType.Text
@@ -1229,16 +1257,16 @@ Public MustInherit Class JeopardyController
             Dim newClue = New Clue(cbID, category, clueValue, clue, clueID, dailyDoubleBoolean, clueLocation)
             lstClues.Add(clueID.Replace("Cat", ""), newClue)
             'If checkClueList(cbID) = True Then
-            '    CType(roundForm.categoryPanel.Controls(convertClueID(clueID)), PictureBox).Image = My.Resources.BlankTile
-            '    CType(roundForm.categoryPanel.Controls(convertClueID(clueID)), PictureBox).Enabled = False
+            '    CType(categoryScreen.categoryPanel.Controls(convertClueID(clueID)), PictureBox).Image = My.Resources.BlankTile
+            '    CType(categoryScreen.categoryPanel.Controls(convertClueID(clueID)), PictureBox).Enabled = False
             'End If
             'categoryListSorted.Add(clueID.Replace("Cat", ""), category)
             'clueList.Add(clueID, clue)
             'If Trim(clueLocation) <> "" Then
             '    interactiveClueList.Add(clueID, clueLocation)
             'End If
-            'If Not roundForm.CategoryDisplay1.categoryList.Contains(category) Then
-            '    roundForm.CategoryDisplay1.addCategory(category)
+            'If Not categoryScreen.CategoryDisplay1.categoryList.Contains(category) Then
+            '    categoryScreen.CategoryDisplay1.addCategory(category)
             'End If
         Loop
         connClues.Close()
@@ -1363,8 +1391,8 @@ Public MustInherit Class JeopardyController
                 clueID = str5Replaced
                 XMLStringList.Add(currentAnswer)
                 jSpeechRecog.addToList(XMLStringList, JeopardySpeechRecognizer.LoadCommand.Clue)
-                'roundForm.clue.Load(str3Replaced)
-                roundForm.clue.Show()
+                'categoryScreen.clue.Load(str3Replaced)
+                categoryScreen.clue.Show()
             Else
 
             End If
@@ -1454,14 +1482,14 @@ Public MustInherit Class JeopardyController
                 clueLocation = str3Replaced
                 clueID = str5Replaced
                 'XMLStringList.Add(currentAnswer)
-                'roundForm.clue.Load(str3Replaced)
+                'categoryScreen.clue.Load(str3Replaced)
                 If str6 = "false" Then
-                    roundForm.clue.Show()
+                    categoryScreen.clue.Show()
                 ElseIf str6 = "true" Then
                     frmScore.IsDailyDouble = True
                     DailyDouble.Show()
                 Else
-                    roundForm.clue.Show()
+                    categoryScreen.clue.Show()
                 End If
             Else
 
@@ -1469,18 +1497,23 @@ Public MustInherit Class JeopardyController
         Next
         Dim blankTilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\BlankTile.png"
         'MsgBox(clueID)
-        CType(roundForm.categoryPanel.Controls(clueID), PictureBox).Load(blankTilePath)
-        CType(roundForm.categoryPanel.Controls(clueID), PictureBox).Enabled = False
-        'roundForm.rtbSeenClues.AppendText(clueID + vbCrLf)
-        'roundForm.rtbSeenClues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
+        CType(categoryScreen.categoryPanel.Controls(clueID), PictureBox).Load(blankTilePath)
+        CType(categoryScreen.categoryPanel.Controls(clueID), PictureBox).Enabled = False
+        'categoryScreen.rtbSeenClues.AppendText(clueID + vbCrLf)
+        'categoryScreen.rtbSeenClues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
         frmScore.btnGo.Show()
     End Sub
 #End Region
 #Region "Load Clue Manual without XML"
     Public Shared Sub loadClue(clueID As String)
-        roundForm.PointValueBox.Image = My.Resources.ResourceManager.GetObject("Screen" & currentPointValue)
-        roundForm.PointValueBox.Show()
-        'roundForm.clue.Load(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\" + clueID + ".png")
+        'If roundEnum = roundType.Jeopardy Then
+        '    clueID = clueID
+        'ElseIf roundEnum = roundType.DoubleJeopardy Then
+        '    clueID = convertToR2(clueID)
+        'End If
+        categoryScreen.PointValueBox.Image = My.Resources.ResourceManager.GetObject("Screen" & currentPointValue)
+        categoryScreen.PointValueBox.Show()
+        'categoryScreen.clue.Load(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\" + clueID + ".png")
         If lstClues(Integer.Parse(clueID.Replace("Cat", ""))).dailyDouble = True Then
             frmScore.IsDailyDouble = True
             DailyDouble.Show()
@@ -1489,166 +1522,73 @@ Public MustInherit Class JeopardyController
             frmScore.btnGo.Show()
             frmScore.IsDailyDouble = False
         End If
-        cbID = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).cbID
         seenClues.Add(lstClues(Integer.Parse(clueID.Replace("Cat", ""))))
-        roundForm.clue.Show()
-        roundForm.clue.wmpClue.Hide()
-        roundForm.clue.pboxClue.Hide()
-        roundForm.clue.MiniClue1.Hide()
-        roundForm.clue.MiniClue1.Location = New Point(0, 534)
+        cbID = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).cbID
+        categoryScreen.clue.Show()
+        categoryScreen.clue.wmpClue.Hide()
+        categoryScreen.clue.pboxClue.Hide()
+        categoryScreen.clue.MiniClue1.Hide()
+        categoryScreen.clue.MiniClue1.Location = New Point(0, 534)
         Dim categoryNumber = clueID.Replace("Cat", "").Substring(0, 1)
         If String.IsNullOrEmpty(lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation) Then
             frmScore.Show()
-            roundForm.clue.clueBrowser.Navigate(finalURL & "\Resources\clue.html")
-            'roundForm.clue.clueBrowser.Navigate("localhost/Jeopardy/Content/clue.aspx?packName=" & packName & "&round=" & roundNumber & "&catNumber=" & categoryNumber & "&pointValue=" & currentPointValue)
-            'roundForm.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:none;"
-            'roundForm.clue.lblClue.Show()
-            'roundForm.clue.lblClue.Text = clueList.Item(clueID)
-            roundForm.clue.clueType = clueType.Regular
-            'roundForm.clue.MiniClue1.Parent = roundForm.clue
-            'roundForm.clue.MiniClue1.BackColor = Color.Black
+            categoryScreen.clue.clueBrowser.Navigate(finalURL & "\Resources\clue.html")
+            'categoryScreen.clue.clueBrowser.Navigate("localhost/Jeopardy/Content/clue.aspx?packName=" & packName & "&round=" & roundNumber & "&catNumber=" & categoryNumber & "&pointValue=" & currentPointValue)
+            'categoryScreen.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:none;"
+            'categoryScreen.clue.lblClue.Show()
+            'categoryScreen.clue.lblClue.Text = clueList.Item(clueID)
+            categoryScreen.clue.clueType = clueType.Regular
+            'categoryScreen.clue.MiniClue1.Parent = categoryScreen.clue
+            'categoryScreen.clue.MiniClue1.BackColor = Color.Black
         Else
             If lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".mp4") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".wmv") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".avi") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".mov") Then
-                roundForm.clue.clueBrowser.Navigate(finalURL & "\Resources\interactiveClue.html")
+                categoryScreen.clue.clueBrowser.Navigate(finalURL & "\Resources\interactiveClue.html")
                 frmScore.Hide()
-                roundForm.clue.lblClue.Hide()
-                'roundForm.clue.MiniClue1.lblClue.Text = clueList.Item(clueID)
-                'roundForm.clue.MiniClue1.Show()
-                'roundForm.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:none;"
-                'roundForm.clue.wmpClue.Show()
-                roundForm.clue.videoClueLocation = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation
-                roundForm.clue.clueType = clueType.Video
-                'roundForm.clue.MiniClue1.Parent = roundForm.clue
-                'roundForm.clue.MiniClue1.BackColor = Color.Black
+                categoryScreen.clue.lblClue.Hide()
+                'categoryScreen.clue.MiniClue1.lblClue.Text = clueList.Item(clueID)
+                'categoryScreen.clue.MiniClue1.Show()
+                'categoryScreen.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:none;"
+                'categoryScreen.clue.wmpClue.Show()
+                categoryScreen.clue.videoClueLocation = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation
+                categoryScreen.clue.clueType = clueType.Video
+                'categoryScreen.clue.MiniClue1.Parent = categoryScreen.clue
+                'categoryScreen.clue.MiniClue1.BackColor = Color.Black
             ElseIf lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".m4a") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".mp3") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".wav") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".wma") Then
-                roundForm.clue.clueBrowser.Navigate(finalURL & "\Resources\clue.html")
+                categoryScreen.clue.clueBrowser.Navigate(finalURL & "\Resources\clue.html")
                 frmScore.Show()
-                roundForm.clue.wmpClue.Hide()
-                roundForm.clue.wmpClue.URL = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation
-                'roundForm.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:none;"
-                'roundForm.clue.clueBrowser.Navigate("localhost/Jeopardy/Content/clue.aspx?packName=" & packName & "&round=" & roundNumber & "&catNumber=" & categoryNumber & "&pointValue=" & currentPointValue)
-                'roundForm.clue.lblClue.Text = clueList.Item(clueID)
-                roundForm.clue.wmpClue.Ctlcontrols.stop()
-                roundForm.clue.clueType = clueType.Audio
-                roundForm.clue.MiniClue1.Parent = roundForm.clue
-                roundForm.clue.MiniClue1.BackColor = Color.Black
+                categoryScreen.clue.wmpClue.Hide()
+                categoryScreen.clue.wmpClue.URL = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation
+                'categoryScreen.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:none;"
+                'categoryScreen.clue.clueBrowser.Navigate("localhost/Jeopardy/Content/clue.aspx?packName=" & packName & "&round=" & roundNumber & "&catNumber=" & categoryNumber & "&pointValue=" & currentPointValue)
+                'categoryScreen.clue.lblClue.Text = clueList.Item(clueID)
+                categoryScreen.clue.wmpClue.Ctlcontrols.stop()
+                categoryScreen.clue.clueType = clueType.Audio
+                categoryScreen.clue.MiniClue1.Parent = categoryScreen.clue
+                categoryScreen.clue.MiniClue1.BackColor = Color.Black
             ElseIf lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".png") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".jpg") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".bmp") Or lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation.Contains(".gif") Then
-                roundForm.clue.clueBrowser.Navigate(finalURL & "\Resources\interactiveClue.html")
+                categoryScreen.clue.clueBrowser.Navigate(finalURL & "\Resources\interactiveClue.html")
                 frmScore.Hide()
-                roundForm.clue.lblClue.Hide()
-                'roundForm.clue.pboxClue.Show()
-                roundForm.clue.imgClueLocation = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation
-                'roundForm.clue.clueBrowser.Document.GetElementById("interactiveClueString").SetAttribute("src", lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation)
-                'roundForm.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:block;"
-                'roundForm.clue.clueBrowser.Navigost/Jeopardy/Content/clue.aspx?packName=" & packName & "&round=" & roundNumber & "&catNumber=" & categoryNumber & "&pointValue=" & currentPointValue)
-                'roundForm.clue.MiniClue1.lblClue.Text = clueList.Item(clueID)
-                'roundForm.clue.MiniClue1.Show()
-                'roundForm.clue.MiniClue1.Parent = roundForm.clue.pboxClue
-                'roundForm.clue.MiniClue1.BackColor = Color.Transparent
-                'roundForm.clue.MiniClue1.Location = New Point(0, 534)
-                'roundForm.clue.pboxClue.BackgroundImage = Image.FromFile(lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation)
-                roundForm.clue.clueType = clueType.Image
+                categoryScreen.clue.lblClue.Hide()
+                'categoryScreen.clue.pboxClue.Show()
+                categoryScreen.clue.imgClueLocation = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation
+                'categoryScreen.clue.clueBrowser.Document.GetElementById("interactiveClueString").SetAttribute("src", lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation)
+                'categoryScreen.clue.clueBrowser.Document.GetElementById("interactiveClue").Style = "display:block;"
+                'categoryScreen.clue.clueBrowser.Navigost/Jeopardy/Content/clue.aspx?packName=" & packName & "&round=" & roundNumber & "&catNumber=" & categoryNumber & "&pointValue=" & currentPointValue)
+                'categoryScreen.clue.MiniClue1.lblClue.Text = clueList.Item(clueID)
+                'categoryScreen.clue.MiniClue1.Show()
+                'categoryScreen.clue.MiniClue1.Parent = categoryScreen.clue.pboxClue
+                'categoryScreen.clue.MiniClue1.BackColor = Color.Transparent
+                'categoryScreen.clue.MiniClue1.Location = New Point(0, 534)
+                'categoryScreen.clue.pboxClue.BackgroundImage = Image.FromFile(lstClues(Integer.Parse(clueID.Replace("Cat", ""))).interactiveClueLocation)
+                categoryScreen.clue.clueType = clueType.Image
             End If
         End If
         'Dim blankTilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\BlankTile.png"
         'MsgBox(clueID)
-        roundForm.clue.clue = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).clue
-        CType(roundForm.categoryPanel.Controls(clueID), PictureBox).Image = My.Resources.BlankTile
-        CType(roundForm.categoryPanel.Controls(clueID), PictureBox).Enabled = False
-        'If clueID = "Cat1200" Then
-        '    roundForm.Cat1200.Load(blankTilePath)
-        '    roundForm.Cat1200.Enabled = False
-        'ElseIf clueID = "Cat1400" Then
-        '    roundForm.Cat1400.Load(blankTilePath)
-        '    roundForm.Cat1400.Enabled = False
-        'ElseIf clueID = "Cat1600" Then
-        '    roundForm.Cat1600.Load(blankTilePath)
-        '    roundForm.Cat1600.Enabled = False
-        'ElseIf clueID = "Cat1800" Then
-        '    roundForm.Cat1800.Load(blankTilePath)
-        '    roundForm.Cat1800.Enabled = False
-        'ElseIf clueID = "Cat11000" Then
-        '    roundForm.Cat11000.Load(blankTilePath)
-        '    roundForm.Cat11000.Enabled = False
-        'ElseIf clueID = "Cat2200" Then
-        '    roundForm.Cat2200.Load(blankTilePath)
-        '    roundForm.Cat2200.Enabled = False
-        'ElseIf clueID = "Cat2400" Then
-        '    roundForm.Cat2400.Load(blankTilePath)
-        '    roundForm.Cat2400.Enabled = False
-        'ElseIf clueID = "Cat2600" Then
-        '    roundForm.Cat2600.Load(blankTilePath)
-        '    roundForm.Cat2600.Enabled = False
-        'ElseIf clueID = "Cat2800" Then
-        '    roundForm.Cat2800.Load(blankTilePath)
-        '    roundForm.Cat2800.Enabled = False
-        'ElseIf clueID = "Cat21000" Then
-        '    roundForm.Cat21000.Load(blankTilePath)
-        '    roundForm.Cat21000.Enabled = False
-        'ElseIf clueID = "Cat3200" Then
-        '    roundForm.Cat3200.Load(blankTilePath)
-        '    roundForm.Cat3200.Enabled = False
-        'ElseIf clueID = "Cat3400" Then
-        '    roundForm.Cat3400.Load(blankTilePath)
-        '    roundForm.Cat3400.Enabled = False
-        'ElseIf clueID = "Cat3600" Then
-        '    roundForm.Cat3600.Load(blankTilePath)
-        '    roundForm.Cat3600.Enabled = False
-        'ElseIf clueID = "Cat3800" Then
-        '    roundForm.Cat3800.Load(blankTilePath)
-        '    roundForm.Cat3800.Enabled = False
-        'ElseIf clueID = "Cat31000" Then
-        '    roundForm.Cat31000.Load(blankTilePath)
-        '    roundForm.Cat31000.Enabled = False
-        'ElseIf clueID = "Cat4200" Then
-        '    roundForm.Cat4200.Load(blankTilePath)
-        '    roundForm.Cat4200.Enabled = False
-        'ElseIf clueID = "Cat4400" Then
-        '    roundForm.Cat4400.Load(blankTilePath)
-        '    roundForm.Cat4400.Enabled = False
-        'ElseIf clueID = "Cat4600" Then
-        '    roundForm.Cat4600.Load(blankTilePath)
-        '    roundForm.Cat4600.Enabled = False
-        'ElseIf clueID = "Cat4800" Then
-        '    roundForm.Cat4800.Load(blankTilePath)
-        '    roundForm.Cat4800.Enabled = False
-        'ElseIf clueID = "Cat41000" Then
-        '    roundForm.Cat41000.Load(blankTilePath)
-        '    roundForm.Cat41000.Enabled = False
-        'ElseIf clueID = "Cat5200" Then
-        '    roundForm.Cat5200.Load(blankTilePath)
-        '    roundForm.Cat5200.Enabled = False
-        'ElseIf clueID = "Cat5400" Then
-        '    roundForm.Cat5400.Load(blankTilePath)
-        '    roundForm.Cat5400.Enabled = False
-        'ElseIf clueID = "Cat5600" Then
-        '    roundForm.Cat5600.Load(blankTilePath)
-        '    roundForm.Cat5600.Enabled = False
-        'ElseIf clueID = "Cat5800" Then
-        '    roundForm.Cat5800.Load(blankTilePath)
-        '    roundForm.Cat5800.Enabled = False
-        'ElseIf clueID = "Cat51000" Then
-        '    roundForm.Cat51000.Load(blankTilePath)
-        '    roundForm.Cat51000.Enabled = False
-        'ElseIf clueID = "Cat6200" Then
-        '    roundForm.Cat6200.Load(blankTilePath)
-        '    roundForm.Cat6200.Enabled = False
-        'ElseIf clueID = "Cat6400" Then
-        '    roundForm.Cat6400.Load(blankTilePath)
-        '    roundForm.Cat6400.Enabled = False
-        'ElseIf clueID = "Cat6600" Then
-        '    roundForm.Cat6600.Load(blankTilePath)
-        '    roundForm.Cat6600.Enabled = False
-        'ElseIf clueID = "Cat6800" Then
-        '    roundForm.Cat6800.Load(blankTilePath)
-        '    roundForm.Cat6800.Enabled = False
-        'ElseIf clueID = "Cat61000" Then
-        '    roundForm.Cat61000.Load(blankTilePath)
-        '    roundForm.Cat61000.Enabled = False
-        'End If
-        'roundForm.rtbSeenClues.AppendText(clueID + vbCrLf)
-        'roundForm.rtbSeenClues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
-        roundForm.timeOutTimer.Start()
+        categoryScreen.clue.clue = lstClues(Integer.Parse(clueID.Replace("Cat", ""))).clue
+        CType(categoryScreen.categoryPanel.Controls(convertClueID(clueID)), PictureBox).Image = My.Resources.BlankTile
+        CType(categoryScreen.categoryPanel.Controls(convertClueID(clueID)), PictureBox).Enabled = False
+        categoryScreen.timeOutTimer.Start()
     End Sub
 #End Region
 #Region "Check image if same"
@@ -1673,7 +1613,7 @@ Public MustInherit Class JeopardyController
                 Try
                     jSpeechRecog.SetInputToDefaultAudioDevice()
                     jSpeechRecog.Recognize()
-                    'roundForm.Timer13.Stop()
+                    'categoryScreen.Timer13.Stop()
                 Catch ex As Exception
                     MsgBox(ex.Message)
                     jSpeechRecog.RecognizeAsyncCancel()
@@ -1689,7 +1629,7 @@ Public MustInherit Class JeopardyController
                 Try
                     jSpeechRecog.SetInputToDefaultAudioDevice()
                     jSpeechRecog.Recognize()
-                    'roundForm.Timer13.Stop()
+                    'categoryScreen.Timer13.Stop()
                 Catch ex As Exception
                     MsgBox(ex.Message)
                     jSpeechRecog.RecognizeAsyncCancel()
@@ -1699,7 +1639,7 @@ Public MustInherit Class JeopardyController
                 jSpeechRecog.RecognizeAsyncCancel()
             End If
         ElseIf jSpeechRecog.categoryMode = False And jSpeechRecog.QuestionMode = False And jSpeechRecog.allowCatMode = False Then
-            'roundForm.Timer13.Stop()
+            'categoryScreen.Timer13.Stop()
             jSpeechRecog.RecognizeAsyncCancel()
         Else
             jSpeechRecog.RecognizeAsyncCancel()
@@ -1708,7 +1648,7 @@ Public MustInherit Class JeopardyController
 #End Region
 #Region "Check Round"
     Public Shared Sub checkRound()
-        If (roundForm.cat1Title.display = False And roundForm.cat2Title.display = False And roundForm.cat3Title.display = False And roundForm.cat4Title.display = False And roundForm.cat5Title.display = False And roundForm.cat6Title.display = False) And roundEnum = roundType.Jeopardy Then
+        If (categoryScreen.cat1Title.display = False And categoryScreen.cat2Title.display = False And categoryScreen.cat3Title.display = False And categoryScreen.cat4Title.display = False And categoryScreen.cat5Title.display = False And categoryScreen.cat6Title.display = False) Then
             'jSpeechRecog.categoryMode = False
             'jSpeechRecog.allowCatMode = False
             'jSpeechRecog.QuestionMode = False
@@ -1761,7 +1701,7 @@ Public MustInherit Class JeopardyController
             '    FinalJeopardy.ClueDisplayScreen1.lblClue.Show()
             '    FinalJeopardy.ClueDisplayScreen1.lblClue.Text = clueList.Item(clueID)
             FinalJeopardy.ClueDisplayScreen1.clueType = clueType.Regular
-            '    FinalJeopardy.ClueDisplayScreen1.MiniClue1.Parent = roundForm.clue
+            '    FinalJeopardy.ClueDisplayScreen1.MiniClue1.Parent = categoryScreen.clue
             '    FinalJeopardy.ClueDisplayScreen1.MiniClue1.BackColor = Color.Black
         Else
             If interactiveClueLocation.Contains(".mp4") Or interactiveClueLocation.Contains(".wmv") Or interactiveClueLocation.Contains(".avi") Or interactiveClueLocation.Contains(".mov") Then
@@ -1773,7 +1713,7 @@ Public MustInherit Class JeopardyController
                 'FinalJeopardy.ClueDisplayScreen1.wmpClue.Show()
                 FinalJeopardy.ClueDisplayScreen1.videoClueLocation = interactiveClueLocation
                 FinalJeopardy.ClueDisplayScreen1.clueType = clueType.Video
-                '    FinalJeopardy.ClueDisplayScreen1.MiniClue1.Parent = roundForm.clue
+                '    FinalJeopardy.ClueDisplayScreen1.MiniClue1.Parent = categoryScreen.clue
                 '    FinalJeopardy.ClueDisplayScreen1.MiniClue1.BackColor = Color.Black
             ElseIf interactiveClueLocation.Contains(".m4a") Or interactiveClueLocation.Contains(".mp3") Or interactiveClueLocation.Contains(".wav") Or interactiveClueLocation.Contains(".wma") Then
                 FinalJeopardy.ClueDisplayScreen1.clueBrowser.Navigate(finalURL & "\Resources\clue.html")
@@ -1785,7 +1725,7 @@ Public MustInherit Class JeopardyController
                 '    FinalJeopardy.ClueDisplayScreen1.lblClue.Text = clueList.Item(clueID)
                 FinalJeopardy.ClueDisplayScreen1.wmpClue.Ctlcontrols.stop()
                 FinalJeopardy.ClueDisplayScreen1.clueType = clueType.Audio
-                FinalJeopardy.ClueDisplayScreen1.MiniClue1.Parent = roundForm.clue
+                FinalJeopardy.ClueDisplayScreen1.MiniClue1.Parent = categoryScreen.clue
                 FinalJeopardy.ClueDisplayScreen1.MiniClue1.BackColor = Color.Black
             ElseIf interactiveClueLocation.Contains(".png") Or interactiveClueLocation.Contains(".jpg") Or interactiveClueLocation.Contains(".bmp") Or interactiveClueLocation.Contains(".gif") Then
                 FinalJeopardy.ClueDisplayScreen1.clueBrowser.Navigate(finalURL & "\Resources\interactiveClue.html")
@@ -1814,127 +1754,127 @@ Public MustInherit Class JeopardyController
 #Region "Check if the Category has Been Cleared"
     Public Shared Sub checkIfCategoryCleared()
         jSpeechRecog.RecognizeAsyncCancel()
-        If (checkClueList("Cat1200") = True And checkClueList("Cat1400") = True And checkClueList("Cat1600") = True And checkClueList("Cat1800") = True And checkClueList("Cat11000") = True) = True Or (checkClueList("Cat1400") = True And checkClueList("Cat1800") = True And checkClueList("Cat11200") = True And checkClueList("Cat11600") = True And checkClueList("Cat12000") = True) = True Then
-            roundForm.cat1Title.display = False
-            roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
+        If (checkFinalClueList("Cat1200") = True And checkFinalClueList("Cat1400") = True And checkFinalClueList("Cat1600") = True And checkFinalClueList("Cat1800") = True And checkFinalClueList("Cat11000") = True) = True Or (checkFinalClueList("Cat1400") = True And checkFinalClueList("Cat1800") = True And checkFinalClueList("Cat11200") = True And checkFinalClueList("Cat11600") = True And checkFinalClueList("Cat12000") = True) = True Then
+            categoryScreen.cat1Title.display = False
+            categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
         End If
-        If (checkClueList("Cat2200") = True And checkClueList("Cat2400") = True And checkClueList("Cat2600") = True And checkClueList("Cat2800") = True And checkClueList("Cat21000") = True) = True Or (checkClueList("Cat2400") = True And checkClueList("Cat2800") = True And checkClueList("Cat21200") = True And checkClueList("Cat21600") = True And checkClueList("Cat22000") = True) = True Then
-            roundForm.cat2Title.display = False
-            roundForm.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
+        If (checkFinalClueList("Cat2200") = True And checkFinalClueList("Cat2400") = True And checkFinalClueList("Cat2600") = True And checkFinalClueList("Cat2800") = True And checkFinalClueList("Cat21000") = True) = True Or (checkFinalClueList("Cat2400") = True And checkFinalClueList("Cat2800") = True And checkFinalClueList("Cat21200") = True And checkFinalClueList("Cat21600") = True And checkFinalClueList("Cat22000") = True) = True Then
+            categoryScreen.cat2Title.display = False
+            categoryScreen.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
         End If
-        If (checkClueList("Cat3200") = True And checkClueList("Cat3400") = True And checkClueList("Cat3600") = True And checkClueList("Cat3800") = True And checkClueList("Cat31000") = True) = True Or (checkClueList("Cat3400") = True And checkClueList("Cat3800") = True And checkClueList("Cat31200") = True And checkClueList("Cat31600") = True And checkClueList("Cat32000") = True) = True Then
-            roundForm.cat3Title.display = False
-            roundForm.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
+        If (checkFinalClueList("Cat3200") = True And checkFinalClueList("Cat3400") = True And checkFinalClueList("Cat3600") = True And checkFinalClueList("Cat3800") = True And checkFinalClueList("Cat31000") = True) = True Or (checkFinalClueList("Cat3400") = True And checkFinalClueList("Cat3800") = True And checkFinalClueList("Cat31200") = True And checkFinalClueList("Cat31600") = True And checkFinalClueList("Cat32000") = True) = True Then
+            categoryScreen.cat3Title.display = False
+            categoryScreen.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
         End If
-        If (checkClueList("Cat4200") = True And checkClueList("Cat4400") = True And checkClueList("Cat4600") = True And checkClueList("Cat4800") = True And checkClueList("Cat41000") = True) = True Or (checkClueList("Cat4400") = True And checkClueList("Cat4800") = True And checkClueList("Cat41200") = True And checkClueList("Cat41600") = True And checkClueList("Cat42000") = True) = True Then
-            roundForm.cat4Title.display = False
-            roundForm.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
+        If (checkFinalClueList("Cat4200") = True And checkFinalClueList("Cat4400") = True And checkFinalClueList("Cat4600") = True And checkFinalClueList("Cat4800") = True And checkFinalClueList("Cat41000") = True) = True Or (checkFinalClueList("Cat4400") = True And checkFinalClueList("Cat4800") = True And checkFinalClueList("Cat41200") = True And checkFinalClueList("Cat41600") = True And checkFinalClueList("Cat42000") = True) = True Then
+            categoryScreen.cat4Title.display = False
+            categoryScreen.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
         End If
-        If (checkClueList("Cat5200") = True And checkClueList("Cat5400") = True And checkClueList("Cat5600") = True And checkClueList("Cat5800") = True And checkClueList("Cat51000") = True) = True Or (checkClueList("Cat5400") = True And checkClueList("Cat5800") = True And checkClueList("Cat51200") = True And checkClueList("Cat51600") = True And checkClueList("Cat52000") = True) = True Then
-            roundForm.cat5Title.display = False
-            roundForm.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
+        If (checkFinalClueList("Cat5200") = True And checkFinalClueList("Cat5400") = True And checkFinalClueList("Cat5600") = True And checkFinalClueList("Cat5800") = True And checkFinalClueList("Cat51000") = True) = True Or (checkFinalClueList("Cat5400") = True And checkFinalClueList("Cat5800") = True And checkFinalClueList("Cat51200") = True And checkFinalClueList("Cat51600") = True And checkFinalClueList("Cat52000") = True) = True Then
+            categoryScreen.cat5Title.display = False
+            categoryScreen.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
         End If
-        If (checkClueList("Cat6200") = True And checkClueList("Cat6400") = True And checkClueList("Cat6600") = True And checkClueList("Cat6800") = True And checkClueList("Cat61000") = True) = True Or (checkClueList("Cat6400") = True And checkClueList("Cat6800") = True And checkClueList("Cat61200") = True And checkClueList("Cat61600") = True And checkClueList("Cat62000") = True) = True Then
-            roundForm.cat6Title.display = False
-            roundForm.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
+        If (checkFinalClueList("Cat6200") = True And checkFinalClueList("Cat6400") = True And checkFinalClueList("Cat6600") = True And checkFinalClueList("Cat6800") = True And checkFinalClueList("Cat61000") = True) = True Or (checkFinalClueList("Cat6400") = True And checkFinalClueList("Cat6800") = True And checkFinalClueList("Cat61200") = True And checkFinalClueList("Cat61600") = True And checkFinalClueList("Cat62000") = True) = True Then
+            categoryScreen.cat6Title.display = False
+            categoryScreen.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = ""
         End If
     End Sub
 #End Region
 #Region "Check if All Categories Revealed"
     Public Shared Sub checkIfCategoriesRevealed()
-        If roundForm.CategoryDisplay1.displayFinished = True Or roundForm.CategoryDisplay1.Visible = False Then
-            roundForm.CategoryDisplay1.Visible = False
-            'roundForm.cat1Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            'roundForm.cat2Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            'roundForm.cat3Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            'roundForm.cat4Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            'roundForm.cat5Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            'roundForm.cat6Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            'roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(1200)
-            'roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(2200)
-            'roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(3200)
-            'roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(4200)
-            'roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(5200)
-            'roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(6200)
+        If categoryScreen.CategoryDisplay1.displayFinished = True Or categoryScreen.CategoryDisplay1.Visible = False Then
+            categoryScreen.CategoryDisplay1.Visible = False
+            'categoryScreen.cat1Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+            'categoryScreen.cat2Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+            'categoryScreen.cat3Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+            'categoryScreen.cat4Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+            'categoryScreen.cat5Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+            'categoryScreen.cat6Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+            'categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(1200)
+            'categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(2200)
+            'categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(3200)
+            'categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(4200)
+            'categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(5200)
+            'categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerHtml = categoryListSorted(6200)
             categoryMode = True
             questionMode = False
             jSpeechRecog.categoryMode = True
             jSpeechRecog.allowCatMode = True
             jSpeechRecog.RecognizeAsyncCancel()
-            roundForm.CategoryDisplay1.Visible = False
+            categoryScreen.CategoryDisplay1.Visible = False
             frmScore.Show()
             frmScore.BringToFront()
-            roundForm.tmrCatReveal.Stop()
-            roundForm.tmrCheckReveal.Stop()
+            categoryScreen.tmrCatReveal.Stop()
+            categoryScreen.tmrCheckReveal.Stop()
         End If
     End Sub
 #End Region
 #Region "Perform Category Reveal"
     Public Shared Sub performCategoryReveal()
-        'roundForm.cat1Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        'roundForm.cat2Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        'roundForm.cat3Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        'roundForm.cat4Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        'roundForm.cat5Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-        'roundForm.cat6Title.catBrowserSmall.Navigate(JeopardyController.finalURL & "\Resources\category.html")
+        'categoryScreen.cat1Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        'categoryScreen.cat2Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        'categoryScreen.cat3Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        'categoryScreen.cat4Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        'categoryScreen.cat5Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
+        'categoryScreen.cat6Title.catBrowserSmall.Navigate(Application.StartupPath & "\Resources\category.html")
         Do
-            If (roundForm.cat1Title.catBrowserSmall.IsBusy = False And roundForm.cat2Title.catBrowserSmall.IsBusy = False And roundForm.cat3Title.catBrowserSmall.IsBusy = False And roundForm.cat4Title.catBrowserSmall.IsBusy = False And roundForm.cat5Title.catBrowserSmall.IsBusy = False And roundForm.cat6Title.catBrowserSmall.IsBusy = False) And roundEnum = roundType.Jeopardy Then
-                roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(1200).category
-                roundForm.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(2200).category
-                roundForm.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(3200).category
-                roundForm.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(4200).category
-                roundForm.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(5200).category
-                roundForm.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(6200).category
+            If (categoryScreen.cat1Title.catBrowserSmall.IsBusy = False And categoryScreen.cat2Title.catBrowserSmall.IsBusy = False And categoryScreen.cat3Title.catBrowserSmall.IsBusy = False And categoryScreen.cat4Title.catBrowserSmall.IsBusy = False And categoryScreen.cat5Title.catBrowserSmall.IsBusy = False And categoryScreen.cat6Title.catBrowserSmall.IsBusy = False) And roundEnum = roundType.Jeopardy Then
+                categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(1200).category
+                categoryScreen.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(2200).category
+                categoryScreen.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(3200).category
+                categoryScreen.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(4200).category
+                categoryScreen.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(5200).category
+                categoryScreen.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(6200).category
                 Exit Do
-            ElseIf (roundForm.cat1Title.catBrowserSmall.IsBusy = False And roundForm.cat2Title.catBrowserSmall.IsBusy = False And roundForm.cat3Title.catBrowserSmall.IsBusy = False And roundForm.cat4Title.catBrowserSmall.IsBusy = False And roundForm.cat5Title.catBrowserSmall.IsBusy = False And roundForm.cat6Title.catBrowserSmall.IsBusy = False) And roundEnum = roundType.DoubleJeopardy Then
-                roundForm.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(1400).category
-                roundForm.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(2400).category
-                roundForm.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(3400).category
-                roundForm.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(4400).category
-                roundForm.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(5400).category
-                roundForm.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(6400).category
+            ElseIf (categoryScreen.cat1Title.catBrowserSmall.IsBusy = False And categoryScreen.cat2Title.catBrowserSmall.IsBusy = False And categoryScreen.cat3Title.catBrowserSmall.IsBusy = False And categoryScreen.cat4Title.catBrowserSmall.IsBusy = False And categoryScreen.cat5Title.catBrowserSmall.IsBusy = False And categoryScreen.cat6Title.catBrowserSmall.IsBusy = False) And roundEnum = roundType.DoubleJeopardy Then
+                categoryScreen.cat1Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(1400).category
+                categoryScreen.cat2Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(2400).category
+                categoryScreen.cat3Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(3400).category
+                categoryScreen.cat4Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(4400).category
+                categoryScreen.cat5Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(5400).category
+                categoryScreen.cat6Title.catBrowserSmall.Document.GetElementById("category").InnerText = lstClues(6400).category
                 Exit Do
             End If
         Loop
-        'roundForm.cat1Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=1")
-        'roundForm.cat2Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=2")
-        'roundForm.cat3Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=3")
-        'roundForm.cat4Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=4")
-        'roundForm.cat5Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=5")
-        'roundForm.cat6Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=6")
+        'categoryScreen.cat1Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=1")
+        'categoryScreen.cat2Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=2")
+        'categoryScreen.cat3Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=3")
+        'categoryScreen.cat4Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=4")
+        'categoryScreen.cat5Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=5")
+        'categoryScreen.cat6Title.catBrowserSmall.Navigate("localhost/Jeopardy/Content/categorySmall.aspx?packName=" & packName & "&roundNumber=" & roundNumber & "&categoryNumber=6")
         If catChooser.finished = True Then
             catChooser.Close()
-            roundForm.CategoryDisplay1.Show()
-            roundForm.pbarCatReveal.PerformStep()
-            If roundForm.CategoryDisplay1.displayFinished = False And bypassCategoryReveal = False Then
+            categoryScreen.CategoryDisplay1.Show()
+            categoryScreen.pbarCatReveal.PerformStep()
+            If categoryScreen.CategoryDisplay1.displayFinished = False And bypassCategoryReveal = False Then
                 jSpeechRecog.allowCatMode = False
-                roundForm.pbarCatReveal.Value = 0
-                roundForm.CategoryDisplay1.Show()
+                categoryScreen.pbarCatReveal.Value = 0
+                categoryScreen.CategoryDisplay1.Show()
                 jSpeechRecog.RecognizeAsyncCancel()
-                roundForm.tmrCatReveal.Stop()
-                roundForm.tmrCheckReveal.Start()
-            ElseIf roundForm.CategoryDisplay1.displayFinished = True Then
-                roundForm.CategoryDisplay1.Visible = False
+                categoryScreen.tmrCatReveal.Stop()
+                categoryScreen.tmrCheckReveal.Start()
+            ElseIf categoryScreen.CategoryDisplay1.displayFinished = True Then
+                categoryScreen.CategoryDisplay1.Visible = False
                 categoryMode = True
                 questionMode = False
                 jSpeechRecog.categoryMode = True
                 jSpeechRecog.allowCatMode = True
                 jSpeechRecog.RecognizeAsyncCancel()
-                roundForm.CategoryDisplay1.Visible = False
+                categoryScreen.CategoryDisplay1.Visible = False
                 frmScore.Show()
                 frmScore.BringToFront()
-                roundForm.tmrCatReveal.Stop()
-                roundForm.tmrCheckReveal.Stop()
+                categoryScreen.tmrCatReveal.Stop()
+                categoryScreen.tmrCheckReveal.Stop()
             ElseIf bypassCategoryReveal = True Then
-                roundForm.CategoryDisplay1.Visible = False
-                'roundForm.wmpCategory.Ctlcontrols.stop()
+                categoryScreen.CategoryDisplay1.Visible = False
+                'categoryScreen.wmpCategory.Ctlcontrols.stop()
                 'Dim fileReader As System.IO.StreamReader
                 'fileReader = My.Computer.FileSystem.OpenTextFileReader(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt")
                 'Do While fileReader.Peek() > -1
                 '    Dim fileClueID = fileReader.ReadLine()
                 '    'MsgBox(fileClueID)
-                '    CType(roundForm.categoryPanel.Controls(fileClueID), PictureBox).Enabled = False
-                '    CType(roundForm.categoryPanel.Controls(fileClueID), PictureBox).Image = My.Resources.BlankTile
+                '    CType(categoryScreen.categoryPanel.Controls(fileClueID), PictureBox).Enabled = False
+                '    CType(categoryScreen.categoryPanel.Controls(fileClueID), PictureBox).Image = My.Resources.BlankTile
                 'Loop
                 'fileReader.Close()
                 frmScore.Show()
@@ -1953,9 +1893,9 @@ Public MustInherit Class JeopardyController
             frmScore.notifyBar.Text = ""
             'jSpeechRecog.RecognizeAsyncCancel()
         End If
-        'If roundForm.clue.Visible = True Then
+        'If categoryScreen.clue.Visible = True Then
         '    frmScore.notifyBar.Show()
-        'ElseIf roundForm.clue.Visible = False Then
+        'ElseIf categoryScreen.clue.Visible = False Then
         '    frmScore.notifyBar.Hide()
         'End If
     End Sub
@@ -2023,11 +1963,11 @@ Public MustInherit Class JeopardyController
 #End Region
 #Region "Show Point Value Box"
     Public Shared Sub showPointValueBox()
-        roundForm.pbarPVB.PerformStep()
-        If roundForm.pbarPVB.Value = roundForm.pbarPVB.Maximum Then
-            roundForm.pbarPVB.Value = 0
-            roundForm.PointValueBox.Hide()
-            roundForm.tmrPointValueBox.Stop()
+        categoryScreen.pbarPVB.PerformStep()
+        If categoryScreen.pbarPVB.Value = categoryScreen.pbarPVB.Maximum Then
+            categoryScreen.pbarPVB.Value = 0
+            categoryScreen.PointValueBox.Hide()
+            categoryScreen.tmrPointValueBox.Stop()
         End If
     End Sub
 #End Region
@@ -2056,10 +1996,10 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.txtCurrentPlayer.Clear()
-                    roundForm.tmrRingIn.Stop()
+                    categoryScreen.tmrRingIn.Stop()
                     currentPointValue = 0
                     currentPlayer = 1
-                    roundForm.clue.Hide()
+                    categoryScreen.clue.Hide()
                     frmScore.btnYes.Hide()
                     frmScore.btnNo.Hide()
                 ElseIf frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text Then
@@ -2080,10 +2020,10 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.txtCurrentPlayer.Clear()
-                    roundForm.tmrRingIn.Stop()
+                    categoryScreen.tmrRingIn.Stop()
                     currentPointValue = 0
                     currentPlayer = 2
-                    roundForm.clue.Hide()
+                    categoryScreen.clue.Hide()
                     frmScore.btnYes.Hide()
                     frmScore.btnNo.Hide()
                 ElseIf frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text Then
@@ -2104,10 +2044,10 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.txtCurrentPlayer.Clear()
-                    roundForm.tmrRingIn.Stop()
+                    categoryScreen.tmrRingIn.Stop()
                     currentPointValue = 0
                     currentPlayer = 3
-                    roundForm.clue.Hide()
+                    categoryScreen.clue.Hide()
                     frmScore.btnYes.Hide()
                     frmScore.btnNo.Hide()
                 End If
@@ -2121,9 +2061,9 @@ Public MustInherit Class JeopardyController
                         Next
                         frmScore.IsDailyDouble = False
                         frmScore.txtCurrentPlayer.Clear()
-                        roundForm.tmrRingIn.Stop()
+                        categoryScreen.tmrRingIn.Stop()
                         currentPointValue = 0
-                        roundForm.clue.Hide()
+                        categoryScreen.clue.Hide()
                         frmScore.btnYes.Hide()
                         frmScore.btnNo.Hide()
                     Else
@@ -2148,9 +2088,9 @@ Public MustInherit Class JeopardyController
                         Next
                         frmScore.IsDailyDouble = False
                         frmScore.txtCurrentPlayer.Clear()
-                        roundForm.tmrRingIn.Stop()
+                        categoryScreen.tmrRingIn.Stop()
                         currentPointValue = 0
-                        roundForm.clue.Hide()
+                        categoryScreen.clue.Hide()
                         frmScore.btnYes.Hide()
                         frmScore.btnNo.Hide()
                     Else
@@ -2175,9 +2115,9 @@ Public MustInherit Class JeopardyController
                         Next
                         frmScore.IsDailyDouble = False
                         frmScore.txtCurrentPlayer.Clear()
-                        roundForm.tmrRingIn.Stop()
+                        categoryScreen.tmrRingIn.Stop()
                         currentPointValue = 0
-                        roundForm.clue.Hide()
+                        categoryScreen.clue.Hide()
                         frmScore.btnYes.Hide()
                         frmScore.btnNo.Hide()
                     Else
@@ -2200,11 +2140,11 @@ Public MustInherit Class JeopardyController
             End If
         Else
             If answer = True Then
-                currentPointValue = CInt(frmScore.txtWager1.Text)
                 frmScore.notifyBar.Text = ""
                 questionMode = False
                 categoryMode = True
                 If frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer1.Text Then
+                    currentPointValue = CInt(frmScore.txtWager1.Text)
                     frmScore.lblPlayer1Score.Text = FormatCurrency(Integer.Parse(frmScore.lblPlayer1Score.Text.Replace("$", "").Replace(",", "")) + currentPointValue, 0, , TriState.False)
                     For Each player As Player In Player1List
                         player.Score = frmScore.lblPlayer1Score.Text.Replace("$", "").Replace(",", "")
@@ -2215,12 +2155,14 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
-                    'roundForm.Timer7.Stop()
+                    'categoryScreen.Timer7.Stop()
                     'currentPointValue = 0
                     'currentPlayer = 1
-                    frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text
-                    currentPointValue = CInt(frmScore.txtWager2.Text)
-                    'roundForm.clue.Hide()
+                    If determineIfNegative(2) = False Then
+                        frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text
+                        currentPointValue = CInt(frmScore.txtWager2.Text)
+                    End If
+                    'categoryScreen.clue.Hide()
                     'frmScore.btnYes.Hide()
                     'frmScore.btnNo.Hide()
                 ElseIf frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text Then
@@ -2238,12 +2180,14 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
-                    frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text
-                    currentPointValue = CInt(frmScore.txtWager3.Text)
-                    'roundForm.Timer7.Stop()
+                    If determineIfNegative(3) = False Then
+                        frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text
+                        currentPointValue = CInt(frmScore.txtWager3.Text)
+                    End If
+                    'categoryScreen.Timer7.Stop()
                     'currentPointValue = 0
                     'currentPlayer = 2
-                    'roundForm.clue.Hide()
+                    'categoryScreen.clue.Hide()
                     'frmScore.btnYes.Hide()
                     'frmScore.btnNo.Hide()
                 ElseIf frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text Then
@@ -2262,10 +2206,10 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
                     frmScore.txtCurrentPlayer.Clear()
-                    'roundForm.Timer7.Stop()
+                    'categoryScreen.Timer7.Stop()
                     'currentPointValue = 0
                     'currentPlayer = 3
-                    'roundForm.clue.Hide()
+                    'categoryScreen.clue.Hide()
                     frmScore.btnYes.Hide()
                     frmScore.btnNo.Hide()
                     frmScore.btnGo.Enabled = False
@@ -2285,8 +2229,10 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 192)
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 192)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 192)
-                    frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text
-                    currentPointValue = CInt(frmScore.txtWager2.Text)
+                    If determineIfNegative(2) = False Then
+                        frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text
+                        currentPointValue = CInt(frmScore.txtWager2.Text)
+                    End If
                 ElseIf frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer2.Text Then
                     My.Computer.Audio.Play(My.Resources.timesup, AudioPlayMode.Background)
                     frmScore.lblPlayer2Score.Text = FormatCurrency(Integer.Parse(frmScore.lblPlayer2Score.Text.Replace("$", "").Replace(",", "")) - currentPointValue, 0, , TriState.False)
@@ -2299,8 +2245,10 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 192)
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 192)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 192)
-                    frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text
-                    currentPointValue = CInt(frmScore.txtWager3.Text)
+                    If determineIfNegative(3) = False Then
+                        frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text
+                        currentPointValue = CInt(frmScore.txtWager3.Text)
+                    End If
                 ElseIf frmScore.txtCurrentPlayer.Text = frmScore.lblPlayer3.Text Then
                     My.Computer.Audio.Play(My.Resources.timesup, AudioPlayMode.Background)
                     frmScore.lblPlayer3Score.Text = FormatCurrency(Integer.Parse(frmScore.lblPlayer3Score.Text.Replace("$", "").Replace(",", "")) - currentPointValue, 0, , TriState.False)
@@ -2313,23 +2261,24 @@ Public MustInherit Class JeopardyController
                     frmScore.lblPlayer3.BackColor = Color.FromArgb(0, 45, 192)
                     frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 192)
                     frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 192)
-                    frmScore.txtCurrentPlayer.Clear()
-                    frmScore.btnYes.Hide()
-                    frmScore.btnNo.Hide()
-                    frmScore.btnGo.Enabled = False
-                    finalCheckComplete = True
-                    If quickGame = False Then
-                        saveGame(True)
-                    End If
+                End If
+                frmScore.txtCurrentPlayer.Clear()
+                frmScore.btnYes.Hide()
+                frmScore.btnNo.Hide()
+                frmScore.btnGo.Enabled = False
+                finalCheckComplete = True
+                determineFinalWinner()
+                If quickGame = False Then
+                    saveGame(True)
                 End If
             End If
         End If
         'If FinalJeopardy.Visible = False Then
-        '    roundForm.rtbPointValues.Clear()
-        '    roundForm.rtbPointValues.AppendText(frmScore.lblPlayer1Score.Text + vbCrLf)
-        '    roundForm.rtbPointValues.AppendText(frmScore.lblPlayer2Score.Text + vbCrLf)
-        '    roundForm.rtbPointValues.AppendText(frmScore.lblPlayer3Score.Text)
-        '    roundForm.rtbPointValues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
+        '    categoryScreen.rtbPointValues.Clear()
+        '    categoryScreen.rtbPointValues.AppendText(frmScore.lblPlayer1Score.Text + vbCrLf)
+        '    categoryScreen.rtbPointValues.AppendText(frmScore.lblPlayer2Score.Text + vbCrLf)
+        '    categoryScreen.rtbPointValues.AppendText(frmScore.lblPlayer3Score.Text)
+        '    categoryScreen.rtbPointValues.SaveFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
         'Else
         'End If
     End Sub
@@ -2344,10 +2293,10 @@ Public MustInherit Class JeopardyController
         frmScore.lblPlayer2.BackColor = Color.FromArgb(0, 45, 194)
         frmScore.lblPlayer1.BackColor = Color.FromArgb(0, 45, 194)
         frmScore.txtCurrentPlayer.Clear()
-        roundForm.tmrRingIn.Stop()
+        categoryScreen.tmrRingIn.Stop()
         currentPointValue = 0
         currentPlayer = 1
-        roundForm.clue.Hide()
+        categoryScreen.clue.Hide()
         frmScore.btnYes.Hide()
         frmScore.btnNo.Hide()
     End Sub
@@ -2387,8 +2336,8 @@ Public MustInherit Class JeopardyController
                 frmScore.Player1RungIn = False
                 frmScore.Player2RungIn = False
                 frmScore.Player3RungIn = False
-                roundForm.tmrRingIn.Stop()
-                roundForm.clue.Hide()
+                categoryScreen.tmrRingIn.Stop()
+                categoryScreen.clue.Hide()
                 My.Computer.Audio.Play(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\OneDrive\Jeopardy\timesup.wav")
                 'Dim SAPI
                 'SAPI = CreateObject("SAPI.spvoice")
@@ -2399,7 +2348,7 @@ Public MustInherit Class JeopardyController
                 jSpeechRecog.categoryMode = True
                 jSpeechRecog.QuestionMode = False
             End If
-            roundForm.tmrCheckRecogStopped.Stop()
+            categoryScreen.tmrCheckRecogStopped.Stop()
         End If
     End Sub
 #End Region
@@ -2450,6 +2399,14 @@ Public MustInherit Class JeopardyController
     End Function
     Public Shared Function checkClueList(clueID As String) As Boolean
         For Each item As Clue In seenClues
+            If item.clueID = convertClueIDToR2(clueID) Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+    Public Shared Function checkFinalClueList(clueID As String) As Boolean
+        For Each item As Clue In seenClues
             If item.clueID = clueID Then
                 Return True
             End If
@@ -2462,43 +2419,205 @@ Public MustInherit Class JeopardyController
         If roundEnum = roundType.Jeopardy Then
             Return clueID
         ElseIf roundEnum = roundType.DoubleJeopardy Then
-            Select Case clueID
-                Case clueID.Contains("400")
-                    Return clueID.Replace("400", "200")
-                Case clueID.Contains("800")
-                    Return clueID.Replace("800", "400")
-                Case clueID.Contains("1200")
-                    Return clueID.Replace("1200", "600")
-                Case clueID.Contains("1600")
-                    Return clueID.Replace("1600", "800")
-                Case clueID.Contains("2000")
-                    Return clueID.Replace("2000", "1000")
-            End Select
+            If clueID.Contains("400") Then
+                Return clueID.Replace("400", "200")
+            ElseIf clueID.Contains("800") Then
+                Return clueID.Replace("800", "400")
+            ElseIf clueID.Contains("2000") Then
+                Return clueID.Replace("2000", "1000")
+            ElseIf clueID.Contains("1200") Then
+                Return clueID.Replace("1200", "600")
+            ElseIf clueID.Contains("1600") Then
+                Return clueID.Replace("1600", "800")
+            Else
+                Return clueID
+            End If
+        End If
+        Return clueID
+    End Function
+    Public Shared Function convertClueIDToR2(clueID As String) As String
+        If roundEnum = roundType.DoubleJeopardy Then
+            If clueID.Contains("200") Then
+                Return clueID.Replace("200", "400")
+            ElseIf clueID.Contains("400") Then
+                Return clueID.Replace("400", "800")
+            ElseIf clueID.Contains("600") Then
+                Return clueID.Replace("600", "1200")
+            ElseIf clueID.Contains("800") Then
+                Return clueID.Replace("800", "1600")
+            ElseIf clueID.Contains("1000") Then
+                Return clueID.Replace("1000", "2000")
+                End If
+                ElseIf roundEnum = roundType.Jeopardy Then
+                Return clueID
         Else
             Return clueID
         End If
         Return clueID
     End Function
-    Public Shared Function convertClueIDToR2(clueID As String) As String
-        If roundEnum = roundType.Jeopardy Then
-            Select Case clueID
-                Case clueID.Contains("200")
-                    Return clueID.Replace("200", "400")
-                Case clueID.Contains("400")
-                    Return clueID.Replace("400", "800")
-                Case clueID.Contains("600")
-                    Return clueID.Replace("600", "1200")
-                Case clueID.Contains("800")
-                    Return clueID.Replace("800", "1600")
-                Case clueID.Contains("1000")
-                    Return clueID.Replace("1000", "2000")
-            End Select
-        ElseIf roundEnum = roundType.DoubleJeopardy Then
-            Return clueID
+    Public Shared Function convertToR2(clueID As String) As String
+        If clueID.Contains("200") Then
+            Return clueID.Replace("200", "400")
+        ElseIf clueID.Contains("400") Then
+            Return clueID.Replace("400", "800")
+        ElseIf clueID.Contains("600") Then
+            Return clueID.Replace("600", "1200")
+        ElseIf clueID.Contains("800") Then
+            Return clueID.Replace("800", "1600")
+        ElseIf clueID.Contains("1000") Then
+            Return clueID.Replace("1000", "2000")
         Else
             Return clueID
         End If
-        Return clueID
+    End Function
+#End Region
+#Region "Determine Winner"
+    Public Shared Function determineFirstPlace() As Integer
+        Dim winner As Integer
+        If Player1List(0).Score > Player2List(0).Score And Player1List(0).Score > Player3List(0).Score Then
+            winner = 1
+        ElseIf Player2List(0).Score > Player1List(0).Score And Player2List(0).Score > Player3List(0).Score Then
+            winner = 2
+        ElseIf Player3List(0).Score > Player2List(0).Score And Player3List(0).Score > Player1List(0).Score Then
+            winner = 3
+        End If
+        Return winner
+    End Function
+    Public Shared Sub determineFinalWinner()
+        Dim winner = determineFirstPlace()
+        Select Case winner
+            Case 1
+                If Player3List(0).Score > Player2List(0).Score And Player3List(0).Score < Player1List(0).Score Then
+                    frmScore.lblPlayer3Score.Text = FormatCurrency(2000, 0, , TriState.False)
+                    frmScore.lblPlayer2Score.Text = FormatCurrency(1000, 0, , TriState.False)
+                    For Each myPlayer As Player In Player3List
+                        myPlayer.Score = 2000
+                    Next
+                    For Each myPlayer As Player In Player2List
+                        myPlayer.Score = 1000
+                    Next
+                Else
+                    frmScore.lblPlayer2Score.Text = FormatCurrency(2000, 0, , TriState.False)
+                    frmScore.lblPlayer3Score.Text = FormatCurrency(1000, 0, , TriState.False)
+                    For Each myPlayer As Player In Player2List
+                        myPlayer.Score = 2000
+                    Next
+                    For Each myPlayer As Player In Player3List
+                        myPlayer.Score = 1000
+                    Next
+                End If
+                frmScore.lblPlayer3Score.BackColor = Color.FromArgb(175, 233, 253)
+                frmScore.lblPlayer3Score.ForeColor = Color.FromArgb(0, 45, 194)
+                frmScore.lblPlayer2Score.BackColor = Color.FromArgb(175, 233, 253)
+                frmScore.lblPlayer2Score.ForeColor = Color.FromArgb(0, 45, 194)
+            Case 2
+                If Player3List(0).Score > Player1List(0).Score And Player3List(0).Score < Player2List(0).Score Then
+                    frmScore.lblPlayer3Score.Text = FormatCurrency(2000, 0, , TriState.False)
+                    frmScore.lblPlayer1Score.Text = FormatCurrency(1000, 0, , TriState.False)
+                    For Each myPlayer As Player In Player3List
+                        myPlayer.Score = 2000
+                    Next
+                    For Each myPlayer As Player In Player1List
+                        myPlayer.Score = 1000
+                    Next
+                Else
+                    frmScore.lblPlayer1Score.Text = FormatCurrency(2000, 0, , TriState.False)
+                    frmScore.lblPlayer3Score.Text = FormatCurrency(1000, 0, , TriState.False)
+                    For Each myPlayer As Player In Player1List
+                        myPlayer.Score = 2000
+                    Next
+                    For Each myPlayer As Player In Player3List
+                        myPlayer.Score = 1000
+                    Next
+                End If
+                frmScore.lblPlayer3Score.BackColor = Color.FromArgb(175, 233, 253)
+                frmScore.lblPlayer3Score.ForeColor = Color.FromArgb(0, 45, 194)
+                frmScore.lblPlayer1Score.BackColor = Color.FromArgb(175, 233, 253)
+                frmScore.lblPlayer1Score.ForeColor = Color.FromArgb(0, 45, 194)
+            Case 3
+                If Player2List(0).Score > Player1List(0).Score And Player2List(0).Score < Player3List(0).Score Then
+                    frmScore.lblPlayer2Score.Text = FormatCurrency(2000, 0, , TriState.False)
+                    frmScore.lblPlayer1Score.Text = FormatCurrency(1000, 0, , TriState.False)
+                    For Each myPlayer As Player In Player2List
+                        myPlayer.Score = 2000
+                    Next
+                    For Each myPlayer As Player In Player1List
+                        myPlayer.Score = 1000
+                    Next
+                Else
+                    frmScore.lblPlayer1Score.Text = FormatCurrency(2000, 0, , TriState.False)
+                    frmScore.lblPlayer2Score.Text = FormatCurrency(1000, 0, , TriState.False)
+                    For Each myPlayer As Player In Player1List
+                        myPlayer.Score = 2000
+                    Next
+                    For Each myPlayer As Player In Player2List
+                        myPlayer.Score = 1000
+                    Next
+                End If
+                frmScore.lblPlayer2Score.BackColor = Color.FromArgb(175, 233, 253)
+                frmScore.lblPlayer2Score.ForeColor = Color.FromArgb(0, 45, 194)
+                frmScore.lblPlayer1Score.BackColor = Color.FromArgb(175, 233, 253)
+                frmScore.lblPlayer1Score.ForeColor = Color.FromArgb(0, 45, 194)
+        End Select
+    End Sub
+    Public Shared Function determineLastPlace() As Integer
+        If Player1List(0).Score < Player2List(0).Score And Player1List(0).Score < Player3List(0).Score Then
+            Return 1
+        ElseIf Player2List(0).Score < Player1List(0).Score And Player2List(0).Score < Player3List(0).Score Then
+            Return 2
+        ElseIf Player3List(0).Score < Player2List(0).Score And Player3List(0).Score < Player1List(0).Score Then
+            Return 3
+        Else
+            Static Generator As Random = New System.Random()
+            Dim randomPlayers As New List(Of Integer)
+            If determineFirstPlace() = 1 Then
+                randomPlayers.Add(2)
+                randomPlayers.Add(3)
+                Return randomPlayers(Generator.Next(randomPlayers.Count))
+            ElseIf determineFirstPlace() = 2 Then
+                randomPlayers.Add(1)
+                randomPlayers.Add(3)
+                Return randomPlayers(Generator.Next(randomPlayers.Count))
+            ElseIf determineFirstPlace() = 3 Then
+                randomPlayers.Add(1)
+                randomPlayers.Add(2)
+                Return randomPlayers(Generator.Next(randomPlayers.Count))
+            End If
+        End If
+    End Function
+    Public Shared Sub determineIfNegative()
+        If Player1List(0).Score <= 0 Then
+            frmScore.txtWager1.Hide()
+        Else
+            frmScore.txtWager1.Show()
+        End If
+        If Player2List(0).Score <= 0 Then
+            frmScore.txtWager2.Hide()
+        Else
+            frmScore.txtWager2.Show()
+        End If
+        If Player3List(0).Score <= 0 Then
+            frmScore.txtWager3.Hide()
+        Else
+            frmScore.txtWager3.Show()
+        End If
+    End Sub
+    Public Shared Function determineIfNegative(playerNumber As Integer) As Integer
+        Select Case playerNumber
+            Case 1
+                If Player1List(0).Score <= 0 Then
+                    Return True
+                End If
+            Case 2
+                If Player2List(0).Score <= 0 Then
+                    Return True
+                End If
+            Case 3
+                If Player3List(0).Score <= 0 Then
+                    Return True
+                End If
+        End Select
+        Return False
     End Function
 #End Region
 End Class

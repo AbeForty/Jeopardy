@@ -1,15 +1,17 @@
 ﻿Public Class VariableTesting
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Label1.Text = "Player 1: " + ScoreForm.Player1RungIn.ToString
-        Label2.Text = "Player 2: " + ScoreForm.Player2RungIn.ToString
-        Label3.Text = "Player 3: " + ScoreForm.Player3RungIn.ToString
-        Label4.Text = "Daily Double: " + ScoreForm.IsDailyDouble.ToString
-        Label5.Text = "Current Player: " + ScoreForm.TextBox1.Text
-        Label6.Text = "Current Point Value: " + JeopardyController.currentPointValue.ToString
-        Label7.Text = "Answer: " + JeopardyController.currentAnswer
-        Label8.Text = "Current Second: " + JeopardyController.currentSecond.ToString
-        Label9.Text = "Right Now Second: " + DateTime.Now.Second.ToString
-        Label10.Text = "Clue ID: " + JeopardyController.getClueID
+        Label1.Text = "Player 1: " & ScoreForm.Player1RungIn.ToString
+        Label2.Text = "Player 2: " & ScoreForm.Player2RungIn.ToString
+        Label3.Text = "Player 3: " & ScoreForm.Player3RungIn.ToString
+        Label4.Text = "Daily Double: " & ScoreForm.IsDailyDouble.ToString
+        Label5.Text = "Current Player: " & ScoreForm.TextBox1.Text
+        Label6.Text = "Current Point Value: " & JeopardyController.currentPointValue.ToString
+        Label7.Text = "Answer: " & JeopardyController.currentAnswer
+        Label8.Text = "Current Second: " & JeopardyController.currentSecond.ToString
+        Label9.Text = "Right Now Second: " & DateTime.Now.Second.ToString
+        Label10.Text = "Clue ID: " & JeopardyController.getClueID
+        lblCatNumber.Text = "i: " & categoryScreen.CategoryDisplay1.i
+        lblDisplayFinished.Text = "Display Finished: " & categoryScreen.CategoryDisplay1.displayFinished.ToString
     End Sub
 
     Private Sub VariableTesting_Load(sender As Object, e As EventArgs) Handles MyBase.Load

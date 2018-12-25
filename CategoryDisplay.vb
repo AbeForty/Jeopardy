@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 <DefaultEvent("Click")>
 Public Class CategoryDisplay
     Dim timeStart As Integer
@@ -41,14 +41,20 @@ Public Class CategoryDisplay
         'timeStart = DateTime.Now.Second
         'pboxJeopardyCard.Image = My.Resources.JeopardyTitlesGIF
         'tmrRevealCategory.Start()
-        catBrowser.Navigate(JeopardyController.finalURL & "\Resources\category.html")
+        pboxJeopardyCard.Show()
+        i = 1
+        catBrowser.Navigate(Application.StartupPath & "\Resources\category.html")
     End Sub
 
     Private Sub pboxJeopardyCard_Click(sender As Object, e As EventArgs) Handles pboxJeopardyCard.Click
         'Try
         If i <= 6 Then
-            'catBrowser.Navigate(JeopardyController.finalURL & "\Resources\category.html")
-            catBrowser.Document.GetElementById("category").InnerText = JeopardyController.lstClues(i & 200).category
+            'catBrowser.Navigate(Application.StartupPath & "\Resources\category.html")
+            If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                catBrowser.Document.GetElementById("category").InnerText = JeopardyController.lstClues(i & 200).category
+            ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                catBrowser.Document.GetElementById("category").InnerText = JeopardyController.lstClues(i & 400).category
+            End If
             'catBrowser.Update()
             'MsgBox(catBrowser.DocumentText)
             'lblCategory.Text = categoryList(i)

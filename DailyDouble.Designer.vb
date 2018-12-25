@@ -26,14 +26,14 @@ Partial Class DailyDouble
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DailyDouble))
         Me.wagerBox = New System.Windows.Forms.NumericUpDown()
         Me.lblWagerTitle = New System.Windows.Forms.Label()
-        Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
+        Me.wmpDailyDouble = New AxWMPLib.AxWindowsMediaPlayer()
         Me.btnGo = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.lblWagerRules = New System.Windows.Forms.Label()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.btnTrueDailyDouble = New System.Windows.Forms.Button()
         CType(Me.wagerBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.wmpDailyDouble, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'wagerBox
@@ -59,15 +59,15 @@ Partial Class DailyDouble
         Me.lblWagerTitle.Text = "Enter your wager"
         Me.lblWagerTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'AxWindowsMediaPlayer1
+        'wmpDailyDouble
         '
-        Me.AxWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(0, 0)
-        Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
-        Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(1932, 1092)
-        Me.AxWindowsMediaPlayer1.TabIndex = 5
+        Me.wmpDailyDouble.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.wmpDailyDouble.Enabled = True
+        Me.wmpDailyDouble.Location = New System.Drawing.Point(0, 0)
+        Me.wmpDailyDouble.Name = "wmpDailyDouble"
+        Me.wmpDailyDouble.OcxState = CType(resources.GetObject("wmpDailyDouble.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.wmpDailyDouble.Size = New System.Drawing.Size(1932, 1092)
+        Me.wmpDailyDouble.TabIndex = 5
         '
         'btnGo
         '
@@ -121,7 +121,7 @@ Partial Class DailyDouble
         Me.Controls.Add(Me.btnGo)
         Me.Controls.Add(Me.lblWagerTitle)
         Me.Controls.Add(Me.wagerBox)
-        Me.Controls.Add(Me.AxWindowsMediaPlayer1)
+        Me.Controls.Add(Me.wmpDailyDouble)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -131,7 +131,7 @@ Partial Class DailyDouble
         Me.TopMost = True
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.wagerBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.wmpDailyDouble, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -139,7 +139,7 @@ Partial Class DailyDouble
 
     Friend WithEvents wagerBox As NumericUpDown
     Friend WithEvents lblWagerTitle As Label
-    Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
+    Friend WithEvents wmpDailyDouble As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents btnGo As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents lblWagerRules As Label

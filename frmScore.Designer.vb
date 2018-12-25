@@ -49,6 +49,7 @@ Partial Class frmScore
         Me.txtWager2 = New System.Windows.Forms.TextBox()
         Me.txtWager1 = New System.Windows.Forms.TextBox()
         Me.lblPlayerWagerMessage = New System.Windows.Forms.Label()
+        Me.tmrCheckWager = New System.Windows.Forms.Timer(Me.components)
         Me.lblPlayer3 = New Jeopardy.NameTag()
         Me.lblPlayer2 = New Jeopardy.NameTag()
         Me.lblPlayer1 = New Jeopardy.NameTag()
@@ -265,7 +266,7 @@ Partial Class frmScore
         Me.lblPlayer1Score.ForeColor = System.Drawing.Color.White
         Me.lblPlayer1Score.Location = New System.Drawing.Point(522, 2)
         Me.lblPlayer1Score.Name = "lblPlayer1Score"
-        Me.lblPlayer1Score.Size = New System.Drawing.Size(280, 47)
+        Me.lblPlayer1Score.Size = New System.Drawing.Size(296, 47)
         Me.lblPlayer1Score.TabIndex = 11
         Me.lblPlayer1Score.Text = "$0"
         Me.lblPlayer1Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -303,7 +304,7 @@ Partial Class frmScore
         Me.lblPlayer3Score.ForeColor = System.Drawing.Color.White
         Me.lblPlayer3Score.Location = New System.Drawing.Point(1129, 2)
         Me.lblPlayer3Score.Name = "lblPlayer3Score"
-        Me.lblPlayer3Score.Size = New System.Drawing.Size(280, 47)
+        Me.lblPlayer3Score.Size = New System.Drawing.Size(300, 47)
         Me.lblPlayer3Score.TabIndex = 22
         Me.lblPlayer3Score.Text = "$0"
         Me.lblPlayer3Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -315,7 +316,7 @@ Partial Class frmScore
         Me.lblPlayer2Score.ForeColor = System.Drawing.Color.White
         Me.lblPlayer2Score.Location = New System.Drawing.Point(824, 2)
         Me.lblPlayer2Score.Name = "lblPlayer2Score"
-        Me.lblPlayer2Score.Size = New System.Drawing.Size(280, 47)
+        Me.lblPlayer2Score.Size = New System.Drawing.Size(301, 47)
         Me.lblPlayer2Score.TabIndex = 18
         Me.lblPlayer2Score.Text = "$0"
         Me.lblPlayer2Score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -371,14 +372,19 @@ Partial Class frmScore
         Me.lblPlayerWagerMessage.UseMnemonic = False
         Me.lblPlayerWagerMessage.Visible = False
         '
+        'tmrCheckWager
+        '
+        '
         'lblPlayer3
         '
         Me.lblPlayer3.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.lblPlayer3.BackgroundImage = CType(resources.GetObject("lblPlayer3.BackgroundImage"), System.Drawing.Image)
         Me.lblPlayer3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblPlayer3.contestantID = 0
+        Me.lblPlayer3.enableClick = True
         Me.lblPlayer3.Location = New System.Drawing.Point(1130, 51)
         Me.lblPlayer3.Name = "lblPlayer3"
+        Me.lblPlayer3.score = 0
         Me.lblPlayer3.Size = New System.Drawing.Size(299, 71)
         Me.lblPlayer3.TabIndex = 37
         '
@@ -388,8 +394,10 @@ Partial Class frmScore
         Me.lblPlayer2.BackgroundImage = CType(resources.GetObject("lblPlayer2.BackgroundImage"), System.Drawing.Image)
         Me.lblPlayer2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblPlayer2.contestantID = 0
+        Me.lblPlayer2.enableClick = True
         Me.lblPlayer2.Location = New System.Drawing.Point(825, 51)
         Me.lblPlayer2.Name = "lblPlayer2"
+        Me.lblPlayer2.score = 0
         Me.lblPlayer2.Size = New System.Drawing.Size(299, 71)
         Me.lblPlayer2.TabIndex = 36
         '
@@ -399,8 +407,10 @@ Partial Class frmScore
         Me.lblPlayer1.BackgroundImage = CType(resources.GetObject("lblPlayer1.BackgroundImage"), System.Drawing.Image)
         Me.lblPlayer1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.lblPlayer1.contestantID = 0
+        Me.lblPlayer1.enableClick = True
         Me.lblPlayer1.Location = New System.Drawing.Point(519, 51)
         Me.lblPlayer1.Name = "lblPlayer1"
+        Me.lblPlayer1.score = 0
         Me.lblPlayer1.Size = New System.Drawing.Size(299, 71)
         Me.lblPlayer1.TabIndex = 35
         '
@@ -460,4 +470,5 @@ Partial Class frmScore
     Friend WithEvents lblPlayer3 As NameTag
     Friend WithEvents lblPlayer2 As NameTag
     Friend WithEvents lblPlayer1 As NameTag
+    Friend WithEvents tmrCheckWager As Timer
 End Class

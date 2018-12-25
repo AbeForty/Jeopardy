@@ -2,7 +2,12 @@
     Dim myText As String = "Hello <u>World</u>"
     Dim richTextBoxWPF As New System.Windows.Controls.Frame
     Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
-        ShadowLabel1.TextAlign = ContentAlignment.MiddleCenter
+        VariableTesting.lblCrossFormTest.Text = "Hello"
+        VariableTesting.Show()
+        'pboxImgTest.Image = CType(My.Resources.ResourceManager.GetObject("Screen400"), Bitmap)
+        'AxWindowsMediaPlayer1.URL = My.Resources.ResourceManager.GetObject("thinkmusic")
+        'ShadowLabel1.TextAlign = ContentAlignment.MiddleCenter
+        'WebBrowser2.Document.GetElementById("category").InnerText = "HELLO"
         'ElementHost1.Child = richTextBoxWPF
         'richTextBoxWPF.HorizontalAlignment = System.Windows.HorizontalAlignment.Center
         'richTextBoxWPF.VerticalAlignment = System.Windows.VerticalAlignment.Center
@@ -22,5 +27,9 @@
         '        myWords.Add(item)
         '    End If
         'Next
+    End Sub
+
+    Private Sub testFormatting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'WebBrowser2.Navigate(Application.StartupPath & "\Resources\category.html")
     End Sub
 End Class

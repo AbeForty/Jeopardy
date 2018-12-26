@@ -161,6 +161,7 @@ Public Class frmNewGame
         Dim playerNumberParam As SqlParameter = New SqlParameter("@playerNumber", playerNumber)
         cmdNewGame.Parameters.Add(playerIDParam)
         cmdNewGame.Parameters.Add(gameIDParam)
+        cmdNewGame.Parameters.Add(playerNumberParam)
         cmdNewGame.CommandType = CommandType.Text
         cmdNewGame.ExecuteNonQuery()
         connClues.Close()

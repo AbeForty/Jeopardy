@@ -1906,7 +1906,7 @@ Public MustInherit Class JeopardyController
         connClues = New SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JeopardyClues.mdf;Integrated Security=True")
         Dim cmdFinalGame As SqlCommand
         Dim cmdUpdateRound As SqlCommand
-        If roundEnum <> roundType.FinalJeopardy And frmScore.btnDoubleJeopardy.Visible = False And frmScore.btnFinalJeopardy.Visible = False Then
+        If roundEnum <> roundType.FinalJeopardy And Not (categoryScreen.cat1Title.display = False And categoryScreen.cat2Title.display = False And categoryScreen.cat3Title.display = False And categoryScreen.cat4Title.display = False And categoryScreen.cat5Title.display = False And categoryScreen.cat6Title.display = False) Then
             If (frmScore.Player1RungIn = True And frmScore.Player2RungIn = True And frmScore.Player3RungIn = True) Or correct = True Then
                 Dim strSQL As String = "Insert Into SeenClues VALUES (@clueID, @gameID)"
                 Dim cmd As SqlCommand

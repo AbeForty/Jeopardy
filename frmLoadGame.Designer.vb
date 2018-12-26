@@ -25,7 +25,7 @@ Partial Class frmLoadGame
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLoadGame))
         Me.pnlLoadGame = New System.Windows.Forms.Panel()
         Me.btnClose = New System.Windows.Forms.PictureBox()
-        Me.btnSaveGame = New System.Windows.Forms.Button()
+        Me.btnResumeGame = New System.Windows.Forms.Button()
         Me.lblSelectPack = New System.Windows.Forms.Label()
         Me.cboGame = New System.Windows.Forms.ComboBox()
         Me.lblLoadGame = New System.Windows.Forms.Label()
@@ -39,7 +39,7 @@ Partial Class frmLoadGame
         Me.pnlLoadGame.BackgroundImage = Global.Jeopardy.My.Resources.Resources.BlueOverlay
         Me.pnlLoadGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlLoadGame.Controls.Add(Me.btnClose)
-        Me.pnlLoadGame.Controls.Add(Me.btnSaveGame)
+        Me.pnlLoadGame.Controls.Add(Me.btnResumeGame)
         Me.pnlLoadGame.Controls.Add(Me.lblSelectPack)
         Me.pnlLoadGame.Controls.Add(Me.cboGame)
         Me.pnlLoadGame.Controls.Add(Me.lblLoadGame)
@@ -58,18 +58,18 @@ Partial Class frmLoadGame
         Me.btnClose.TabIndex = 19
         Me.btnClose.TabStop = False
         '
-        'btnSaveGame
+        'btnResumeGame
         '
-        Me.btnSaveGame.BackColor = System.Drawing.Color.Transparent
-        Me.btnSaveGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveGame.Font = New System.Drawing.Font("Korinna BT", 15.0!)
-        Me.btnSaveGame.ForeColor = System.Drawing.Color.Transparent
-        Me.btnSaveGame.Location = New System.Drawing.Point(485, 461)
-        Me.btnSaveGame.Name = "btnSaveGame"
-        Me.btnSaveGame.Size = New System.Drawing.Size(396, 67)
-        Me.btnSaveGame.TabIndex = 18
-        Me.btnSaveGame.Text = "RESUME"
-        Me.btnSaveGame.UseVisualStyleBackColor = False
+        Me.btnResumeGame.BackColor = System.Drawing.Color.Transparent
+        Me.btnResumeGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnResumeGame.Font = New System.Drawing.Font("Korinna BT", 15.0!)
+        Me.btnResumeGame.ForeColor = System.Drawing.Color.Transparent
+        Me.btnResumeGame.Location = New System.Drawing.Point(485, 461)
+        Me.btnResumeGame.Name = "btnResumeGame"
+        Me.btnResumeGame.Size = New System.Drawing.Size(396, 67)
+        Me.btnResumeGame.TabIndex = 18
+        Me.btnResumeGame.Text = "RESUME"
+        Me.btnResumeGame.UseVisualStyleBackColor = False
         '
         'lblSelectPack
         '
@@ -133,6 +133,7 @@ Partial Class frmLoadGame
     Friend WithEvents lblSelectPack As Label
     Friend WithEvents cboGame As ComboBox
     Friend WithEvents lblLoadGame As Label
-    Friend WithEvents btnSaveGame As Button
+    Friend WithEvents btnResumeGame As Button
     Friend WithEvents btnClose As PictureBox
 End Class
+

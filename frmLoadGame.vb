@@ -1,7 +1,7 @@
-﻿Imports System.Data.SqlClient
-
+Imports System.Data.SqlClient
 Public Class frmLoadGame
     Dim numOfPlayers As Integer
+    Dim loadingGame As Boolean = False
     Private Sub getPreviousGames()
         Try
             Dim connPuzzle As SqlConnection
@@ -41,7 +41,7 @@ Public Class frmLoadGame
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-    Private Sub btnSaveGame_Click(sender As Object, e As EventArgs) Handles btnSaveGame.Click
+    Private Sub btnResumeGame_Click(sender As Object, e As EventArgs) Handles btnResumeGame.Click
         If cboGame.SelectedItem <> Nothing Then
             Dim gameInfo = cboGame.SelectedItem.ToString.Split("|")
             JeopardyController.gameID = gameInfo(0)
@@ -143,6 +143,7 @@ Public Class frmLoadGame
             JeopardyController.loadGame = True
             WelcomeScreen.Close()
             IntroScreen.Show()
+            loadingGame = True
             Me.Close()
         Else
             MsgBox("No game selected. Please select a game.", vbExclamation, "JEOPARDY!")
@@ -150,6 +151,8 @@ Public Class frmLoadGame
     End Sub
 
     Private Sub frmLoadGame_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        frmNewGame.Show()
+        If loadingGame = False Then
+            frmNewGame.Show()
+        End If
     End Sub
 End Class

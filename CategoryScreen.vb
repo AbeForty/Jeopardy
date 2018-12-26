@@ -154,8 +154,13 @@ Public Class categoryScreen
         If pbarLoadCat.Value = 100 Then
             categoryPanel.BackgroundImage = Nothing
             For Each item In JeopardyController.set1
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -166,8 +171,13 @@ Public Class categoryScreen
                 If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(item)) = True Then
                     CType(categoryPanel.Controls(item), PictureBox).Image = My.Resources.BlankTile
                 End If
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -178,8 +188,13 @@ Public Class categoryScreen
                 If JeopardyController.checkClueList(JeopardyController.convertClueIDToR2(item)) = True Then
                     CType(categoryPanel.Controls(item), PictureBox).Image = My.Resources.BlankTile
                 End If
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -187,8 +202,13 @@ Public Class categoryScreen
         'Next
         If pbarLoadCat.Value = 400 Then
             For Each item In JeopardyController.set4
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -196,14 +216,24 @@ Public Class categoryScreen
         'Next
         If pbarLoadCat.Value = 500 Then
             For Each item In JeopardyController.set5
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         If pbarLoadCat.Value = 600 Then
             For Each item In JeopardyController.set6
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -211,8 +241,13 @@ Public Class categoryScreen
         'Next
         If pbarLoadCat.Value = 700 Then
             For Each item In JeopardyController.set7
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -220,14 +255,24 @@ Public Class categoryScreen
         'Next
         If pbarLoadCat.Value = 800 Then
             For Each item In JeopardyController.set8
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         If pbarLoadCat.Value = 900 Then
             For Each item In JeopardyController.set9
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200
@@ -235,8 +280,13 @@ Public Class categoryScreen
         'Next
         If pbarLoadCat.Value = 1000 Then
             For Each item In JeopardyController.set10
-                categoryPanel.Controls(item).Show()
-                categoryPanel.Controls(item).Refresh()
+                If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+                    categoryPanel.Controls(item).Show()
+                    categoryPanel.Controls(item).Refresh()
+                ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Show()
+                    categoryPanel.Controls(JeopardyController.convertClueID(item)).Refresh()
+                End If
             Next
         End If
         'For myI = 100 To 200

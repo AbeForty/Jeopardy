@@ -90,8 +90,10 @@
         JeopardyController.setAnswerValue(True)
         btnClear.Hide()
         If JeopardyController.quickGame = False Then
+            JeopardyController.cleared = True
             JeopardyController.saveGame(True)
         End If
+        JeopardyController.cleared = False
         JeopardyController.cbID = Nothing
     End Sub
     Private Sub btnNo_Click(sender As Object, e As EventArgs) Handles btnNo.Click

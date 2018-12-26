@@ -95,6 +95,8 @@ Public MustInherit Class JeopardyController
     Public Shared Player3List As New List(Of Player)
     Public Shared teamDisplayInt As Integer = 0
     Public Shared numberOfPlayers As Integer = 0
+    Public Shared cleared As Boolean = False
+    Public Shared firstLoad As Boolean = False
     Public Enum clueType
         Regular
         Video
@@ -151,14 +153,19 @@ Public MustInherit Class JeopardyController
         'End If
         If round = roundType.Jeopardy Then
             loadSets()
+            firstLoad = False
         ElseIf round = roundType.DoubleJeopardy Then
-            noAnimation()
+            If firstLoad = False Then
+                noAnimation()
+            Else
+                loadSets()
+            End If
         End If
-        'categoryScreen.Timer3.Start()
-        'categoryScreen.rtbSeenClues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
-        'categoryScreen.rtbPointValues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
-        'loadcategoryXMLManual()
-        categoryScreen.tmrCheckCurrentRound.Start()
+            'categoryScreen.Timer3.Start()
+            'categoryScreen.rtbSeenClues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\seenClues.txt", RichTextBoxStreamType.PlainText)
+            'categoryScreen.rtbPointValues.LoadFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\JeopardyQs\pointValues.txt", RichTextBoxStreamType.PlainText)
+            'loadcategoryXMLManual()
+            categoryScreen.tmrCheckCurrentRound.Start()
         categoryScreen.tmrCheckIfRungIn.Start()
         'categoryScreen.wmpCategory.Ctlcontrols.stop()
         'If round = roundType.DoubleJeopardy Then
@@ -1907,15 +1914,17 @@ Public MustInherit Class JeopardyController
         Dim cmdFinalGame As SqlCommand
         Dim cmdUpdateRound As SqlCommand
         If roundEnum <> roundType.FinalJeopardy And Not (categoryScreen.cat1Title.display = False And categoryScreen.cat2Title.display = False And categoryScreen.cat3Title.display = False And categoryScreen.cat4Title.display = False And categoryScreen.cat5Title.display = False And categoryScreen.cat6Title.display = False) Then
-            If (frmScore.Player1RungIn = True And frmScore.Player2RungIn = True And frmScore.Player3RungIn = True) Or correct = True Then
-                Dim strSQL As String = "Insert Into SeenClues VALUES (@clueID, @gameID)"
+            If (frmScore.Player1RungIn = True And frmScore.Player2RungIn = True And frmScore.Player3RungIn = True) Or correct = True Or cleared = True Then
+                Dim strSQL As String = "Insert Into SeenClues VALUES (@clueID, @gameID, @round)"
                 Dim cmd As SqlCommand
                 connClues.Open()
                 cmd = New SqlCommand(strSQL, connClues)
                 Dim cbIDParam As SqlParameter = New SqlParameter("@clueID", cbID)
                 Dim gameIDParam As SqlParameter = New SqlParameter("@gameID", gameID)
+                Dim croundParam As SqlParameter = New SqlParameter("@round", roundNumber)
                 cmd.Parameters.Add(cbIDParam)
                 cmd.Parameters.Add(gameIDParam)
+                cmd.Parameters.Add(croundParam)
                 cmd.CommandType = CommandType.Text
                 cmd.ExecuteNonQuery()
                 connClues.Close()

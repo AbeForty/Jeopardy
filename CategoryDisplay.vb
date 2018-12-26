@@ -41,6 +41,11 @@ Public Class CategoryDisplay
         'timeStart = DateTime.Now.Second
         'pboxJeopardyCard.Image = My.Resources.JeopardyTitlesGIF
         'tmrRevealCategory.Start()
+        If JeopardyController.roundEnum = JeopardyController.roundType.Jeopardy Then
+            pboxJeopardyCard.Image = My.Resources.JEOPARDYLogo
+        ElseIf JeopardyController.roundEnum = JeopardyController.roundType.DoubleJeopardy Then
+            pboxJeopardyCard.Image = My.Resources.DOUBLEJeopardy
+        End If
         pboxJeopardyCard.Show()
         i = 1
         catBrowser.Navigate(Application.StartupPath & "\Resources\category.html")

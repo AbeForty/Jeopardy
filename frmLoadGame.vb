@@ -116,10 +116,12 @@ Public Class frmLoadGame
             'frmScore.lblPlayer1Score.Text = FormatCurrency(Integer.Parse(playerIDList.ElementAt(0).Value), 0, , TriState.False)
             'frmScore.lblPlayer2Score.Text = FormatCurrency(Integer.Parse(playerIDList.ElementAt(1).Value), 0, , TriState.False)
             'frmScore.lblPlayer3Score.Text = FormatCurrency(Integer.Parse(playerIDList.ElementAt(2).Value), 0, , TriState.False)
-            Dim strSeenCluesSQL As String = "SELECT * FROM SeenClues, Clueboard WHERE GameID = @gameID and SeenClues.ClueID = Clueboard.Id"
+            Dim strSeenCluesSQL As String = "SELECT * FROM SeenClues, Clueboard WHERE GameID = @gameID and SeenClues.ClueID = Clueboard.Id and SeenClues.round = @round"
             cmdSeenClues = New SqlCommand(strSeenCluesSQL, connClues)
             Dim gameID2Param As SqlParameter = New SqlParameter("@gameID", gameInfo(0))
+            Dim roundParam As SqlParameter = New SqlParameter("@round", JeopardyController.roundNumber)
             cmdSeenClues.Parameters.Add(gameID2Param)
+            cmdSeenClues.Parameters.Add(roundParam)
             cmdSeenClues.CommandType = CommandType.Text
             seenCluesrdr = cmdSeenClues.ExecuteReader()
             Do While seenCluesrdr.Read()
@@ -144,6 +146,7 @@ Public Class frmLoadGame
             WelcomeScreen.Close()
             IntroScreen.Show()
             loadingGame = True
+            JeopardyController.firstLoad = True
             Me.Close()
         Else
             MsgBox("No game selected. Please select a game.", vbExclamation, "JEOPARDY!")
